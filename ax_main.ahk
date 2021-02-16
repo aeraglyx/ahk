@@ -6,6 +6,7 @@ XButton1 & Volume_Up::
 Send, {Volume_Up 20}
 Return
 
+; night light
 XButton1 & e::
 ;Send, {LWinDown}{LWinUp}night light{Enter}
 Run, ms-settings:nightlight
@@ -15,6 +16,8 @@ Send, !{F4}
 return
 
 RAlt::Down
+
+
 
 
 ; info
@@ -38,13 +41,14 @@ return
 Send, v_macicek_AV2FC_cviceni_2_v01{Left 4}{Shift Down}{Left}{Shift Up}
 return
 
+
+
+
 ; websites
 
 /*XButton1::
 Run, https://keep.google.com/u/0/
 return
-
-
 */
 
 #g::
@@ -75,6 +79,9 @@ XButton1::
 Run, https://www.notion.so/Ideas-c162763c26ce4077a4eb4c55e6eedfb2
 return
 
+
+
+
 ; latex
 :o:ltx::/latex{Down}{Enter} 
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
@@ -83,7 +90,6 @@ return
 
 ; scroll
 ;Scroll:
-
 
 ; After Effects
 XButton1 & a::
