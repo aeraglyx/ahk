@@ -19,7 +19,7 @@ RAlt::Down
 
 ; info
 :o:vm::Vladislav Mac{U+00ED}{U+010D}ek
-:o:em::vladislav.cam{2}{4}{@}gmail.com
+:o:@me::vladislav.cam{2}{4}{@}gmail.com
 :o*:v_m::v_macicek{Tab}
 :o*:(::(){Left}
 
