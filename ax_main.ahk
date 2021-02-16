@@ -39,9 +39,13 @@ Send, v_macicek_AV2FC_cviceni_2_v01{Left 4}{Shift Down}{Left}{Shift Up}
 return
 
 ; websites
-;XButton1::
+
+/*XButton1::
 Run, https://keep.google.com/u/0/
 return
+
+
+*/
 
 #g::
 XButton1 & f::
@@ -81,30 +85,16 @@ return
 ;Scroll:
 
 
-XButton1 & x::
-Send, ^{space}
-Return
-
 ; After Effects
 XButton1 & a::
 Send, ^!y
-Send, {Enter}chroma{Enter}
-Send, ^!y
 Send, {Enter}glow{Enter}
-Sleep, 250
-Send, {Ctrl Down}{Space}{Ctrl Up}
-Sleep, 250
-Send, Deep Glow{Enter}
-/*
+Send, ^!y
+Send, {Enter}chroma{Enter}
 Send, ^!y
 Send, {Enter}lin2log{Enter}
 Send, ^!y
 Send, {Enter}grain{Enter}
-;Send, {Ctrl}{Space}ax_grain_v1{Enter}
 Send, ^!y
 Send, {Enter}grade{Enter}
-*/
 Return
-
-
-
