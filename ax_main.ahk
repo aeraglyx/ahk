@@ -17,6 +17,21 @@ return
 
 RAlt::Down
 
+; faster arrows
+; 1 min steps on YT
+Ctrl & Left::
+Send, {Left 12}
+return
+Ctrl & Right::
+Send, {Right 12}
+return
+Ctrl & Up::
+Send, {Up 12}
+return
+Ctrl & Down::
+Send, {Down 12}
+return
+
 
 
 
