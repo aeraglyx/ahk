@@ -2,6 +2,10 @@
 #SingleInstance Force
 SendMode Input
 
+XButton1 & r::
+Reload
+Return
+
 ; system
 XButton1 & Volume_Down::
 Send, {Volume_Down 20}
@@ -120,9 +124,8 @@ else {
     }
     Run, https://webpage/index.php
 }
-*/
 return
-
+*/
 
 
 ; latex
@@ -164,6 +167,7 @@ Return
 
 ; CHROME
 #ifWinActive ahk_exe chrome.exe
+
 F1::
 Send, ^+{Tab}
 return
@@ -177,6 +181,10 @@ F4::
 Send, ^t
 return
 
+XButton2::
+Send, ^w
+return
+
 #ifWinActive
 
 /*
@@ -188,3 +196,20 @@ MouseClick, Left
 MouseMove, 10, -200, 0, R
 return
 */
+
+
+
+
+
+; CUSTOM KEYBOARD LAYOUT 
+XButton1 & b::
+DetectHiddenWindows, On
+SetTitleMatchMode, 2 
+if WinExist("en_cs_hybrid.ahk") {
+    WinClose, en_cs_hybrid.ahk
+    MsgBox, 0, Custom Keyboard Layout, OFF, 0.75
+} else {
+    Run, X:\Aeraglyx\Git\ahk\en_cs_hybrid.ahk
+    MsgBox, 0, Custom Keyboard Layout, ON, 0.75
+}
+return
