@@ -42,8 +42,8 @@ return
 ; info
 :o:vm::Vladislav Mac{U+00ED}{U+010D}ek
 :o:@me::vladislav.cam{2}{4}{@}gmail.com
-:o*:v_m::v_macicek{Tab}
-:o*:(::(){Left}
+:o*:v_m::v_macicek
+;:o*:(::(){Left}
 
 ; format
 :r*?:ttt::
@@ -100,12 +100,12 @@ XButton1::
 Run, https://www.notion.so/Ideas-c162763c26ce4077a4eb4c55e6eedfb2
 return
 
+/*
 ; DEBUG
 XButton1 & z::
 If WinExist("Watch later - YouTube - Google Chrome")
     WinActivate
     MsgBox, works
-/*
 else {
     toFind := "Watch later - YouTube - Google Chrome"
     WinGetActiveTitle, StartingTitle
@@ -134,8 +134,11 @@ return
 ; scroll
 ;Scroll:
 
+
+
 ; After Effects
 #ifWinActive ahk_exe AfterFX.exe
+
 XButton1 & a::
 Send, ^!y
 Send, {Enter}glow{Enter}
@@ -148,6 +151,16 @@ Send, {Enter}grain{Enter}
 Send, ^!y
 Send, {Enter}grade{Enter}
 Return
+
+^y::
+Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
+Return
+
+;^!y::
+
+;^!#t::
+
+
 
 ; CHROME
 #ifWinActive ahk_exe chrome.exe
@@ -163,6 +176,7 @@ return
 F4::
 Send, ^t
 return
+
 #ifWinActive
 
 /*
