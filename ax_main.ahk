@@ -1,3 +1,5 @@
+#NoEnv
+
 ; system
 XButton1 & Volume_Down::
 Send, {Volume_Down 20}
@@ -119,3 +121,29 @@ Send, {Enter}grain{Enter}
 Send, ^!y
 Send, {Enter}grade{Enter}
 Return
+
+; CHROME
+#ifWinActive ahk_exe chrome.exe
+F1::
+Send, ^+{Tab}
+return
+F2::
+Send, ^w
+return
+F3::
+Send, ^{Tab}
+return
+F4::
+Send, ^t
+return
+#ifWinActive
+
+/*
+XButton2 & r::
+Coordmode, Mouse, Screen
+MouseGetPos, OrigX, OrigY
+MouseClick, Right
+MouseClick, Left
+MouseMove, 10, -200, 0, R
+return
+*/
