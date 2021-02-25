@@ -1,4 +1,6 @@
 #NoEnv
+#SingleInstance Force
+SendMode Input
 
 ; system
 XButton1 & Volume_Down::
@@ -86,7 +88,9 @@ Send, {Tab 4}
 return
 #o::
 XButton1 & w::
-Run, https://www.youtube.com/playlist?list=WL
+IfWinExist Watch later - YouTube - Google Chrome
+    MsgBox, yes
+;Run, https://www.youtube.com/playlist?list=WL
 return
 
 #n::
@@ -96,6 +100,28 @@ XButton1::
 Run, https://www.notion.so/Ideas-c162763c26ce4077a4eb4c55e6eedfb2
 return
 
+; DEBUG
+XButton1 & z::
+If WinExist("Watch later - YouTube - Google Chrome")
+    WinActivate
+    MsgBox, works
+/*
+else {
+    toFind := "Watch later - YouTube - Google Chrome"
+    WinGetActiveTitle, StartingTitle
+    loop{
+        Send, {Control down}{Tab}{Control Up}
+        Sleep, 400
+        IfWinActive, %toFind%
+            Return
+        WinGetActiveTitle, CurrentTabTitle
+        If (CurrentTabTitle == StartingTitle)
+            break
+    }
+    Run, https://webpage/index.php
+}
+*/
+return
 
 
 
@@ -109,6 +135,7 @@ return
 ;Scroll:
 
 ; After Effects
+#ifWinActive ahk_exe AfterFX.exe
 XButton1 & a::
 Send, ^!y
 Send, {Enter}glow{Enter}
