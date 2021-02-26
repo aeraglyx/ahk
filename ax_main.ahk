@@ -213,3 +213,29 @@ if WinExist("en_cs_hybrid.ahk") {
     MsgBox, 0, Custom Keyboard Layout, ON, 0.75
 }
 return
+
+
+
+
+
+
+
+/*
+XButton1 & s::
+InputBox, to_play, Spotify, What to play on Spotify,, 256, 128
+DetectHiddenWindows, On
+;SetTitleMatchMode 2 
+CoordMode, Mouse, Screen
+if (ErrorLevel = 0) {
+    MouseGetPos, OrigX, OrigY
+    WinActivate, ahk_exe Spotify.exe
+    WinWaitActive, ahk_exe Spotify.exe
+    MouseClick, Left, -1192, -101, 2
+    Send, %to_play%
+    Sleep, 1000 ; timing
+    MouseClick, Left, -1232, 109, 1
+    Send, {ShiftDown}{Left 20}{ShiftUp}
+    MouseMove, %OrigX%, %OrigY%
+}
+return
+*/
