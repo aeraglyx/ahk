@@ -207,10 +207,12 @@ DetectHiddenWindows, On
 SetTitleMatchMode, 2 
 if WinExist("en_cs_hybrid.ahk") {
     WinClose, en_cs_hybrid.ahk
-    MsgBox, 0, Custom Keyboard Layout, OFF, 0.75
+    TrayTip Custom Keyboard Layout, Disabled., 2
+    ;MsgBox, 0, Custom Keyboard Layout, OFF, 0.75
 } else {
     Run, X:\Aeraglyx\Git\ahk\en_cs_hybrid.ahk
-    MsgBox, 0, Custom Keyboard Layout, ON, 0.75
+    TrayTip Custom Keyboard Layout, Enabled., 2
+    ;MsgBox, 0, Custom Keyboard Layout, ON, 0.75
 }
 return
 
@@ -220,9 +222,13 @@ return
 
 
 
-/*
 XButton1 & s::
-InputBox, to_play, Spotify, What to play on Spotify,, 256, 128
+
+if !WinExist("ahk_exe Spotify.exe"){
+    Run, C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe
+}
+InputBox, to_play, Spotify Search, What to play on Spotify,, 256, 128
+
 DetectHiddenWindows, On
 ;SetTitleMatchMode 2 
 CoordMode, Mouse, Screen
@@ -232,10 +238,10 @@ if (ErrorLevel = 0) {
     WinWaitActive, ahk_exe Spotify.exe
     MouseClick, Left, -1192, -101, 2
     Send, %to_play%
-    Sleep, 1000 ; timing
+    Sleep, 2000 ; timing
     MouseClick, Left, -1232, 109, 1
     Send, {ShiftDown}{Left 20}{ShiftUp}
     MouseMove, %OrigX%, %OrigY%
 }
+
 return
-*/
