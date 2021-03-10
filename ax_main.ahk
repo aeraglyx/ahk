@@ -214,7 +214,7 @@ if WinExist("en_cs_hybrid.ahk") {
     TrayTip Custom Keyboard Layout, Disabled., 2
     ;MsgBox, 0, Custom Keyboard Layout, OFF, 0.75
 } else {
-    Run, X:\Aeraglyx\Git\ahk\en_cs_hybrid.ahk
+    Run, en_cs_hybrid.ahk
     TrayTip Custom Keyboard Layout, Enabled., 2
     ;MsgBox, 0, Custom Keyboard Layout, ON, 0.75
 }
