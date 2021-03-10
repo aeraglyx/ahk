@@ -2,6 +2,10 @@
 #SingleInstance Force
 SendMode Input
 
+Run, acc_scroll.ahk
+
+
+
 XButton1 & r::
 Reload
 Return
