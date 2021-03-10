@@ -18,17 +18,21 @@ XButton1 & Volume_Up::
 Send, {Volume_Up 20}
 Return
 
-; night light
+; NIGHT LIGHT
 XButton1 & e::
-;Send, {LWinDown}{LWinUp}night light{Enter}
 Run, ms-settings:nightlight
-Sleep, 250
-Send, {Tab 3}{Enter}
-Send, !{F4}
+WinWaitActive, Settings
+Send, #{Up}
+;Sleep, 250
+BlockInput, On
+MouseGetPos, OrigX, OrigY
+MouseClick, Left, 53, 206, 1
+WinClose, A
+MouseMove, %OrigX%, %OrigY%
+BlockInput, Off
 return
 
 RAlt::Down
-
 ; faster arrows
 ; 1 min steps on YT
 Ctrl & Left::
@@ -206,17 +210,15 @@ return
 
 
 ; CUSTOM KEYBOARD LAYOUT 
-XButton1 & b::
+Alt & Shift::
 DetectHiddenWindows, On
 SetTitleMatchMode, 2 
 if WinExist("en_cs_hybrid.ahk") {
     WinClose, en_cs_hybrid.ahk
-    TrayTip Custom Keyboard Layout, Disabled., 2
-    ;MsgBox, 0, Custom Keyboard Layout, OFF, 0.75
+    TrayTip Keyboard Layout, EN, 2
 } else {
     Run, en_cs_hybrid.ahk
-    TrayTip Custom Keyboard Layout, Enabled., 2
-    ;MsgBox, 0, Custom Keyboard Layout, ON, 0.75
+    TrayTip Keyboard Layout, CS, 2
 }
 return
 
