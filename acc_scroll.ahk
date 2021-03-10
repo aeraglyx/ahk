@@ -2,24 +2,25 @@
 #SingleInstance Force
 #NoTrayIcon
 
-min := 15 ; fastest scroll
+thr := 15 ; fastest scroll
 max := 8 ; max scroll
 exp := 16 ; how much
 
-last := 0
+last_down := A_TickCount - 1000
+last_up := last_down
 
 WheelDown::
-diff := A_TickCount - last
-n := ceil((max)*exp((- max(diff, min) + min)/exp))
+diff := A_TickCount - last_down
+n := ceil((max)*exp((- max(diff, thr) + thr)/exp))
 Send, {WheelDown %n%}
-last := A_TickCount
+last_down := A_TickCount
 ;ToolTip, down`nd = %diff%`nn = %n%
 return
 
 WheelUp::
-diff := A_TickCount - last
-n := ceil((max)*exp((- max(diff, min) + min)/exp))
+diff := A_TickCount - last_up
+n := ceil((max)*exp((- max(diff, thr) + thr)/exp))
 Send, {WheelUp %n%}
-last := A_TickCount
+last_up := A_TickCount
 ;ToolTip, up`nd = %diff%`nn = %n%
 return
