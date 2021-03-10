@@ -4,7 +4,7 @@
 
 thr := 15 ; fastest scroll
 max := 8 ; max scroll
-exp := 16 ; how much
+exp := 20 ; how much
 
 last_down := A_TickCount - 1000
 last_up := last_down
