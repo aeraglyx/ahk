@@ -3,6 +3,7 @@
 SendMode Input
 
 Run, acc_scroll.ahk
+Run, acc_mouse.ahk
 
 
 
@@ -55,7 +56,6 @@ return
 :o:vm::Vladislav Mac{U+00ED}{U+010D}ek
 :o:@me::vladislav.cam{2}{4}{@}gmail.com
 :o*:v_m::v_macicek
-;:o*:(::(){Left}
 
 ; format
 :r*?:ttt::
@@ -102,7 +102,7 @@ return
 XButton1 & w::
 IfWinExist Watch later - YouTube - Google Chrome
     MsgBox, yes
-;Run, https://www.youtube.com/playlist?list=WL
+Run, https://www.youtube.com/playlist?list=WL
 return
 
 #n::
@@ -141,9 +141,6 @@ return
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
 :ro:fn::f(x)=
 :ro:finv::f^{-1}(x)=
-
-; scroll
-;Scroll:
 
 
 
@@ -221,7 +218,6 @@ if WinExist("en_cs_hybrid.ahk") {
     TrayTip Keyboard Layout, CS, 2
 }
 return
-
 
 
 
