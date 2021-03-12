@@ -90,19 +90,20 @@ Run, https://www.youtube.com/
 Sleep, 2000
 Send, {Tab 4}           
 return
-#o::
 XButton1 & w::
-IfWinExist Watch later - YouTube - Google Chrome
+/*IfWinExist Watch later - YouTube - Google Chrome
     MsgBox, yes
+*/
 Run, https://www.youtube.com/playlist?list=WL
 return
 
 #n::
+XButton1 & n::
 Run, https://www.notion.so/
 return
 
 
-; latex
+; LATEX
 :o:ltx::/latex{Down}{Enter} 
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
 :ro:fn::f(x)=
