@@ -3,7 +3,7 @@
 #NoTrayIcon
 
 interval := 64 ; higher = smoother input but less responsive
-pivot := 8 ; low pivot gets easier to max speed
+pivot := 8 ; low pivot gets easier to max speed, beyong is clamped
 mult := 3.0 ; high-end speed multiplier
 gamma := 3.0 ; shape
 

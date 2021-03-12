@@ -2,18 +2,20 @@
 #SingleInstance Force
 SendMode Input
 
+XButton1 & r::
+Reload
+Return
+
 Run, acc_scroll.ahk
 Run, acc_mouse.ahk
 
 #Include X:\Aeraglyx\secret.ahk
 ;#Include functions.ahk
 
-XButton1 & r::
-Reload
-Return
+
 
 ; VOLUME
-; for switching between headphones and speakers
+; ± 40 for switching between headphones and speakers
 XButton1 & Volume_Down::
 Send, {Volume_Down 20}
 Return
@@ -29,13 +31,14 @@ Send, #{Up}
 ;Sleep, 250
 BlockInput, On
 MouseGetPos, OrigX, OrigY
-MouseClick, Left, 53, 206, 1
+MouseClick, Left, 53, 206, 1 ; where's the on/off button
 WinClose, A
 MouseMove, %OrigX%, %OrigY%
 BlockInput, Off
 return
 
 RAlt::Down
+
 ; faster arrows
 ; 1 min steps on YT
 Ctrl & Left::
@@ -55,21 +58,12 @@ return
 
 
 
-
 ; format
 :r*?:ttt::
 FormatTime, time_now,, yyyyMMdd_HHmmss
 SendInput, %time_now%
 return
 
-:r*?:mrcl::
-FormatTime, date_now,, yyyyMMdd
-SendInput, %date_now%
-Send, _title_v_macicek_v01{Left 14}{Shift Down}{Left 5}{Shift Up}
-return
-:r*?:avcf::
-Send, v_macicek_AV2FC_cviceni_2_v01{Left 4}{Shift Down}{Left}{Shift Up}
-return
 
 
 
@@ -161,6 +155,14 @@ return
 
 XButton2::
 Send, ^w
+return
+
+; make Ctrl + Z work
+^z::
+Send, !{Left}
+return
+^+z::
+Send, !{Right}
 return
 
 #ifWinActive

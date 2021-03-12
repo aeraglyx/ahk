@@ -3,8 +3,8 @@
 #NoTrayIcon
 
 thr := 15 ; fastest scroll
-max := 10 ; max scroll
-exp := 16 ; how much
+max := 8 ; max scroll
+exp := 16 ; spread, higher => bigger effect
 
 last_down := A_TickCount - 1000
 last_up := last_down
