@@ -5,13 +5,15 @@ SendMode Input
 Run, acc_scroll.ahk
 Run, acc_mouse.ahk
 
-
+#Include X:\Aeraglyx\secret.ahk
+;#Include functions.ahk
 
 XButton1 & r::
 Reload
 Return
 
-; system
+; VOLUME
+; for switching between headphones and speakers
 XButton1 & Volume_Down::
 Send, {Volume_Down 20}
 Return
@@ -52,10 +54,7 @@ return
 
 
 
-; info
-:o:vm::Vladislav Mac{U+00ED}{U+010D}ek
-:o:@me::vladislav.cam{2}{4}{@}gmail.com
-:o*:v_m::v_macicek
+
 
 ; format
 :r*?:ttt::
@@ -75,7 +74,7 @@ return
 
 
 
-; websites
+; WEBSITES
 
 /*XButton1::
 Run, https://keep.google.com/u/0/
@@ -84,7 +83,7 @@ return
 
 #g::
 XButton1 & f::
-;XButton1::
+XButton1::
 Run, https://www.google.com/
 return
 
@@ -92,7 +91,6 @@ XButton1 & d::
 Run, https://drive.google.com/drive/my-drive
 return
 
-#y::
 XButton1 & t::
 Run, https://www.youtube.com/
 Sleep, 2000
@@ -108,32 +106,6 @@ return
 #n::
 Run, https://www.notion.so/
 return
-XButton1::
-Run, https://www.notion.so/Ideas-c162763c26ce4077a4eb4c55e6eedfb2
-return
-
-/*
-; DEBUG
-XButton1 & z::
-If WinExist("Watch later - YouTube - Google Chrome")
-    WinActivate
-    MsgBox, works
-else {
-    toFind := "Watch later - YouTube - Google Chrome"
-    WinGetActiveTitle, StartingTitle
-    loop{
-        Send, {Control down}{Tab}{Control Up}
-        Sleep, 400
-        IfWinActive, %toFind%
-            Return
-        WinGetActiveTitle, CurrentTabTitle
-        If (CurrentTabTitle == StartingTitle)
-            break
-    }
-    Run, https://webpage/index.php
-}
-return
-*/
 
 
 ; latex
@@ -165,8 +137,9 @@ Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
 Return
 
 ;^!y::
-
 ;^!#t::
+
+
 
 
 
@@ -192,21 +165,11 @@ return
 
 #ifWinActive
 
-/*
-XButton2 & r::
-Coordmode, Mouse, Screen
-MouseGetPos, OrigX, OrigY
-MouseClick, Right
-MouseClick, Left
-MouseMove, 10, -200, 0, R
-return
-*/
 
 
 
 
-
-; CUSTOM KEYBOARD LAYOUT 
+; KEYBOARD LAYOUT TOGGLE
 Alt & Shift::
 DetectHiddenWindows, On
 SetTitleMatchMode, 2 
@@ -223,7 +186,7 @@ return
 
 
 
-
+; QUICK SPOTIFY SEARCH
 XButton1 & s::
 
 if !WinExist("ahk_exe Spotify.exe"){

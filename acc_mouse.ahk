@@ -3,9 +3,9 @@
 #NoTrayIcon
 
 interval := 64 ; higher = smoother input but less responsive
-pivot := 8 ; low pivot gets quicker to max speed
-mult := 3.0 ; fastest speed multiplier
-gamma := 2.5 ; shape
+pivot := 8 ; low pivot gets easier to max speed
+mult := 3.0 ; high-end speed multiplier
+gamma := 3.0 ; shape
 
 loop {
     CoordMode, Mouse, Screen
