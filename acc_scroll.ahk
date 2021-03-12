@@ -3,8 +3,8 @@
 #NoTrayIcon
 
 thr := 15 ; fastest scroll
-max := 8 ; max scroll
-exp := 20 ; how much
+max := 10 ; max scroll
+exp := 18 ; how much
 
 last_down := A_TickCount - 1000
 last_up := last_down
