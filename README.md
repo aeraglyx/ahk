@@ -17,6 +17,8 @@ Some of the functionality:
   - Easier tab navigation
   - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z`
   - ± 1 min on YouTube
+- LaTeX hotkeys
+- After Effects hotkeys
 
 
 ## Mouse Acceleration `acc_mouse.ahk`

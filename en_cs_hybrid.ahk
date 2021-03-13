@@ -1,3 +1,9 @@
+#NoEnv
+#SingleInstance Force
+SendMode Input
+
+Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v1.ico
+
 1:: ;ů
 if (!GetKeyState("CapsLock", "T")){
     Send, {U+016F}
@@ -46,14 +52,8 @@ if (!GetKeyState("CapsLock", "T")){
 }
 return
 
-7:: ;ý
-if (!GetKeyState("CapsLock", "T")){
-    Send, {U+00FD}
-} else {
-    Send, {U+00DD}
-}
-return
 :*?c:Y-::{U+00DD}
+7::
 :*?:y-:: ;ý
 if (!GetKeyState("CapsLock", "T")){
     Send, {U+00FD}
@@ -62,14 +62,8 @@ if (!GetKeyState("CapsLock", "T")){
 }
 return
 
-8:: ;á
-if (!GetKeyState("CapsLock", "T")){
-    Send, {U+00E1}
-} else {
-    Send, {U+00C1}
-}
-return
 :*?c:A-::{U+00C1}
+8::
 :*?:a-:: ;á
 if (!GetKeyState("CapsLock", "T")){
     Send, {U+00E1}
@@ -78,14 +72,8 @@ if (!GetKeyState("CapsLock", "T")){
 }
 return
 
-9:: ;í
-if (!GetKeyState("CapsLock", "T")){
-    Send, {U+00ED}
-} else {
-    Send, {U+00CD}
-}
-return
 :*?c:I-::{U+00CD}
+9::
 :*?:i-:: ;í
 if (!GetKeyState("CapsLock", "T")){
     Send, {U+00ED}
@@ -94,14 +82,8 @@ if (!GetKeyState("CapsLock", "T")){
 }
 return
 
-0:: ;é
-if (!GetKeyState("CapsLock", "T")){
-    Send, {U+00E9}
-} else {
-    Send, {U+00C9}
-}
-return
 :*?c:I-::{U+00C9}
+0::
 :*?:i-:: ;é
 if (!GetKeyState("CapsLock", "T")){
     Send, {U+00E9}
@@ -109,6 +91,7 @@ if (!GetKeyState("CapsLock", "T")){
     Send, {U+00C9}
 }
 return
+
 
 
 

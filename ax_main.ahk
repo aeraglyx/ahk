@@ -173,16 +173,16 @@ return
 
 
 ; KEYBOARD LAYOUT TOGGLE
-~Alt Up::
+~LAlt Up::
 if (A_PriorKey = "LShift"){
     DetectHiddenWindows, On
     SetTitleMatchMode, 2 
     if WinExist("en_cs_hybrid.ahk") {
         WinClose, en_cs_hybrid.ahk
-        TrayTip Keyboard Layout, EN, 2
+        ;TrayTip Keyboard Layout, EN, 2
     } else {
         Run, en_cs_hybrid.ahk
-        TrayTip Keyboard Layout, CS, 2
+        ;TrayTip Keyboard Layout, CS, 2
     }
 }
 return
