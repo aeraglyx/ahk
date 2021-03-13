@@ -1,6 +1,6 @@
 # AutoHotkey Scripts
 
-My very janky scripts for improved eFFiCieNcY. You can download AHK here - https://www.autohotkey.com/
+My janky scripts for improved eFFiCieNcY. You can download AHK here - https://www.autohotkey.com/
 
 
 ## Main Script `ax_main.ahk`
@@ -19,6 +19,8 @@ Some of the functionality:
   - ± 1 min on YouTube
 - LaTeX hotkeys
 - After Effects hotkeys
+- Hotkeys for favourite websites
+- etc.
 
 
 ## Mouse Acceleration `acc_mouse.ahk`

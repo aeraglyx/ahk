@@ -1,5 +1,6 @@
 #NoEnv
 #SingleInstance Force
+#Persistent
 #NoTrayIcon
 
 interval := 64 ; higher = smoother input but less responsive

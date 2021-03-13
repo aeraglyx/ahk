@@ -1,5 +1,6 @@
 #NoEnv
 #SingleInstance Force
+#Persistent
 SendMode Input
 
 Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v1.ico

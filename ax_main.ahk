@@ -1,16 +1,21 @@
 #NoEnv
 #SingleInstance Force
+#Persistent
 SendMode Input
+
+; RUN SUB-SCRIPTS
+; Has to be before any hotkeys/returns etc. I guess.
+Run, acc_scroll.ahk
+Run, acc_mouse.ahk
 
 XButton1 & r::
 Reload
 Return
 
-Run, acc_scroll.ahk
-Run, acc_mouse.ahk
-
 #Include X:\Aeraglyx\secret.ahk
 ;#Include functions.ahk
+
+
 
 
 
@@ -70,37 +75,24 @@ return
 
 ; WEBSITES
 
-/*XButton1::
-Run, https://keep.google.com/u/0/
-return
-*/
-
-#g::
 XButton1 & f::
-XButton1::
-Run, https://www.google.com/
-return
+XButton1:: Run, https://www.google.com/
 
-XButton1 & d::
-Run, https://drive.google.com/drive/my-drive
-return
-
-XButton1 & t::
+XButton1 & y::
 Run, https://www.youtube.com/
 Sleep, 2000
 Send, {Tab 4}           
 return
-XButton1 & w::
-/*IfWinExist Watch later - YouTube - Google Chrome
-    MsgBox, yes
-*/
-Run, https://www.youtube.com/playlist?list=WL
-return
+
+XButton1 & w:: Run, https://www.youtube.com/playlist?list=WL
+XButton1 & t:: Run https://twitter.com/home
+XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 
 #n::
-XButton1 & n::
-Run, https://www.notion.so/
-return
+XButton1 & n:: Run, https://www.notion.so/
+
+
+
 
 
 ; LATEX
@@ -108,6 +100,8 @@ return
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
 :ro:fn::f(x)=
 :ro:finv::f^{-1}(x)=
+
+
 
 
 
@@ -130,9 +124,6 @@ Return
 ^y::
 Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
 Return
-
-;^!y::
-;^!#t::
 
 
 

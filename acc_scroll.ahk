@@ -1,8 +1,9 @@
 #NoEnv
 #SingleInstance Force
+#Persistent
 #NoTrayIcon
 
-thr := 15 ; fastest scroll
+thr := 16 ; fastest scroll [ms]
 max := 8 ; max scroll
 exp := 16 ; spread, higher => bigger effect
 
