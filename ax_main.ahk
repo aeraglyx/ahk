@@ -8,12 +8,12 @@ SendMode Input
 Run, acc_scroll.ahk
 Run, acc_mouse.ahk
 
-XButton1 & r::
-Reload
-Return
+XButton1 & r:: Reload
 
 #Include X:\Aeraglyx\secret.ahk
 ;#Include functions.ahk
+
+XButton1 & q:: WinClose A
 
 
 
@@ -21,12 +21,12 @@ Return
 
 ; VOLUME
 ; ± 40 for switching between headphones and speakers
-XButton1 & Volume_Down::
-Send, {Volume_Down 20}
-Return
-XButton1 & Volume_Up::
-Send, {Volume_Up 20}
-Return
+XButton1 & Volume_Down:: Send, {Volume_Down 20}
+XButton1 & Volume_Up:: Send, {Volume_Up 20}
+
+XButton1 & LButton:: Send {Media_Prev}
+XButton1 & RButton:: Send {Media_Next}
+XButton1 & MButton:: Send {Media_Play_Pause}
 
 ; NIGHT LIGHT
 XButton1 & e::
@@ -46,18 +46,10 @@ RAlt::Down
 
 ; faster arrows
 ; 1 min steps on YT
-Ctrl & Left::
-Send, {Left 12}
-return
-Ctrl & Right::
-Send, {Right 12}
-return
-Ctrl & Up::
-Send, {Up 12}
-return
-Ctrl & Down::
-Send, {Down 12}
-return
+Ctrl & Left:: Send, {Left 12}
+Ctrl & Right:: Send, {Right 12}
+Ctrl & Up:: Send, {Up 12}
+Ctrl & Down:: Send, {Down 12}
 
 
 
@@ -105,7 +97,7 @@ XButton1 & n:: Run, https://www.notion.so/
 
 
 
-; After Effects
+; AFTER EFFECTS
 #ifWinActive ahk_exe AfterFX.exe
 
 XButton1 & a::
@@ -121,41 +113,31 @@ Send, ^!y
 Send, {Enter}grade{Enter}
 Return
 
-^y::
-Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
-Return
+^y:: Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
 
-
+; PREMIERE PRO
+#ifWinActive ahk_exe Adobe Premiere Pro.exe
+/*
+MButton::
+MsgBox, Yes
+return
+*/
 
 
 
 ; CHROME
 #ifWinActive ahk_exe chrome.exe
 
-F1::
-Send, ^+{Tab}
-return
-F2::
-Send, ^w
-return
-F3::
-Send, ^{Tab}
-return
-F4::
-Send, ^t
-return
+F1:: Send, ^+{Tab}
+F2:: Send, ^w
+F3:: Send, ^{Tab}
+F4:: Send, ^t
 
-XButton2::
-Send, ^w
-return
+XButton2:: Send, ^w
 
 ; make Ctrl + Z work
-^z::
-Send, !{Left}
-return
-^+z::
-Send, !{Right}
-return
+^z:: Send, !{Left}
+^+z:: Send, !{Right}
 
 #ifWinActive
 
