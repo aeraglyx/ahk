@@ -3,10 +3,12 @@
 #Persistent
 #NoTrayIcon
 
-interval := 64 ; higher = smoother input but less responsive
+interval := 16 ; higher = less responsive
 pivot := 8 ; low pivot gets easier to max speed, beyong is clamped
-mult := 3.0 ; high-end speed multiplier
-gamma := 3.0 ; shape
+lim := 512 ; glitch cutoff in px, keep high. Low interval helps too.
+
+mult := 2.75 ; top speed multiplier, 1.0 = no effect
+gamma := 2.5 ; shape, 1 = linear
 
 loop {
     CoordMode, Mouse, Screen
@@ -15,20 +17,38 @@ loop {
     x_diff := x_now - x_last
     y_diff := y_now - y_last
 
-    diff := sqrt(x_diff**2 + y_diff**2) ; length
+    x_jerk := x_diff - x_diff_last
+    y_jerk := y_diff - y_diff_last
+
+    dist := sqrt(x_diff**2 + y_diff**2) ; length
     px := pivot * interval ; pixel change per iteration
 
-    multiplier := min((diff / px)**gamma, 1) * px * (mult - 1) / diff
+    multiplier := min((dist / px)**gamma, 1) * px * (mult - 1) / dist
 
-    x_acc := x_diff * multiplier
-    y_acc := y_diff * multiplier
+    if (x_jerk > lim) {
+        x_acc := 0
+    } else {
+        x_acc := x_diff * multiplier
+    }
 
-    ;x_debug := min((diff / (pivot*interval))**gamma, 1) * x_diff / diff
-    ;ToolTip, x_debug = %x_debug%, 300, 800
+    if (y_jerk > lim) {
+        y_acc := 0
+    } else {
+        y_acc := y_diff * multiplier
+    }
+
+    ;x_debug := min((dist / px)**gamma, 1) * px * mult / dist
+    ;ToolTip, %x_acc%, 256, 512
 
     MouseMove, x_acc, y_acc, 0, Relative
-
     MouseGetPos, x_last, y_last
+    ;x_last := x_now + x_acc
+    ;y_last := y_now + y_acc
+    ; Why the f doesn't this work instead of MouseGetPos?
+
+    x_diff_last := x_diff
+    y_diff_last := y_diff
+
     Sleep, interval
 }
 
