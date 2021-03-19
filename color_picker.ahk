@@ -45,6 +45,8 @@ loop {
     y_txt := y
 
     ToolTip, R = %r%`nG = %g%`nB = %b%, %x_txt%, %y_txt%
+
+    Sleep, 32
     
 }
 

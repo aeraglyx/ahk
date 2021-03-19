@@ -3,16 +3,15 @@
 #Persistent
 SendMode Input
 
-; RUN SUB-SCRIPTS
-; Has to be before any hotkeys/returns etc. I guess.
+; SUB-SCRIPTS
+; has to be before any hotkeys/returns etc. I guess
 Run, acc_scroll.ahk
 ;Run, acc_mouse.ahk
 
-XButton1 & r:: Reload
-
-#Include X:\Aeraglyx\secret.ahk
 #Include functions.ahk
+#Include X:\Aeraglyx\secret.ahk
 
+XButton1 & r:: Reload
 XButton1 & q:: WinClose A
 
 toggle(app) {
@@ -28,6 +27,7 @@ toggle(app) {
 
 
 
+; COLOR PICKER
 XButton1 & b:: toggle("color_picker.ahk")
 
 
@@ -41,14 +41,17 @@ return
 
 
 
-; VOLUME
+; VOLUME & SOUND
 ; ± 40 for switching between headphones and speakers
 XButton1 & Volume_Down:: Send, {Volume_Down 20}
 XButton1 & Volume_Up:: Send, {Volume_Up 20}
 
 XButton1 & LButton:: Send {Media_Prev}
-XButton1 & RButton:: Send {Media_Next}
 XButton1 & MButton:: Send {Media_Play_Pause}
+XButton1 & RButton:: Send {Media_Next}
+
+
+
 
 ; NIGHT LIGHT
 XButton1 & e::
@@ -57,10 +60,10 @@ WinWaitActive, Settings
 Send, #{Up}
 ;Sleep, 250
 BlockInput, On
-MouseGetPos, OrigX, OrigY
+MouseGetPos, x_orig, y_orig
 MouseClick, Left, 53, 206, 1 ; where's the on/off button
 WinClose, A
-MouseMove, %OrigX%, %OrigY%
+MouseMove, %x_orig%, %y_orig%
 BlockInput, Off
 return
 
@@ -77,13 +80,11 @@ Ctrl & Down:: Send, {Down 12}
 
 
 
-
 ; format
 :r*?:ttt::
 FormatTime, time_now,, yyyyMMdd_HHmmss
 SendInput, %time_now%
 return
-
 
 
 
@@ -109,13 +110,11 @@ XButton1 & n:: Run, https://www.notion.so/
 
 
 
-
 ; LATEX
-:o:ltx::/latex{Down}{Enter} 
+:o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
 :ro:fn::f(x)=
 :ro:finv::f^{-1}(x)=
-
 
 
 
@@ -139,12 +138,13 @@ Return
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
 
 ; PREMIERE PRO
-#ifWinActive ahk_exe Adobe Premiere Pro.exe
 /*
+#ifWinActive ahk_exe Adobe Premiere Pro.exe
 MButton::
 MsgBox, Yes
 return
 */
+
 
 
 
@@ -159,16 +159,31 @@ F4:: Send, ^t
 XButton2:: Send, ^w
 
 ; make Ctrl + Z work
+; BUG reloading triggers this
 ^z:: Send, !{Left}
 ^+z:: Send, !{Right}
-; TODO reloading triggers this
 
 #ifWinActive
 
 
 
 
-; QUICK SPOTIFY SEARCH
+; VS CODE
+#ifWinActive ahk_exe Code.exe
+
+F1:: Send, ^{PgUp}
+F2:: Send, ^w
+F3:: Send, ^{PgDn}
+F4:: Send, ^n
+
+XButton2:: Send, ^w
+
+#ifWinActive
+
+
+
+
+; SPOTIFY SEARCH
 XButton1 & s::
 
 if !WinExist("ahk_exe Spotify.exe"){

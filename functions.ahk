@@ -9,9 +9,9 @@ sign(x) {
 }
 
 ; COLOUR
-sRGB2lin(x) {
+sRGB_2_lin(x) {
     return (x <= 0.04045) ? x/12.92 : ((x + 0.055)/1.055)**2.4
 }
-lin2sRGB(x) {
+lin_2_sRGB(x) {
     return (x <= 0.0031308) ? x*12.92 : 1.055*x**(1/2.4) - 0.055
 }

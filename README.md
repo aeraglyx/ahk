@@ -10,17 +10,14 @@ This is the script that calls other sub-scripts and contains the most important 
 If you decide to try it, you might want to remove this line - `#Include X:\Aeraglyx\secret.ahk`. It just points to my private script.
 
 Some of the functionality:
+- Easier tab navigation (Chrome, VS Code)
 - Quick Spotify search
 - ± 40 volume for switching between headphones and speakers
 - Night light switch
-- Chrome
-  - Easier tab navigation
-  - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z`
-  - ± 1 min on YouTube
-- LaTeX hotkeys
-- After Effects hotkeys
+- `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome
+- Hotkeys for AE, LaTeX
 - Hotkeys for favourite websites
-- etc.
+- Etc.
 
 
 ## Colour Picker
