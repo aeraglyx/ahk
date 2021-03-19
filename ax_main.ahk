@@ -6,15 +6,37 @@ SendMode Input
 ; RUN SUB-SCRIPTS
 ; Has to be before any hotkeys/returns etc. I guess.
 Run, acc_scroll.ahk
-Run, acc_mouse.ahk
+;Run, acc_mouse.ahk
 
 XButton1 & r:: Reload
 
 #Include X:\Aeraglyx\secret.ahk
-;#Include functions.ahk
+#Include functions.ahk
 
 XButton1 & q:: WinClose A
 
+toggle(app) {
+    DetectHiddenWindows, On
+    SetTitleMatchMode, 2 
+    if WinExist(app) {
+        WinClose, %app%
+    } else {
+        Run, %app%
+    }
+}
+
+
+
+
+XButton1 & b:: toggle("color_picker.ahk")
+
+
+; KEYBOARD LAYOUT TOGGLE
+~LAlt Up::
+if (A_PriorKey = "LShift"){
+    toggle("en_cs_hybrid.ahk")
+}
+return
 
 
 
@@ -44,12 +66,13 @@ return
 
 RAlt::Down
 
-; faster arrows
-; 1 min steps on YT
+; faster arrows, 1 min steps on YT
+/*
 Ctrl & Left:: Send, {Left 12}
 Ctrl & Right:: Send, {Right 12}
 Ctrl & Up:: Send, {Up 12}
 Ctrl & Down:: Send, {Down 12}
+*/
 
 
 
@@ -76,7 +99,7 @@ Sleep, 2000
 Send, {Tab 4}           
 return
 
-XButton1 & w:: Run, https://www.youtube.com/playlist?list=WL
+XButton1 & w:: Run, https://www.wolframalpha.com/
 XButton1 & t:: Run https://twitter.com/home
 XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 
@@ -138,28 +161,9 @@ XButton2:: Send, ^w
 ; make Ctrl + Z work
 ^z:: Send, !{Left}
 ^+z:: Send, !{Right}
+; TODO reloading triggers this
 
 #ifWinActive
-
-
-
-
-
-; KEYBOARD LAYOUT TOGGLE
-~LAlt Up::
-if (A_PriorKey = "LShift"){
-    DetectHiddenWindows, On
-    SetTitleMatchMode, 2 
-    if WinExist("en_cs_hybrid.ahk") {
-        WinClose, en_cs_hybrid.ahk
-        ;TrayTip Keyboard Layout, EN, 2
-    } else {
-        Run, en_cs_hybrid.ahk
-        ;TrayTip Keyboard Layout, CS, 2
-    }
-}
-return
-
 
 
 
