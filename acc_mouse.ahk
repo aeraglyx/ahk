@@ -1,13 +1,13 @@
 #NoEnv
 #SingleInstance Force
 #Persistent
-#NoTrayIcon
+;#NoTrayIcon
 
-interval := 16 ; higher = less responsive
+interval := 64 ; higher = less responsive
 pivot := 8 ; low pivot gets easier to max speed, beyong is clamped
 lim := 512 ; glitch cutoff in px, keep high. Low interval helps too.
 
-mult := 2.75 ; top speed multiplier, 1.0 = no effect
+mult := 2.5 ; top speed multiplier, 1.0 = no effect
 gamma := 2.5 ; shape, 1 = linear
 
 loop {

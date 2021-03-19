@@ -23,14 +23,9 @@ Some of the functionality:
 - etc.
 
 
-## Mouse Acceleration `acc_mouse.ahk`
+## Colour Picker
 
-This makes it easier to navigate using mouse. Slow mouse movement remains the same, fast movement gets even faster.
-
-
-## Scroll Wheel Acceleration `acc_scroll.ahk`
-
-Similar to `acc_mouse.ahk` but for scroll wheel. Makes scrolling way faster and easier.
+W.I.P.
 
 
 ## EN/CS Hybrid Keyboard Layout `en_cs_hybrid.ahk`
@@ -40,6 +35,16 @@ My custom keyboard layout that combines the default EN layout with Czech charact
 Irreplacable for people like me who are used to the mainstream layout but live in Czech Republic 🙃
 
 However, it can do some weird stuff to other hotkeys because it changes numbers to the CS characters, so enable it only when you need it.
+
+
+## Scroll Wheel Acceleration `acc_scroll.ahk`
+
+Similar to `acc_mouse.ahk` but for scroll wheel. Makes scrolling way faster and easier.
+
+
+## Mouse Acceleration `acc_mouse.ahk`
+
+This makes it easier to navigate using mouse. Slow mouse movement remains the same, fast movement gets even faster. A bit buggy and unreliable though.
 
 
 ---
