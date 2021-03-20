@@ -15,42 +15,44 @@ lin2sRGB(x) {
     return (x <= 0.0031308) ? x*12.92 : 1.055*x**(1/2.4) - 0.055
 }
 filmic_log_2_lin(x) {
-    return - 0.000175781*(1 - e**(11.4369*x))
+    return 2**(16.5*x - 12.473931188)
 }
 filmic_2_lin(x) {
     tmp := (acos(1-2*x**0.025)/pi)**5.8
     return filmic_log_2_lin(tmp)
 }
 
+filmic_2_lin_v2(x) {
+    line := x + 1
+    FileReadLine, out, support_files\filmic_medium_contrast.txt, %x%
+    return %out%
+}
 
-;bl_col_check := False
-;#MaxThreadsPerHotkey 2
-;XButton1 & b::
-;bl_col_check := !bl_col_check
+
+
+;debug := x
+;MsgBox, %debug%
 
 loop {
 
     MouseGetPos, x, y
     PixelGetColor, col, %x%, %y%, RGB
 
-    r_srgb := Format("{1:u}", "0x" SubStr(col, 3, 2))/255
-    g_srgb := Format("{1:u}", "0x" SubStr(col, 5, 2))/255
-    b_srgb := Format("{1:u}", "0x" SubStr(col, 7, 2))/255
+    r_int := Format("{1:u}", "0x" SubStr(col, 3, 2))
+    g_int := Format("{1:u}", "0x" SubStr(col, 5, 2))
+    b_int := Format("{1:u}", "0x" SubStr(col, 7, 2))
 
-    r := round(filmic_2_lin(r_srgb), 2)
-    g := round(filmic_2_lin(g_srgb), 2)
-    b := round(filmic_2_lin(b_srgb), 2)
+    r := round(filmic_2_lin_v2(r_int), 2)
+    g := round(filmic_2_lin_v2(g_int), 2)
+    b := round(filmic_2_lin_v2(b_int), 2)
 
     x_txt := x + 24 ; offset to the right
     y_txt := y
 
-    ToolTip, R = %r%`nG = %g%`nB = %b%, %x_txt%, %y_txt%
+    ToolTip, %col%`nR = %r%`nG = %g%`nB = %b%, %x_txt%, %y_txt%
 
-    Sleep, 32
+    ; Sleep, 32
     
 }
-
-;RemoveToolTip:
-;b    ToolTip
 
 return

@@ -15,14 +15,14 @@ Some of the functionality:
 - ± 40 volume for switching between headphones and speakers
 - Night light switch
 - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome
-- Hotkeys for AE, LaTeX
+- Hotkeys for AE, LaTeX, Python
 - Hotkeys for favourite websites
 - Etc.
 
 
 ## Colour Picker
 
-W.I.P.
+W.I.P. colour picker that can "see" through Filmic in Blender.
 
 
 ## EN/CS Hybrid Keyboard Layout `en_cs_hybrid.ahk`

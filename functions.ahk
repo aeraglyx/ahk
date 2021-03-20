@@ -7,6 +7,9 @@ tau := 6.28318530718
 sign(x) {
 	return (x > 0) ? 1 : (x < 0) ? -1 : 0
 }
+map(x, in_min, in_max, out_min, out_max) {
+  return (x - in_min)*(out_max - out_min)/(in_max - in_min) + out_min
+}
 
 ; COLOUR
 sRGB_2_lin(x) {

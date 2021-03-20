@@ -172,11 +172,22 @@ XButton2:: Send, ^w
 #ifWinActive ahk_exe Code.exe
 
 F1:: Send, ^{PgUp}
-F2:: Send, ^w
+; F2:: Send, ^w
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
 
 XButton2:: Send, ^w
+
+; PYTHON
+:o*:pyfile::
+(
+f = open("file.txt", "r")
+data = []
+for line in f.readlines():
+    data.append(float(line))
+f.close()
+)
+return
 
 #ifWinActive
 
