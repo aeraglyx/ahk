@@ -24,7 +24,7 @@ filmic_2_lin(x) {
 
 filmic_2_lin_v2(x) {
     line := x + 1
-    FileReadLine, out, support_files\filmic_medium_contrast.txt, %x%
+    FileReadLine, out, support_files\test.txt, %line%
     return %out%
 }
 
