@@ -20,9 +20,9 @@ Some of the functionality:
 - Etc.
 
 
-## Colour Picker
+## Blender Colour Picker
 
-W.I.P. colour picker that can "see" through Filmic in Blender.
+Colour picker that can see through Filmic in Blender.
 
 
 ## EN/CS Hybrid Keyboard Layout `en_cs_hybrid.ahk`

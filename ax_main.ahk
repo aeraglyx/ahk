@@ -176,16 +176,22 @@ F1:: Send, ^{PgUp}
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
 
-XButton2:: Send, ^w
-
 ; PYTHON
-:o*:pyfile::
+:o*:pyread::
 (
-f = open("file.txt", "r")
-data = []
-for line in f.readlines():
-    data.append(float(line))
-f.close()
+with open("file.txt", "r") as f:
+    data = []
+    for line in f.readlines():
+        data.append(float(line))
+)
+return
+
+:o*:pywrite::
+(
+with open("test.txt", "w") as f:
+    for thing in final:
+        f.write(str(thing))
+        f.write("\n")
 )
 return
 
@@ -218,3 +224,9 @@ if (ErrorLevel = 0) {
 }
 
 return
+
+
+
+; SYMBOLS
++!<:: Send, {U+2264} ; ≤
++!>:: Send, {U+2265} ; ≥
