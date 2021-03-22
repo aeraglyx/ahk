@@ -11,7 +11,7 @@ If you decide to try it, you might want to remove this line - `#Include X:\Aerag
 
 Some of the functionality:
 - Easier tab navigation (Chrome, VS Code)
-- Quick Spotify search
+- Quick search on Spotify & Wolfram Alpha
 - ± 40 volume for switching between headphones and speakers
 - Night light switch
 - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome
@@ -22,7 +22,7 @@ Some of the functionality:
 
 ## Blender Colour Picker
 
-Colour picker that can see through Filmic in Blender.
+Colour checker/picker that can "see" through Filmic in Blender. While running, `Ctrl`+`C` copies the data so you can paste it in any Blender colour input.
 
 
 ## EN/CS Hybrid Keyboard Layout `en_cs_hybrid.ahk`
@@ -36,12 +36,12 @@ However, it can do some weird stuff to other hotkeys because it changes numbers 
 
 ## Scroll Wheel Acceleration `acc_scroll.ahk`
 
-Similar to `acc_mouse.ahk` but for scroll wheel. Makes scrolling way faster and easier.
+Makes scrolling way faster and easier. There's no going back.
 
 
 ## Mouse Acceleration `acc_mouse.ahk`
 
-This makes it easier to navigate using mouse. Slow mouse movement remains the same, fast movement gets even faster. A bit buggy and unreliable though.
+Similar to `acc_scroll.ahk` but for mouse movement. Low mouse movement remains the same, fast movement gets even faster. Somewhat unreliable though.
 
 
 ---
