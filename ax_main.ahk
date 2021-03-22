@@ -58,10 +58,11 @@ XButton1 & e::
 Run, ms-settings:nightlight
 WinWaitActive, Settings
 Send, #{Up}
-;Sleep, 250
+Sleep, 64
 BlockInput, On
 MouseGetPos, x_orig, y_orig
 MouseClick, Left, 53, 206, 1 ; where's the on/off button
+Sleep, 64
 WinClose, A
 MouseMove, %x_orig%, %y_orig%
 BlockInput, Off
@@ -100,7 +101,16 @@ Sleep, 2000
 Send, {Tab 4}           
 return
 
-XButton1 & w:: Run, https://www.wolframalpha.com/
+XButton1 & w::
+    InputBox, to_solve, WolframAlpha,,, 256, 128
+    if !ErrorLevel {
+        Run, https://www.wolframalpha.com/
+        Sleep, 2000
+        SendRaw, %to_solve%
+        Send, {Enter}
+    }
+return
+
 XButton1 & t:: Run https://twitter.com/home
 XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 
