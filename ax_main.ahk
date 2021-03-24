@@ -148,7 +148,8 @@ Send, ^!y
 Send, {Enter}grade{Enter}
 Return
 
-^y:: Send, ^y{Tab 6}{Enter}{Tab 2}{Enter}{Enter}
+^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
+^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter}
 
 ; PREMIERE PRO
 /*
