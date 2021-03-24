@@ -103,9 +103,12 @@ return
 
 XButton1 & w::
     InputBox, to_solve, WolframAlpha,,, 256, 128
+    clipboard := to_solve ; just in case
     if !ErrorLevel {
         Run, https://www.wolframalpha.com/
-        Sleep, 2000
+        WinWaitActive, ahk_exe chrome.exe
+        WinWait, Wolfram|Alpha: Computational Intelligence
+        Sleep, 256
         SendRaw, %to_solve%
         Send, {Enter}
     }
