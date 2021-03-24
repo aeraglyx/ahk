@@ -46,9 +46,9 @@ return
 XButton1 & Volume_Down:: Send, {Volume_Down 20}
 XButton1 & Volume_Up:: Send, {Volume_Up 20}
 
-XButton1 & LButton:: Send {Media_Prev}
-XButton1 & MButton:: Send {Media_Play_Pause}
-XButton1 & RButton:: Send {Media_Next}
+; XButton1 & LButton:: Send {Media_Prev}
+; XButton1 & MButton:: Send {Media_Play_Pause}
+; XButton1 & RButton:: Send {Media_Next}
 
 
 
@@ -122,6 +122,12 @@ XButton1 & n:: Run, https://www.notion.so/
 
 
 
+
+; SYMBOLS
++!<:: Send, {U+2264} ; ≤
++!>:: Send, {U+2265} ; ≥
+::approx::{U+2248}   ; ≈
+::notequal::{U+2260} ; ≠
 
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
@@ -238,9 +244,3 @@ if (ErrorLevel = 0) {
 }
 
 return
-
-
-
-; SYMBOLS
-+!<:: Send, {U+2264} ; ≤
-+!>:: Send, {U+2265} ; ≥

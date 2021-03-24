@@ -2,22 +2,18 @@
 #SingleInstance Force
 #Persistent
 SendMode Input
-;#NoTrayIcon
-
-
-global e :=  2.71828182846
-global pi := 3.14159265359
+; #NoTrayIcon
+; Menu, Tray, icon, %A_ScriptDir%\icons\col_bl_18px_v1.ico
 
 filmic_2_lin(x) {
     line := x + 1
     FileReadLine, out, support_files\test.txt, %line%
-    ; TODO other looks, Log, sRGB
-    ; switching between them
+    ; TODO other looks, Log, sRGB & switching between them
     return %out%
 }
 
-;debug := x
-;MsgBox, %debug%
+; debug := x
+; MsgBox, %debug%
 
 loop {
 
@@ -45,7 +41,7 @@ loop {
         clipboard := ""
         clipboard := bl_copy
         ClipWait
-        TrayTip , Colour Picker, Copied!, 1
+        ; TrayTip , Colour Picker, Copied!, 1
     }
     
 }
