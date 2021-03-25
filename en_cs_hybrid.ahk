@@ -3,7 +3,7 @@
 #Persistent
 SendMode Input
 
-Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v1.ico
+Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v2.ico
 
 1:: ;ů
 if (!GetKeyState("CapsLock", "T")){
