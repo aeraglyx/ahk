@@ -12,9 +12,6 @@ filmic_2_lin(x) {
     return %out%
 }
 
-; debug := x
-; MsgBox, %debug%
-;/*
 loop {
 
     MouseGetPos, x, y
@@ -32,10 +29,14 @@ loop {
     ; Blender uses this format
     ; [0.500000, 0.500000, 0.500000, 1.000000]
 
+    r_txt := round(r_lin, 2)
+    g_txt := round(g_lin, 2)
+    b_txt := round(b_lin, 2)
+
     x_txt := x + 24 ; offset to the right
     y_txt := y
     
-    ToolTip, R = %r_lin%`nG = %g_lin%`nB = %b_lin%, %x_txt%, %y_txt%
+    ToolTip, R = %r_txt%`nG = %g_txt%`nB = %b_txt%, %x_txt%, %y_txt%
 
     if (GetKeyState("LCtrl" , "P") && GetKeyState("c" , "P")) {
         clipboard := ""
@@ -45,50 +46,5 @@ loop {
     }
     ;Sleep, 16
 }
-*/
-/*
-loop {
 
-    MouseGetPos, x_orig, y_orig
-
-    n := 9
-    i := 0
-    loop, %n% {
-        PixelGetColor, col, %x_orig%, %y_orig%, RGB
-
-        r_int := Format("{1:u}", "0x" SubStr(col, 3, 2))
-        g_int := Format("{1:u}", "0x" SubStr(col, 5, 2))
-        b_int := Format("{1:u}", "0x" SubStr(col, 7, 2))
-
-        r_full += r_int
-        g_full += g_int
-        b_full += b_int
-    }
-
-    r_full /= n
-    g_full /= n
-    b_full /= n
-
-    r_lin := filmic_2_lin(round(r_full))
-    g_lin := filmic_2_lin(round(g_full))
-    b_lin := filmic_2_lin(round(b_full))
-
-    ;bl_copy := "[" r_lin ", " g_lin ", " b_lin ", 1.000000]"
-    ; Blender uses this format
-    ; [0.500000, 0.500000, 0.500000, 1.000000]
-
-    x_txt := x_orig + 24 ; offset to the right
-    y_txt := y_orig
-    
-    ToolTip, R = %r_lin%`nG = %g_lin%`nB = %b_lin%, %x_txt%, %y_txt%
-
-    if (GetKeyState("LCtrl" , "P") && GetKeyState("c" , "P")) {
-        clipboard := ""
-        clipboard := bl_copy
-        ClipWait
-        ; TrayTip , Colour Picker, Copied!, 1
-    }
-    
-}
-*/
 return
