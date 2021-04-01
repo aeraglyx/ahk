@@ -17,6 +17,7 @@ Some of the functionality:
 - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome
 - Hotkeys for AE, LaTeX, Python
 - Hotkeys for favourite websites
+- Hotstrings for `≤`, `≥`, `≈`, `≠`
 - Etc.
 
 

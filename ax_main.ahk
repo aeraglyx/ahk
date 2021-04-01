@@ -108,7 +108,7 @@ XButton1 & w::
         Run, https://www.wolframalpha.com/
         WinWaitActive, ahk_exe chrome.exe
         WinWait, Wolfram|Alpha: Computational Intelligence
-        Sleep, 256
+        Sleep, 500
         SendRaw, %to_solve%
         Send, {Enter}
     }
@@ -119,6 +119,23 @@ XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 
 #n::
 XButton1 & n:: Run, https://www.notion.so/
+
+XButton1 & g::
+    InputBox, to_run, Run,,, 256, 128
+    array := {"monke": "https://monkeytype.com/"
+        ,"rcs": "https://blender.community/c/rightclickselect/"
+        ,"git": "https://github.com/aeraglyx"
+        ,"ig": "https://www.instagram.com/"
+        ,"we": "https://wetransfer.com/"
+        ,"desmos": "https://www.desmos.com/calculator"}
+    if ErrorLevel {
+        return
+    }
+    else If (array.HasKey(to_run)) {
+        x := array[to_run]
+        Run, %x%
+    }
+return
 
 
 
@@ -152,6 +169,20 @@ Send, ^!y
 Send, {Enter}grain{Enter}
 Send, ^!y
 Send, {Enter}grade{Enter}
+Return
+
+; Black colour
+XButton1 & b::
+MouseClick, Left
+SendRaw, 000000
+Send, {Tab}{Enter}
+Return
+
+; White colour
+XButton1 & w::
+MouseClick, Left
+SendRaw, FFFFFF
+Send, {Tab}{Enter}
 Return
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
