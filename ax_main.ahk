@@ -227,6 +227,9 @@ F1:: Send, ^{PgUp}
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
 
+; comment
+XButton1 & c:: Send, ^{/}
+
 ; PYTHON
 :o*:pyread::
 (
