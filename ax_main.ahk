@@ -127,7 +127,8 @@ XButton1 & g::
         ,"git": "https://github.com/aeraglyx"
         ,"ig": "https://www.instagram.com/"
         ,"we": "https://wetransfer.com/"
-        ,"desmos": "https://www.desmos.com/calculator"}
+        ,"desmos": "https://www.desmos.com/calculator"
+        ,"out": "https://outlook.office.com/mail/inbox"}
     if ErrorLevel {
         return
     }
@@ -152,6 +153,15 @@ return
 :ro:fn::f(x)=
 :ro:finv::f^{-1}(x)=
 
+; spaces to underscores
+XButton1 & u::
+Send, ^c
+ClipWait
+txt := clipboard
+txt := StrReplace(txt, " ", "_")
+len := StrLen(txt)
+Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
+return
 
 
 
