@@ -156,7 +156,7 @@ return
 ; spaces to underscores
 XButton1 & u::
 Send, ^c
-ClipWait
+Sleep, 64
 txt := clipboard
 txt := StrReplace(txt, " ", "_")
 len := StrLen(txt)
