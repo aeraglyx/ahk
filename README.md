@@ -18,6 +18,7 @@ Some of the functionality:
 - Hotkeys for AE, LaTeX, Python
 - Hotkeys for favourite websites
 - Hotstrings for `≤`, `≥`, `≈`, `≠`
+- Reloading Blender for addon development
 - Etc.
 
 

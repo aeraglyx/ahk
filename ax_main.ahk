@@ -288,3 +288,16 @@ if (ErrorLevel = 0) {
 }
 
 return
+
+
+
+; TODO path for blender at top as variable
+XButton1 & F2::
+Process, Close, blender.exe
+Sleep, 2000
+src := "X:\Aeraglyx\Git\fulcrum"
+dst := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
+FileCopyDir, %src%, %dst%, 1
+Sleep, 2000
+Run, "X:\Software\Blender\daily\blender-2.93.0-7c5e00965533-windows64\blender.exe"
+Return
