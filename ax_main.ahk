@@ -92,7 +92,7 @@ return
 
 ; WEBSITES
 
-XButton1 & f::
+XButton1 & g::
 XButton1:: Run, https://www.google.com/
 
 XButton1 & y::
@@ -120,7 +120,7 @@ XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 #n::
 XButton1 & n:: Run, https://www.notion.so/
 
-XButton1 & g::
+XButton1 & f::
     InputBox, to_run, Run,,, 256, 128
     array := {"monke": "https://monkeytype.com/"
         ,"rcs": "https://blender.community/c/rightclickselect/"
@@ -128,7 +128,10 @@ XButton1 & g::
         ,"ig": "https://www.instagram.com/"
         ,"we": "https://wetransfer.com/"
         ,"desmos": "https://www.desmos.com/calculator"
-        ,"out": "https://outlook.office.com/mail/inbox"}
+        ,"out": "https://outlook.office.com/mail/inbox"
+        ,"assets": "X:\Assets"
+        ,"utb": "X:\UTB"
+        ,"rec": "X:\Cache\Desktop"}
     if ErrorLevel {
         return
     }
@@ -290,14 +293,14 @@ if (ErrorLevel = 0) {
 return
 
 
-
+; Copy over my addon and restart Blender
 ; TODO path for blender at top as variable
-XButton1 & F2::
+XButton1 & F5::
 Process, Close, blender.exe
-Sleep, 2000
+;Sleep, 64
 src := "X:\Aeraglyx\Git\fulcrum"
 dst := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
 FileCopyDir, %src%, %dst%, 1
-Sleep, 2000
+;Sleep, 64
 Run, "X:\Software\Blender\daily\blender-2.93.0-7c5e00965533-windows64\blender.exe"
 Return
