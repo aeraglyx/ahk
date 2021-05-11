@@ -4,7 +4,7 @@
 SendMode Input
 
 ; SUB-SCRIPTS
-; has to be before any hotkeys/returns etc. I guess
+; has to be run before any hotkeys/returns etc.
 Run, acc_scroll.ahk
 ;Run, acc_mouse.ahk
 
@@ -261,6 +261,9 @@ with open("test.txt", "w") as f:
         f.write("\n")
 )
 return
+
+#ifWinActive ahk_exe blender.exe
+:*:ddd::D.materials['Material'].node_tree.nodes.active.
 
 #ifWinActive
 
