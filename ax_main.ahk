@@ -198,6 +198,16 @@ SendRaw, FFFFFF
 Send, {Tab}{Enter}
 Return
 
+; Reload footage
+XButton1 & `::
+BlockInput, On
+MouseClick, Right
+MouseGetPos, x_orig, y_orig
+MouseClick, Left, 42, 190,, 1,, R
+MouseMove, %x_orig%, %y_orig%
+BlockInput, Off
+Return
+
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
 ^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter}
 
