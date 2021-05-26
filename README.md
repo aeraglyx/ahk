@@ -31,7 +31,7 @@ Colour checker/picker that can "see" through Filmic in Blender. While running, `
 
 My custom keyboard layout that combines the default EN layout with Czech characters. This gets activated from the main script with `Alt` + `Shift`, similar to how you'd normally switch layouts.
 
-Irreplacable for people like me who are used to the mainstream layout but live in Czech Republic 🙃
+Irreplaceable for people like me who are used to the mainstream layout but live in Czech Republic 🙃
 
 However, it can do some weird stuff to other hotkeys because it changes numbers to the CS characters, so enable it only when you need it.
 
