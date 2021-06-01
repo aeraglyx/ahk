@@ -295,11 +295,12 @@ if (ErrorLevel = 0) {
     MouseGetPos, OrigX, OrigY
     WinActivate, ahk_exe Spotify.exe
     WinWaitActive, ahk_exe Spotify.exe
-    MouseClick, Left, -1192, -101, 2
+    MouseClick, Left, -1525, -15, 1
+    MouseClick, Left, -1100, -94, 3
     Send, %to_play%
     Sleep, 2000 ; timing
-    MouseClick, Left, -1232, 109, 1
-    Send, {ShiftDown}{Left 20}{ShiftUp}
+    MouseClick, Left, -956, 176, 1
+    ; Send, {ShiftDown}{Left 20}{ShiftUp}
     MouseMove, %OrigX%, %OrigY%
 }
 
