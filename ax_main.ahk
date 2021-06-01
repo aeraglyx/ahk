@@ -309,12 +309,15 @@ return
 
 ; Copy over my addon and restart Blender
 ; TODO path for blender at top as variable
+; TODO for loop for dst folders
 XButton1 & F5::
 Process, Close, blender.exe
 ;Sleep, 64
 src := "X:\Aeraglyx\Git\fulcrum"
-dst := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
-FileCopyDir, %src%, %dst%, 1
+dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
+dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
+FileCopyDir, %src%, %dst293%, 1
+FileCopyDir, %src%, %dst300%, 1
 ;Sleep, 64
 Run, "X:\Software\Blender\daily\blender-2.93.0-7c5e00965533-windows64\blender.exe"
 Return
