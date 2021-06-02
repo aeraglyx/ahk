@@ -319,5 +319,5 @@ dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scr
 FileCopyDir, %src%, %dst293%, 1
 FileCopyDir, %src%, %dst300%, 1
 ;Sleep, 64
-Run, "X:\Software\Blender\daily\blender-2.93.0-7c5e00965533-windows64\blender.exe"
+Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
 Return
