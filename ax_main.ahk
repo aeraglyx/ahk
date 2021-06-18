@@ -89,22 +89,25 @@ Ctrl & Down:: Send, {Down 12}
 
 ; encode time
 :r*?:ttt::
-time_now := A_NowUTC
-time_now -= 19700101000000, Seconds
-time_now := Floor(time_now / 60)
-time_now := to64(time_now)
-SendRaw, %time_now%
+    time_now := A_NowUTC
+    time_now -= 19700101000000, Seconds
+    time_now := Floor(time_now / 60)
+    time_now := to62(time_now)
+    SendRaw, %time_now%
 Return
 
 ; decode time
 XButton1 & x::
-SendInput, ^{c}
-ClipWait, 1
-unix := from64(Clipboard) * 60
-out := 19700101000000
-out += unix, Seconds
-FormatTime, out, out
-MsgBox, %out%
+    SendInput, ^{c}
+    ClipWait, 1
+    Sleep, 64
+    unix := from62(Clipboard) * 60
+    diff := A_Now - A_NowUTC
+    out := 19700101000000 + diff
+    ; out -= diff, Seconds
+    out += unix, Seconds
+    FormatTime, out, %out%, yyyy MMMM dd, HH:mm
+    MsgBox,, Encoded at UTC, %out%
 Return
 
 
@@ -116,10 +119,10 @@ XButton1 & g::
 XButton1:: Run, https://www.google.com/
 
 XButton1 & y::
-Run, https://www.youtube.com/
-Sleep, 2000
-Send, {Tab 4}           
-return
+    Run, https://www.youtube.com/
+    Sleep, 2000
+    Send, {Tab 4}           
+Return
 
 XButton1 & w::
     InputBox, to_solve, WolframAlpha,,, 256, 128
@@ -128,11 +131,11 @@ XButton1 & w::
         Run, https://www.wolframalpha.com/
         WinWaitActive, ahk_exe chrome.exe
         WinWait, Wolfram|Alpha: Computational Intelligence
-        Sleep, 500
+        Sleep, 1000
         SendRaw, %to_solve%
         Send, {Enter}
     }
-return
+Return
 
 XButton1 & t:: Run https://twitter.com/home
 XButton1 & d:: Run, https://drive.google.com/drive/my-drive
@@ -153,13 +156,13 @@ XButton1 & f::
         ,"utb": "X:\UTB"
         ,"rec": "X:\Cache\Desktop"}
     if ErrorLevel {
-        return
+        Return
     }
     else If (array.HasKey(to_run)) {
         x := array[to_run]
         Run, %x%
     }
-return
+Return
 
 
 
@@ -292,9 +295,6 @@ with open("test.txt", "w") as f:
 )
 return
 
-#ifWinActive ahk_exe blender.exe
-:*:ddd::D.materials['Material'].node_tree.nodes.active.
-
 #ifWinActive
 
 
@@ -324,20 +324,23 @@ if (ErrorLevel = 0) {
     MouseMove, %OrigX%, %OrigY%
 }
 
-return
+Return
 
+; BLENDER
 
 ; Copy over my addon and restart Blender
 ; TODO path for blender at top as variable
 ; TODO for loop for dst folders
 XButton1 & F5::
-Process, Close, blender.exe
-;Sleep, 64
-src := "X:\Aeraglyx\Git\fulcrum"
-dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
-dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
-FileCopyDir, %src%, %dst293%, 1
-FileCopyDir, %src%, %dst300%, 1
-;Sleep, 64
-Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
+    Process, Close, blender.exe
+    src := "X:\Aeraglyx\Git\fulcrum"
+    dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
+    dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
+    FileCopyDir, %src%, %dst293%, 1
+    FileCopyDir, %src%, %dst300%, 1
+    Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
 Return
+
+#ifWinActive ahk_exe blender.exe
+:*:ddd::D.materials['Material'].node_tree.nodes.active.
+#IfWinActive
