@@ -82,10 +82,30 @@ Ctrl & Down:: Send, {Down 12}
 
 
 ; format
+; :r*?:ttt::
+; FormatTime, time_now,, yyyyMMdd_HHmmss
+; SendInput, %time_now%
+; return
+
+; encode time
 :r*?:ttt::
-FormatTime, time_now,, yyyyMMdd_HHmmss
-SendInput, %time_now%
-return
+time_now := A_NowUTC
+time_now -= 19700101000000, Seconds
+time_now := Floor(time_now / 60)
+time_now := to64(time_now)
+SendRaw, %time_now%
+Return
+
+; decode time
+XButton1 & x::
+SendInput, ^{c}
+ClipWait, 1
+unix := from64(Clipboard) * 60
+out := 19700101000000
+out += unix, Seconds
+FormatTime, out, out
+MsgBox, %out%
+Return
 
 
 
@@ -234,8 +254,8 @@ XButton2:: Send, ^w
 
 ; make Ctrl + Z work
 ; BUG reloading triggers this
-^z:: Send, !{Left}
-^+z:: Send, !{Right}
+; ^z:: Send, !{Left}
+; ^+z:: Send, !{Right}
 
 #ifWinActive
 
