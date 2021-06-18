@@ -41,3 +41,25 @@ from64(str) {
   }
   return x
 }
+
+to62(x) {
+  letters := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  str := ""
+  while x > 0 {
+    m := Mod(x, 62) + 1
+    z := SubStr(letters, m, 1)
+    x := x // 62
+    str := z . str
+  }
+  return str
+}
+from62(str) {
+  letters := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  l := StrLen(str)
+  x := 0
+  Loop, parse, str
+  {
+    x += (InStr(letters, A_LoopField, True) - 1) * 62 ** (l - A_Index)
+  }
+  return x
+}
