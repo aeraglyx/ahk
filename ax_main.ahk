@@ -51,6 +51,37 @@ XButton1 & Volume_Up:: Send, {Volume_Up 20}
 ; XButton1 & RButton:: Send {Media_Next}
 
 
+; NUMBERS - Maybe only in Blender?
+XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
+XButton2 & 2:: Send, 0.70710678118 ; sqrt(2) / 2
+XButton1 & 3:: Send, 1.73205080757 ; sqrt(3)
+XButton2 & 3:: Send, 0.86602540378 ; sqrt(3) / 2
+XButton1 & 4:: Send, 1.57079632679 ; tau / 4
+XButton2 & 4:: Send, 0.78539816339 ; tau / 8
+
+; SYMBOLS
++!<:: Send, {U+2264} ; ≤
++!>:: Send, {U+2265} ; ≥
+::approx::{U+2248}   ; ≈
+::notequal::{U+2260} ; ≠
+
+; LATEX
+:o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
+:o:frac::\frac{{}{}}{{}{}}{Left 3}
+:ro:fn::f(x)=
+:ro:finv::f^{-1}(x)=
+
+; spaces to underscores
+XButton1 & u::
+	Send, ^c
+	Sleep, 64
+	txt := clipboard
+	txt := StrReplace(txt, " ", "_")
+	len := StrLen(txt)
+	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
+Return
+
+
 
 
 ; NIGHT LIGHT
@@ -162,31 +193,6 @@ XButton1 & f::
 		x := array[to_run]
 		Run, %x%
 	}
-Return
-
-
-
-
-; SYMBOLS
-+!<:: Send, {U+2264} ; ≤
-+!>:: Send, {U+2265} ; ≥
-::approx::{U+2248}   ; ≈
-::notequal::{U+2260} ; ≠
-
-; LATEX
-:o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
-:o:frac::\frac{{}{}}{{}{}}{Left 3}
-:ro:fn::f(x)=
-:ro:finv::f^{-1}(x)=
-
-; spaces to underscores
-XButton1 & u::
-	Send, ^c
-	Sleep, 64
-	txt := clipboard
-	txt := StrReplace(txt, " ", "_")
-	len := StrLen(txt)
-	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
 Return
 
 
