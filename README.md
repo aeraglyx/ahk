@@ -14,11 +14,12 @@ Some of the functionality:
 - Quick search on Spotify & Wolfram Alpha
 - ± 40 volume for switching between headphones and speakers
 - Night light switch
-- `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome
 - Hotkeys for AE, LaTeX, Python
-- Hotkeys for favourite websites
+- Shortcuts for favourite websites and folders
 - Hotstrings for `≤`, `≥`, `≈`, `≠`
 - Reloading Blender for addon development
+- Encoding current time to 5 characters and vice versa
+<!-- - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome -->
 - Etc.
 
 

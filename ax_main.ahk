@@ -15,13 +15,13 @@ XButton1 & r:: Reload
 XButton1 & q:: WinClose A
 
 toggle(app) {
-    DetectHiddenWindows, On
-    SetTitleMatchMode, 2 
-    if WinExist(app) {
-        WinClose, %app%
-    } else {
-        Run, %app%
-    }
+	DetectHiddenWindows, On
+	SetTitleMatchMode, 2 
+	if WinExist(app) {
+		WinClose, %app%
+	} else {
+		Run, %app%
+	}
 }
 
 
@@ -33,9 +33,9 @@ XButton1 & b:: toggle("color_picker.ahk")
 
 ; KEYBOARD LAYOUT TOGGLE
 ~LAlt Up::
-if (A_PriorKey = "LShift"){
-    toggle("en_cs_hybrid.ahk")
-}
+	if (A_PriorKey = "LShift"){
+		toggle("en_cs_hybrid.ahk")
+	}
 return
 
 
@@ -55,18 +55,18 @@ XButton1 & Volume_Up:: Send, {Volume_Up 20}
 
 ; NIGHT LIGHT
 XButton1 & e::
-Run, ms-settings:nightlight
-WinWaitActive, Settings
-Send, #{Up}
-Sleep, 64
-BlockInput, On
-MouseGetPos, x_orig, y_orig
-MouseClick, Left, 53, 206, 1 ; where's the on/off button
-Sleep, 64
-WinClose, A
-MouseMove, %x_orig%, %y_orig%
-BlockInput, Off
-return
+	Run, ms-settings:nightlight
+	WinWaitActive, Settings
+	Send, #{Up}
+	Sleep, 64
+	BlockInput, On
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 53, 206, 1 ; where's the on/off button
+	Sleep, 64
+	WinClose, A
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
+Return
 
 RAlt::Down
 
@@ -89,25 +89,25 @@ Ctrl & Down:: Send, {Down 12}
 
 ; encode time
 :r*?:ttt::
-    time_now := A_NowUTC
-    time_now -= 19700101000000, Seconds
-    time_now := Floor(time_now / 60)
-    time_now := to62(time_now)
-    SendRaw, %time_now%
+	time_now := A_NowUTC
+	time_now -= 19700101000000, Seconds
+	time_now := Floor(time_now / 60)
+	time_now := to62(time_now)
+	SendRaw, %time_now%
 Return
 
 ; decode time
 XButton1 & x::
-    SendInput, ^{c}
-    ClipWait, 1
-    Sleep, 64
-    unix := from62(Clipboard) * 60
-    diff := A_Now - A_NowUTC
-    out := 19700101000000 + diff
-    ; out -= diff, Seconds
-    out += unix, Seconds
-    FormatTime, out, %out%, yyyy MMMM dd, HH:mm
-    MsgBox,, Encoded at UTC, %out%
+	SendInput, ^{c}
+	ClipWait, 1
+	Sleep, 64
+	unix := from62(Clipboard) * 60
+	diff := A_Now - A_NowUTC
+	out := 19700101000000 + diff
+	; out -= diff, Seconds
+	out += unix, Seconds
+	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
+	MsgBox,, Encoded at UTC, %out%
 Return
 
 
@@ -119,22 +119,22 @@ XButton1 & g::
 XButton1:: Run, https://www.google.com/
 
 XButton1 & y::
-    Run, https://www.youtube.com/
-    Sleep, 2000
-    Send, {Tab 4}           
+	Run, https://www.youtube.com/
+	Sleep, 2000
+	Send, {Tab 4}           
 Return
 
 XButton1 & w::
-    InputBox, to_solve, WolframAlpha,,, 256, 128
-    clipboard := to_solve ; just in case
-    if !ErrorLevel {
-        Run, https://www.wolframalpha.com/
-        WinWaitActive, ahk_exe chrome.exe
-        WinWait, Wolfram|Alpha: Computational Intelligence
-        Sleep, 1000
-        SendRaw, %to_solve%
-        Send, {Enter}
-    }
+	InputBox, to_solve, WolframAlpha,,, 256, 128
+	clipboard := to_solve ; just in case
+	if !ErrorLevel {
+		Run, https://www.wolframalpha.com/
+		WinWaitActive, ahk_exe chrome.exe
+		WinWait, Wolfram|Alpha: Computational Intelligence
+		Sleep, 1000
+		SendRaw, %to_solve%
+		Send, {Enter}
+	}
 Return
 
 XButton1 & t:: Run https://twitter.com/home
@@ -144,24 +144,24 @@ XButton1 & d:: Run, https://drive.google.com/drive/my-drive
 XButton1 & n:: Run, https://www.notion.so/
 
 XButton1 & f::
-    InputBox, to_run, Run,,, 256, 128
-    array := {"monke": "https://monkeytype.com/"
-        ,"rcs": "https://blender.community/c/rightclickselect/"
-        ,"git": "https://github.com/aeraglyx"
-        ,"ig": "https://www.instagram.com/"
-        ,"we": "https://wetransfer.com/"
-        ,"desmos": "https://www.desmos.com/calculator"
-        ,"out": "https://outlook.office.com/mail/inbox"
-        ,"assets": "X:\Assets"
-        ,"utb": "X:\UTB"
-        ,"rec": "X:\Cache\Desktop"}
-    if ErrorLevel {
-        Return
-    }
-    else If (array.HasKey(to_run)) {
-        x := array[to_run]
-        Run, %x%
-    }
+	InputBox, to_run, Run,,, 256, 128
+	array := {"monke": "https://monkeytype.com/"
+		,"rcs": "https://blender.community/c/rightclickselect/"
+		,"git": "https://github.com/aeraglyx"
+		,"ig": "https://www.instagram.com/"
+		,"we": "https://wetransfer.com/"
+		,"desmos": "https://www.desmos.com/calculator"
+		,"out": "https://outlook.office.com/mail/inbox"
+		,"assets": "X:\Assets"
+		,"utb": "X:\UTB"
+		,"rec": "X:\Cache\Desktop"}
+	if ErrorLevel {
+		Return
+	}
+	else If (array.HasKey(to_run)) {
+		x := array[to_run]
+		Run, %x%
+	}
 Return
 
 
@@ -181,13 +181,13 @@ Return
 
 ; spaces to underscores
 XButton1 & u::
-Send, ^c
-Sleep, 64
-txt := clipboard
-txt := StrReplace(txt, " ", "_")
-len := StrLen(txt)
-Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
-return
+	Send, ^c
+	Sleep, 64
+	txt := clipboard
+	txt := StrReplace(txt, " ", "_")
+	len := StrLen(txt)
+	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
+Return
 
 
 
@@ -195,40 +195,40 @@ return
 #ifWinActive ahk_exe AfterFX.exe
 
 XButton1 & a::
-Send, ^!y
-Send, {Enter}glow{Enter}
-Send, ^!y
-Send, {Enter}chroma{Enter}
-Send, ^!y
-Send, {Enter}lin2log{Enter}
-Send, ^!y
-Send, {Enter}grain{Enter}
-Send, ^!y
-Send, {Enter}grade{Enter}
+	Send, ^!y
+	Send, {Enter}glow{Enter}
+	Send, ^!y
+	Send, {Enter}chroma{Enter}
+	Send, ^!y
+	Send, {Enter}lin2log{Enter}
+	Send, ^!y
+	Send, {Enter}grain{Enter}
+	Send, ^!y
+	Send, {Enter}grade{Enter}
 Return
 
 ; Black colour
 XButton1 & b::
-MouseClick, Left
-SendRaw, 000000
-Send, {Tab}{Enter}
+	MouseClick, Left
+	SendRaw, 000000
+	Send, {Tab}{Enter}
 Return
 
 ; White colour
 XButton1 & w::
-MouseClick, Left
-SendRaw, FFFFFF
-Send, {Tab}{Enter}
+	MouseClick, Left
+	SendRaw, FFFFFF
+	Send, {Tab}{Enter}
 Return
 
 ; Reload footage
 XButton1 & `::
-BlockInput, On
-MouseClick, Right
-MouseGetPos, x_orig, y_orig
-MouseClick, Left, 42, 190,, 1,, R
-MouseMove, %x_orig%, %y_orig%
-BlockInput, Off
+	BlockInput, On
+	MouseClick, Right
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 42, 190,, 1,, R
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
 Return
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
@@ -272,7 +272,6 @@ F1:: Send, ^{PgUp}
 ; F2:: Send, ^w
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
-
 ; comment
 XButton1 & c:: Send, ^{/}
 
@@ -280,20 +279,20 @@ XButton1 & c:: Send, ^{/}
 :o*:pyread::
 (
 with open("file.txt", "r") as f:
-    data = []
-    for line in f.readlines():
-        data.append(float(line))
+	data = []
+	for line in f.readlines():
+		data.append(float(line))
 )
-return
+Return
 
 :o*:pywrite::
 (
 with open("test.txt", "w") as f:
-    for thing in final:
-        f.write(str(thing))
-        f.write("\n")
+	for thing in final:
+		f.write(str(thing))
+		f.write("\n")
 )
-return
+Return
 
 #ifWinActive
 
@@ -302,43 +301,39 @@ return
 
 ; SPOTIFY SEARCH
 XButton1 & s::
-
-if !WinExist("ahk_exe Spotify.exe"){
-    Run, C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe
-}
-InputBox, to_play, Spotify Search, What to play on Spotify,, 256, 128
-
-DetectHiddenWindows, On
-;SetTitleMatchMode 2 
-CoordMode, Mouse, Screen
-if (ErrorLevel = 0) {
-    MouseGetPos, OrigX, OrigY
-    WinActivate, ahk_exe Spotify.exe
-    WinWaitActive, ahk_exe Spotify.exe
-    MouseClick, Left, -1525, -15, 1
-    MouseClick, Left, -1100, -94, 3
-    Send, %to_play%
-    Sleep, 2000 ; timing
-    MouseClick, Left, -956, 176, 1
-    ; Send, {ShiftDown}{Left 20}{ShiftUp}
-    MouseMove, %OrigX%, %OrigY%
-}
-
+	if !WinExist("ahk_exe Spotify.exe"){
+		Run, C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe
+	}
+	InputBox, to_play, Spotify Search, What to play on Spotify,, 256, 128
+	DetectHiddenWindows, On
+	;SetTitleMatchMode 2 
+	CoordMode, Mouse, Screen
+	if (ErrorLevel = 0) {
+		MouseGetPos, OrigX, OrigY
+		WinActivate, ahk_exe Spotify.exe
+		WinWaitActive, ahk_exe Spotify.exe
+		MouseClick, Left, -1525, -15, 1
+		MouseClick, Left, -1100, -94, 3
+		Send, %to_play%
+		Sleep, 2000 ; timing
+		MouseClick, Left, -956, 176, 1
+		; Send, {ShiftDown}{Left 20}{ShiftUp}
+		MouseMove, %OrigX%, %OrigY%
+	}
 Return
 
 ; BLENDER
-
 ; Copy over my addon and restart Blender
 ; TODO path for blender at top as variable
 ; TODO for loop for dst folders
 XButton1 & F5::
-    Process, Close, blender.exe
-    src := "X:\Aeraglyx\Git\fulcrum"
-    dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
-    dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
-    FileCopyDir, %src%, %dst293%, 1
-    FileCopyDir, %src%, %dst300%, 1
-    Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
+	Process, Close, blender.exe
+	src := "X:\Aeraglyx\Git\fulcrum"
+	dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
+	dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
+	FileCopyDir, %src%, %dst293%, 1
+	FileCopyDir, %src%, %dst300%, 1
+	Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
 Return
 
 #ifWinActive ahk_exe blender.exe
