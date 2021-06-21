@@ -5,6 +5,12 @@ SendMode Input
 
 Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v2.ico
 
+Loop {
+	MouseGetPos, x, y
+	ToolTip, Czech, (x + 24), y
+	Sleep, 32
+}
+
 1:: ;ů
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+016F}
