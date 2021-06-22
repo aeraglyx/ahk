@@ -33,7 +33,7 @@ XButton1 & b:: toggle("color_picker.ahk")
 ; MEASURE TOOL
 XButton1 & m:: toggle("measure.ahk")
 
-; KEYBOARD LAYOUT TOGGLE
+; KEYBOARD LAYOUT
 ~LAlt Up::
 	if (A_PriorKey = "LShift"){
 		toggle("en_cs_hybrid.ahk")
@@ -75,9 +75,7 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 ; spaces to underscores
 ; TODO other way around?
 XButton1 & u::
-	Send, ^c
-	Sleep, 64
-	txt := clipboard
+	txt := selected()
 	txt := StrReplace(txt, " ", "_")
 	len := StrLen(txt)
 	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
@@ -139,48 +137,6 @@ XButton1 & x::
 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
 	MsgBox,, Encoded at UTC, %out%
 	Return
-
-url_encode(txt) {
-	chars := {"!": "%21"
-		,"#": "%23"
-		,"$": "%24"
-		,"&": "%26"
-		,"'": "%27"
-		,"(": "%28"
-		,")": "%29"
-		,"*": "%2A"
-		,"+": "%2B"
-		,",": "%2C"
-		,"/": "%2F"
-		,":": "%3A"
-		,";": "%3B"
-		,"=": "%3D"
-		,"?": "%3F"
-		,"@": "%40"
-		,"[": "%5B"
-		,"]": "%5D"} ; ,"%": "%25"
-	for key, value in chars
-		txt := StrReplace(txt, key, value)
-	txt := StrReplace(txt, "`r`n", " ")
-	Return txt
-}
-
-query(site, txt) {
-	txt := url_encode(txt)
-	url := site . txt
-	Run, %url%
-}
-
-selected() {
-	clipboard_prev := Clipboard
-	Clipboard := ""
-	SendInput, ^{c}
-	ClipWait, 1
-	Sleep, 64
-	out := Clipboard
-	Clipboard := clipboard_prev
-	Return out
-}
 
 
 

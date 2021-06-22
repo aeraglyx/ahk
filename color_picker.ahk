@@ -36,7 +36,7 @@ loop {
 	x_txt := x + 24 ; offset to the right
 	y_txt := y
 	
-	ToolTip, R = %r_txt%`nG = %g_txt%`nB = %b_txt%, %x_txt%, %y_txt%
+	ToolTip, R = %r_txt%`nG = %g_txt%`nB = %b_txt%, x_txt + 24, y_txt
 
 	if (GetKeyState("LCtrl" , "P") && GetKeyState("c" , "P")) {
 		clipboard := ""
