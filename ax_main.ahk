@@ -30,6 +30,8 @@ toggle(app) {
 ; COLOR PICKER
 XButton1 & b:: toggle("color_picker.ahk")
 
+; MEASURE TOOL
+XButton1 & m:: toggle("measure.ahk")
 
 ; KEYBOARD LAYOUT TOGGLE
 ~LAlt Up::
