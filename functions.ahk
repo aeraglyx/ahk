@@ -64,3 +64,45 @@ from62(str) {
 	}
 	Return x
 }
+
+url_encode(txt) {
+	chars := {"!": "%21"
+		,"#": "%23"
+		,"$": "%24"
+		,"&": "%26"
+		,"'": "%27"
+		,"(": "%28"
+		,")": "%29"
+		,"*": "%2A"
+		,"+": "%2B"
+		,",": "%2C"
+		,"/": "%2F"
+		,":": "%3A"
+		,";": "%3B"
+		,"=": "%3D"
+		,"?": "%3F"
+		,"@": "%40"
+		,"[": "%5B"
+		,"]": "%5D"} ; ,"%": "%25"
+	for key, value in chars
+		txt := StrReplace(txt, key, value)
+	txt := StrReplace(txt, "`r`n", " ")
+	Return txt
+}
+
+query(site, txt) {
+	txt := url_encode(txt)
+	url := site . txt
+	Run, %url%
+}
+
+selected() {
+	clipboard_prev := Clipboard
+	Clipboard := ""
+	SendInput, ^{c}
+	ClipWait, 1
+	Sleep, 64
+	out := Clipboard
+	Clipboard := clipboard_prev
+	Return out
+}
