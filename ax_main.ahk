@@ -36,7 +36,7 @@ XButton1 & b:: toggle("color_picker.ahk")
 	if (A_PriorKey = "LShift"){
 		toggle("en_cs_hybrid.ahk")
 	}
-return
+	Return
 
 
 
@@ -49,7 +49,6 @@ XButton1 & Volume_Up:: Send, {Volume_Up 20}
 ; XButton1 & LButton:: Send {Media_Prev}
 ; XButton1 & MButton:: Send {Media_Play_Pause}
 ; XButton1 & RButton:: Send {Media_Next}
-
 
 ; NUMBERS - Maybe only in Blender?
 XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
@@ -72,6 +71,7 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 :ro:finv::f^{-1}(x)=
 
 ; spaces to underscores
+; TODO other way around?
 XButton1 & u::
 	Send, ^c
 	Sleep, 64
@@ -79,10 +79,7 @@ XButton1 & u::
 	txt := StrReplace(txt, " ", "_")
 	len := StrLen(txt)
 	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
-Return
-
-
-
+	Return
 
 ; NIGHT LIGHT
 XButton1 & e::
@@ -97,7 +94,7 @@ XButton1 & e::
 	WinClose, A
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
-Return
+	Return
 
 RAlt::Down
 
@@ -125,7 +122,7 @@ Ctrl & Down:: Send, {Down 12}
 	time_now := Floor(time_now / 60)
 	time_now := to62(time_now)
 	SendRaw, %time_now%
-Return
+	Return
 
 ; decode time
 XButton1 & x::
@@ -139,39 +136,83 @@ XButton1 & x::
 	out += unix, Seconds
 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
 	MsgBox,, Encoded at UTC, %out%
-Return
+	Return
 
+url_encode(txt) {
+	chars := {"!": "%21"
+		,"#": "%23"
+		,"$": "%24"
+		,"&": "%26"
+		,"'": "%27"
+		,"(": "%28"
+		,")": "%29"
+		,"*": "%2A"
+		,"+": "%2B"
+		,",": "%2C"
+		,"/": "%2F"
+		,":": "%3A"
+		,";": "%3B"
+		,"=": "%3D"
+		,"?": "%3F"
+		,"@": "%40"
+		,"[": "%5B"
+		,"]": "%5D"} ; ,"%": "%25"
+	for key, value in chars
+		txt := StrReplace(txt, key, value)
+	txt := StrReplace(txt, "`r`n", " ")
+	Return txt
+}
+
+query(site, txt) {
+	txt := url_encode(txt)
+	url := site . txt
+	Run, %url%
+}
+
+selected() {
+	clipboard_prev := Clipboard
+	Clipboard := ""
+	SendInput, ^{c}
+	ClipWait, 1
+	Sleep, 64
+	out := Clipboard
+	Clipboard := clipboard_prev
+	Return out
+}
 
 
 
 ; WEBSITES
 
 XButton1 & g::
-XButton1:: Run, https://www.google.com/
+	txt := selected()
+	If (txt = "") {
+		Run, "https://www.google.com/"
+	} Else {
+		query("https://www.google.com/search?q=", txt)
+	}
+	Return
 
 XButton1 & y::
-	Run, https://www.youtube.com/
-	Sleep, 2000
-	Send, {Tab 4}           
-Return
+	txt := selected()
+	If (txt = "") {
+		Run, "https://www.youtube.com/"
+		Sleep, 2000
+		Send, {Tab 4}
+	} Else {
+		query("https://www.youtube.com/results?search_query=", txt)
+	}      
+	Return
 
 XButton1 & w::
 	InputBox, to_solve, WolframAlpha,,, 256, 128
-	clipboard := to_solve ; just in case
 	if !ErrorLevel {
-		Run, https://www.wolframalpha.com/
-		WinWaitActive, ahk_exe chrome.exe
-		WinWait, Wolfram|Alpha: Computational Intelligence
-		Sleep, 1000
-		SendRaw, %to_solve%
-		Send, {Enter}
+		query("https://www.wolframalpha.com/input/?i=", to_solve)
 	}
-Return
+	Return
 
 XButton1 & t:: Run https://twitter.com/home
 XButton1 & d:: Run, https://drive.google.com/drive/my-drive
-
-#n::
 XButton1 & n:: Run, https://www.notion.so/
 
 XButton1 & f::
@@ -193,7 +234,7 @@ XButton1 & f::
 		x := array[to_run]
 		Run, %x%
 	}
-Return
+	Return
 
 
 
@@ -211,21 +252,21 @@ XButton1 & a::
 	Send, {Enter}grain{Enter}
 	Send, ^!y
 	Send, {Enter}grade{Enter}
-Return
+	Return
 
 ; Black colour
 XButton1 & b::
 	MouseClick, Left
 	SendRaw, 000000
 	Send, {Tab}{Enter}
-Return
+	Return
 
 ; White colour
 XButton1 & w::
 	MouseClick, Left
 	SendRaw, FFFFFF
 	Send, {Tab}{Enter}
-Return
+	Return
 
 ; Reload footage
 XButton1 & `::
@@ -235,18 +276,13 @@ XButton1 & `::
 	MouseClick, Left, 42, 190,, 1,, R
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
-Return
+	Return
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
 ^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter}
 
 ; PREMIERE PRO
-/*
-#ifWinActive ahk_exe Adobe Premiere Pro.exe
-MButton::
-MsgBox, Yes
-return
-*/
+; #ifWinActive ahk_exe Adobe Premiere Pro.exe
 
 
 
@@ -326,7 +362,7 @@ XButton1 & s::
 		; Send, {ShiftDown}{Left 20}{ShiftUp}
 		MouseMove, %OrigX%, %OrigY%
 	}
-Return
+	Return
 
 ; BLENDER
 ; Copy over my addon and restart Blender
@@ -340,7 +376,7 @@ XButton1 & F5::
 	FileCopyDir, %src%, %dst293%, 1
 	FileCopyDir, %src%, %dst300%, 1
 	Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
-Return
+	Return
 
 #ifWinActive ahk_exe blender.exe
 :*:ddd::D.materials['Material'].node_tree.nodes.active.
