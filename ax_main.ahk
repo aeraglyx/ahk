@@ -9,7 +9,7 @@ Run, acc_scroll.ahk
 ;Run, acc_mouse.ahk
 
 #Include functions.ahk
-#Include X:\Aeraglyx\secret.ahk
+#Include *i secret.ahk
 
 XButton1 & r:: Reload
 XButton1 & q:: WinClose A
@@ -176,15 +176,16 @@ XButton1 & n:: Run, https://www.notion.so/
 XButton1 & f::
 	InputBox, to_run, Run,,, 256, 128
 	array := {"monke": "https://monkeytype.com/"
+		,"assets": "X:\Assets"
+		,"utb": "X:\UTB"
+		,"rec": "X:\Cache\Desktop"
 		,"rcs": "https://blender.community/c/rightclickselect/"
 		,"git": "https://github.com/aeraglyx"
 		,"ig": "https://www.instagram.com/"
 		,"we": "https://wetransfer.com/"
 		,"desmos": "https://www.desmos.com/calculator"
 		,"out": "https://outlook.office.com/mail/inbox"
-		,"assets": "X:\Assets"
-		,"utb": "X:\UTB"
-		,"rec": "X:\Cache\Desktop"}
+		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"}
 	if ErrorLevel {
 		Return
 	}
@@ -319,6 +320,7 @@ XButton1 & s::
 		MouseClick, Left, -956, 176, 1
 		; Send, {ShiftDown}{Left 20}{ShiftUp}
 		MouseMove, %OrigX%, %OrigY%
+		; Run, Spotify:search:%searchQuery% ; TODO
 	}
 	Return
 

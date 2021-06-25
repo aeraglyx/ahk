@@ -11,7 +11,7 @@ Loop {
 	Sleep, 32
 }
 
-1:: ;ů
+$1:: ;ů
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+016F}
 } else {
@@ -19,7 +19,7 @@ if (!GetKeyState("CapsLock", "T")){
 }
 Return
 
-2:: ;ě
+$2:: ;ě
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+011B}
 } else {
@@ -27,7 +27,7 @@ if (!GetKeyState("CapsLock", "T")){
 }
 Return
 
-3:: ;š
+$3:: ;š
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+0161}
 } else {
@@ -35,7 +35,7 @@ if (!GetKeyState("CapsLock", "T")){
 }
 Return
 
-4:: ;č
+$4:: ;č
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+010D}
 } else {
@@ -43,7 +43,7 @@ if (!GetKeyState("CapsLock", "T")){
 }
 Return
 
-5:: ;ř
+$5:: ;ř
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+0159}
 } else {
@@ -51,7 +51,7 @@ if (!GetKeyState("CapsLock", "T")){
 }
 Return
 
-6:: ;ž
+$6:: ;ž
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+017E}
 } else {
@@ -60,7 +60,7 @@ if (!GetKeyState("CapsLock", "T")){
 Return
 
 :*?c:Y-::{U+00DD}
-7::
+$7::
 :*?:y-:: ;ý
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+00FD}
@@ -70,7 +70,7 @@ if (!GetKeyState("CapsLock", "T")){
 Return
 
 :*?c:A-::{U+00C1}
-8::
+$8::
 :*?:a-:: ;á
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+00E1}
@@ -80,7 +80,7 @@ if (!GetKeyState("CapsLock", "T")){
 Return
 
 :*?c:I-::{U+00CD}
-9::
+$9::
 :*?:i-:: ;í
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+00ED}
@@ -90,7 +90,7 @@ if (!GetKeyState("CapsLock", "T")){
 Return
 
 :*?c:I-::{U+00C9}
-0::
+$0::
 :*?:i-:: ;é
 if (!GetKeyState("CapsLock", "T")){
 	Send, {U+00E9}
