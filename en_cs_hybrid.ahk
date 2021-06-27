@@ -7,7 +7,7 @@ Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v2.ico
 
 Loop {
 	MouseGetPos, x, y
-	ToolTip, Czech, (x + 24), y
+	ToolTip, Czech, (x + 24), (y + 8)
 	Sleep, 32
 }
 

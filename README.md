@@ -7,11 +7,9 @@ My janky scripts for improved eFFiCieNcY. You can download AHK here - https://ww
 
 This is the script that calls other sub-scripts and contains the most important hotkeys.
 
-If you decide to try it, you might want to remove this line - `#Include X:\Aeraglyx\secret.ahk`. It just points to my private script.
-
 Some of the functionality:
 - Easier tab navigation (Chrome, VS Code)
-- Quick search on Spotify & Wolfram Alpha
+- Quick search on Google, Wolfram Alpha, YouTube, Spotify
 - ± 40 volume for switching between headphones and speakers
 - Night light switch
 - Hotkeys for AE, LaTeX, Python

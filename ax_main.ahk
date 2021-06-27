@@ -179,13 +179,17 @@ XButton1 & f::
 		,"assets": "X:\Assets"
 		,"utb": "X:\UTB"
 		,"rec": "X:\Cache\Desktop"
-		,"rcs": "https://blender.community/c/rightclickselect/"
+		,"ideas": "X:\Aeraglyx\stolen_ideas"
+		,"exp": "X:\Aeraglyx\Experiments"
 		,"git": "https://github.com/aeraglyx"
-		,"ig": "https://www.instagram.com/"
 		,"we": "https://wetransfer.com/"
 		,"desmos": "https://www.desmos.com/calculator"
+		,"rcs": "https://blender.community/c/rightclickselect/"
+		,"devtalk": "https://devtalk.blender.org/"
+		,"dev": "https://developer.blender.org/"
 		,"out": "https://outlook.office.com/mail/inbox"
-		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"}
+		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"
+		,"ig": "https://www.instagram.com/"}
 	if ErrorLevel {
 		Return
 	}
