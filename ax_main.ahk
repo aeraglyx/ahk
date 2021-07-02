@@ -96,6 +96,21 @@ XButton1 & e::
 	BlockInput, Off
 	Return
 
+; FOCUS ASSIST
+assist := false
+XButton1 & a::
+	SendInput, #{b}{Left}{AppsKey}{Down}{Down}{Right}
+	if (assist = false) {
+		SendInput, {Up}
+		assist := true
+	} else {
+		assist := false
+	}
+	SendInput, {Enter}
+	Sleep, 256
+	SendInput, {Escape}
+	Return
+
 RAlt::Down
 
 ; faster arrows, 1 min steps on YT
