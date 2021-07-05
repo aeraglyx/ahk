@@ -204,7 +204,8 @@ XButton1 & f::
 		,"dev": "https://developer.blender.org/"
 		,"out": "https://outlook.office.com/mail/inbox"
 		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"
-		,"ig": "https://www.instagram.com/"}
+		,"ig": "https://www.instagram.com/"
+		,"drive": "https://drive.google.com/drive/my-drive"}
 	if ErrorLevel {
 		Return
 	}
@@ -219,18 +220,18 @@ XButton1 & f::
 ; AFTER EFFECTS
 #ifWinActive ahk_exe AfterFX.exe
 
-XButton1 & a::
-	Send, ^!y
-	Send, {Enter}glow{Enter}
-	Send, ^!y
-	Send, {Enter}chroma{Enter}
-	Send, ^!y
-	Send, {Enter}lin2log{Enter}
-	Send, ^!y
-	Send, {Enter}grain{Enter}
-	Send, ^!y
-	Send, {Enter}grade{Enter}
-	Return
+; XButton1 & a::
+; 	Send, ^!y
+; 	Send, {Enter}glow{Enter}
+; 	Send, ^!y
+; 	Send, {Enter}chroma{Enter}
+; 	Send, ^!y
+; 	Send, {Enter}lin2log{Enter}
+; 	Send, ^!y
+; 	Send, {Enter}grain{Enter}
+; 	Send, ^!y
+; 	Send, {Enter}grade{Enter}
+; 	Return
 
 ; Black colour
 XButton1 & b::
@@ -345,18 +346,27 @@ XButton1 & s::
 
 ; BLENDER
 ; Copy over my addon and restart Blender
-; TODO path for blender at top as variable
-; TODO for loop for dst folders
+
 XButton1 & F5::
+	git := "X:\Aeraglyx\Git"
+	addons := ["fulcrum", "i-have-spoken"]
+
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
+		,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+	
 	Process, Close, blender.exe
-	src := "X:\Aeraglyx\Git\fulcrum"
-	dst293 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons\fulcrum"
-	dst300 := "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons\fulcrum"
-	FileCopyDir, %src%, %dst293%, 1
-	FileCopyDir, %src%, %dst300%, 1
-	Run, "X:\Software\Blender\daily\blender-2.93.0-beta+blender-v293-release.d5c3bff6e774-windows.amd64-release\blender.exe"
+
+	For version in versions {
+		For addon in addons {
+			src := git . "\" . addons[addon]
+			dst := versions[version] . "\" . addons[addon]
+			FileCopyDir, %src%, %dst%, 1
+		}
+	}
+	Run, "X:\Software\Blender\stable\blender-windows64\blender.exe"
 	Return
 
+
 #ifWinActive ahk_exe blender.exe
-:*:ddd::D.materials['Material'].node_tree.nodes.active.
+:*:fdfd::D.materials['Material'].node_tree.nodes.active.
 #IfWinActive
