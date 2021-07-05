@@ -1,6 +1,6 @@
 # AutoHotkey Scripts
 
-My janky scripts for improved eFFiCieNcY. You can download AHK here - https://www.autohotkey.com/
+My janky scripts for improved eFFiCieNcY. Get AHK v1 here - https://www.autohotkey.com/
 
 
 ## Main Script `ax_main.ahk`
@@ -11,38 +11,40 @@ Some of the functionality:
 - Easier tab navigation (Chrome, VS Code)
 - Quick search on Google, Wolfram Alpha, YouTube, Spotify
 - ± 40 volume for switching between headphones and speakers
-- Night light switch
+- Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
 - Shortcuts for favourite websites and folders
 - Hotstrings for `≤`, `≥`, `≈`, `≠`
-- Reloading Blender for addon development
+- Reloading Blender and copying folders for addon development
 - Encoding current time to 5 characters and vice versa
-<!-- - `Ctrl`+`Z` and `Ctrl`+`Shift`+`Z` in Chrome -->
 - Etc.
 
 
-## Blender Colour Picker
+## EN/CS Hybrid Keyboard Layout
 
-Colour checker/picker that can "see" through Filmic in Blender. While running, `Ctrl`+`C` copies the data so you can paste it in any Blender colour input.
+My custom keyboard layout that combines the default EN layout with Czech characters. Indispensable for people like me who are used to the mainstream layout but live in Czech Republic. There is, however, a non zero chance it will do something weird to other hotkeys, so enable only when needed.
 
-
-## EN/CS Hybrid Keyboard Layout `en_cs_hybrid.ahk`
-
-My custom keyboard layout that combines the default EN layout with Czech characters. This gets activated from the main script with `Alt` + `Shift`, similar to how you'd normally switch layouts.
-
-Irreplacable for people like me who are used to the mainstream layout but live in Czech Republic 🙃
-
-However, it can do some weird stuff to other hotkeys because it changes numbers to the CS characters, so enable it only when you need it.
+Default hotkey - `Alt` + `Shift`.
 
 
-## Scroll Wheel Acceleration `acc_scroll.ahk`
+## Scroll Wheel Acceleration
 
 Makes scrolling way faster and easier. There's no going back.
 
 
-## Mouse Acceleration `acc_mouse.ahk`
+## Mouse Acceleration
 
-Similar to `acc_scroll.ahk` but for mouse movement. Low mouse movement remains the same, fast movement gets even faster. Somewhat unreliable though.
+Similar to the above but for mouse movement. Slow mouse movements remain the same, fast movements get even faster. Somewhat unreliable though, hence disabled by default.
+
+
+## Measure Tool
+
+For measuring distances on screen in pixels. The value gets automatically saved to clipboard. Default hotkey - `XButton1` + `M`.
+
+
+## Blender Colour Picker
+
+Colour picker/checker that can "see" through Filmic in Blender. While running, `Ctrl` + `C` copies the data so you can paste it in any Blender colour input. Works only with Filmic + Medium Contrast (aka None). Default hotkey - `XButton1` + `C`.
 
 
 ---
