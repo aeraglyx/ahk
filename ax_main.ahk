@@ -112,6 +112,7 @@ XButton1 & a::
 	Return
 
 RAlt::Down
+Shift & RAlt::Up
 
 ; faster arrows, 1 min steps on YT
 /*
@@ -147,7 +148,6 @@ XButton1 & x::
 	unix := from62(Clipboard) * 60
 	diff := A_Now - A_NowUTC
 	out := 19700101000000 + diff
-	; out -= diff, Seconds
 	out += unix, Seconds
 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
 	MsgBox,, Encoded at UTC, %out%
@@ -253,6 +253,18 @@ XButton1 & `::
 	MouseClick, Right
 	MouseGetPos, x_orig, y_orig
 	MouseClick, Left, 42, 190,, 1,, R
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
+	Return
+
+XButton1 & p::
+	BlockInput, On
+	CoordMode, Mouse, Screen
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 48, 32,, 1
+	SendInput, {Up 9}{Right}{Enter}
+	; Sleep, 64
+	SendInput {Enter}
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
 	Return
