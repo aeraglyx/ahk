@@ -14,19 +14,6 @@ Run, acc_scroll.ahk
 XButton1 & r:: Reload
 XButton1 & q:: WinClose A
 
-toggle(app) {
-	DetectHiddenWindows, On
-	SetTitleMatchMode, 2 
-	if WinExist(app) {
-		WinClose, %app%
-	} else {
-		Run, %app%
-	}
-}
-
-
-
-
 ; COLOR PICKER
 XButton1 & b:: toggle("color_picker.ahk")
 
@@ -64,7 +51,8 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 +!<:: Send, {U+2264} ; ≤
 +!>:: Send, {U+2265} ; ≥
 ::approx::{U+2248}   ; ≈
-::notequal::{U+2260} ; ≠
+::noteq::{U+2260}    ; ≠
+::+-::{U+00B1}       ; ±
 
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
@@ -113,14 +101,6 @@ XButton1 & a::
 
 RAlt::Down
 Shift & RAlt::Up
-
-; faster arrows, 1 min steps on YT
-/*
-Ctrl & Left:: Send, {Left 12}
-Ctrl & Right:: Send, {Right 12}
-Ctrl & Up:: Send, {Up 12}
-Ctrl & Down:: Send, {Down 12}
-*/
 
 
 
@@ -257,20 +237,20 @@ XButton1 & `::
 	BlockInput, Off
 	Return
 
+; Clear cache
 XButton1 & p::
 	BlockInput, On
 	CoordMode, Mouse, Screen
 	MouseGetPos, x_orig, y_orig
 	MouseClick, Left, 48, 32,, 1
 	SendInput, {Up 9}{Right}{Enter}
-	; Sleep, 64
 	SendInput {Enter}
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
 	Return
 
-^y:: Send, ^y{Tab 6}{Enter}{Tab 4}
-^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter}
+^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
+^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter} ; make current solid comp size
 
 ; PREMIERE PRO
 ; #ifWinActive ahk_exe Adobe Premiere Pro.exe
@@ -361,7 +341,7 @@ XButton1 & s::
 
 XButton1 & F5::
 	git := "X:\Aeraglyx\Git"
-	addons := ["fulcrum", "i-have-spoken"]
+	addons := ["fulcrum", "i-have-spoken", "bone_glow"]
 
 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
 		,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]

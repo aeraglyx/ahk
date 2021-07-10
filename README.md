@@ -14,7 +14,7 @@ Some of the functionality:
 - Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
 - Shortcuts for favourite websites and folders
-- Hotstrings for `≤`, `≥`, `≈`, `≠`
+- Hotstrings for `≤`, `≥`, `≈`, `≠`, `±`
 - Reloading Blender and copying folders for addon development
 - Encoding current time to 5 characters and vice versa
 - Etc.
@@ -24,7 +24,7 @@ Some of the functionality:
 
 My custom keyboard layout that combines the default EN layout with Czech characters. Indispensable for people like me who are used to the mainstream layout but live in Czech Republic. There is, however, a non zero chance it will do something weird to other hotkeys, so enable only when needed.
 
-Default hotkey - `Alt` + `Shift`.
+Default hotkey - `Alt`+`Shift`.
 
 
 ## Scroll Wheel Acceleration
@@ -39,12 +39,12 @@ Similar to the above but for mouse movement. Slow mouse movements remain the sam
 
 ## Measure Tool
 
-For measuring distances on screen in pixels. The value gets automatically saved to clipboard. Default hotkey - `XButton1` + `M`.
+For measuring distances on screen in pixels. The value gets automatically saved to clipboard. Default hotkey - `XButton1`+`M`.
 
 
 ## Blender Colour Picker
 
-Colour picker/checker that can "see" through Filmic in Blender. While running, `Ctrl` + `C` copies the data so you can paste it in any Blender colour input. Works only with Filmic + Medium Contrast (aka None). Default hotkey - `XButton1` + `C`.
+Colour picker/checker that can "see" through Filmic in Blender. While running, `Ctrl`+`C` copies the data so you can paste it in any Blender colour input. Works only with Filmic + Medium Contrast (aka None). Default hotkey - `XButton1`+`C`.
 
 
 ---

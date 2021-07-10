@@ -106,3 +106,13 @@ selected() {
 	Clipboard := clipboard_prev
 	Return out
 }
+
+toggle(app) {
+	DetectHiddenWindows, On
+	SetTitleMatchMode, 2 
+	if WinExist(app) {
+		WinClose, %app%
+	} else {
+		Run, %app%
+	}
+}
