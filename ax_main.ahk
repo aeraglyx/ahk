@@ -13,6 +13,7 @@ Run, acc_scroll.ahk
 
 XButton1 & r:: Reload
 XButton1 & q:: WinClose A
+XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
 
 ; COLOR PICKER
 XButton1 & b:: toggle("color_picker.ahk")
@@ -27,7 +28,6 @@ XButton1 & m:: toggle("measure.ahk")
 	}
 	Return
 
-XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
 
 
 
@@ -203,18 +203,44 @@ XButton1 & f::
 ; AFTER EFFECTS
 #ifWinActive ahk_exe AfterFX.exe
 
-; XButton1 & a::
-; 	Send, ^!y
-; 	Send, {Enter}glow{Enter}
-; 	Send, ^!y
-; 	Send, {Enter}chroma{Enter}
-; 	Send, ^!y
-; 	Send, {Enter}lin2log{Enter}
-; 	Send, ^!y
-; 	Send, {Enter}grain{Enter}
-; 	Send, ^!y
-; 	Send, {Enter}grade{Enter}
-; 	Return
+fx_console(effect){
+	Send, {LControl down}
+	Sleep, 128
+	Send, {Space down}
+	Sleep, 128
+	Send, {LControl up}
+	Sleep, 128
+	Send, {Space up}
+	Sleep, 256
+	Send, %effect%
+	Sleep, 256
+	Send, {Enter}
+	Sleep, 256
+}
+
+fx_subroutine(name, effect){
+	Send, ^!y
+	Send, {Enter}%name%{Enter}
+	fx_console(effect)
+	MouseClick, Middle, 1700, 1200,, 1
+}
+
+XButton1 & n::
+
+	CoordMode, Mouse, Screen
+	MouseGetPos, x_orig, y_orig
+	BlockInput, On
+
+	fx_subroutine("glow", "Deep Glow")
+	fx_subroutine("chromatic_aberration", "Quick Chromatic Aberration")
+	fx_subroutine("lin_to_log", "Cineon Converter")
+	fx_subroutine("grain", "Add Grain")
+	fx_subroutine("color_grade", "Lumetri Color")
+
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
+	
+	Return
 
 ; Black colour
 XButton1 & b::
