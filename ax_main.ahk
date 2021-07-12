@@ -27,6 +27,8 @@ XButton1 & m:: toggle("measure.ahk")
 	}
 	Return
 
+XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
+
 
 
 
@@ -164,9 +166,9 @@ XButton1 & w::
 	}
 	Return
 
-XButton1 & t:: Run https://twitter.com/home
-XButton1 & d:: Run, https://drive.google.com/drive/my-drive
-XButton1 & n:: Run, https://www.notion.so/
+; XButton1 & t:: Run https://twitter.com/home
+; XButton1 & d:: Run, https://drive.google.com/drive/my-drive
+; XButton1 & n:: Run, https://www.notion.so/
 
 XButton1 & f::
 	InputBox, to_run, Run,,, 256, 128
@@ -176,6 +178,7 @@ XButton1 & f::
 		,"rec": "X:\Cache\Desktop"
 		,"ideas": "X:\Aeraglyx\stolen_ideas"
 		,"exp": "X:\Aeraglyx\Experiments"
+		,"film": "X:\Films"
 		,"git": "https://github.com/aeraglyx"
 		,"we": "https://wetransfer.com/"
 		,"desmos": "https://www.desmos.com/calculator"
@@ -289,6 +292,12 @@ F4:: Send, ^n
 XButton1 & c:: Send, ^{/}
 
 ; PYTHON
+
+XButton1 & p::
+	SendRaw, print(f"{x = }")
+	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
+	Return
+
 :o*:pyread::
 (
 with open("file.txt", "r") as f:
