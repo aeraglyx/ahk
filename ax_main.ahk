@@ -226,20 +226,9 @@ fx_subroutine(name, effect){
 }
 
 XButton1 & n::
-
-	CoordMode, Mouse, Screen
-	MouseGetPos, x_orig, y_orig
-	BlockInput, On
-
-	fx_subroutine("glow", "Deep Glow")
-	fx_subroutine("chromatic_aberration", "Quick Chromatic Aberration")
-	fx_subroutine("lin_to_log", "Cineon Converter")
-	fx_subroutine("grain", "Add Grain")
-	fx_subroutine("color_grade", "Lumetri Color")
-
-	MouseMove, %x_orig%, %y_orig%
-	BlockInput, Off
-	
+	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
+	script := A_ScriptDir . "\support_files\ae_process.jsx"
+	RunWait, %ComSpec% /c afterfx -r %script%, %directory%
 	Return
 
 ; Black colour
@@ -268,14 +257,9 @@ XButton1 & `::
 
 ; Clear cache
 XButton1 & p::
-	BlockInput, On
-	CoordMode, Mouse, Screen
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 48, 32,, 1
-	SendInput, {Up 9}{Right}{Enter}
-	SendInput {Enter}
-	MouseMove, %x_orig%, %y_orig%
-	BlockInput, Off
+	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
+	script := "app.purge(PurgeTarget.ALL_CACHES)"
+	RunWait, %ComSpec% /c afterfx -s %script%, %directory%
 	Return
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
