@@ -15,6 +15,10 @@ function add_effect(layer, effect){
 function set_prop(effect, property, value){
 	effect(property).setValue(value);
 }
+function set_expression(effect, property, value){
+	var prop = effect(property);
+	prop.expression = value
+}
 
 var glow = add_adj_layer("Glow");
 glow.blendingMode = BlendingMode.ADD;
@@ -23,12 +27,14 @@ set_prop(fx_glow, "Radius", 256);
 set_prop(fx_glow, "Exposure", 0.125);
 set_prop(fx_glow, "Threshold", 0);
 set_prop(fx_glow, "Threshold Smooth", 0);
+set_expression(fx_glow, "Source Opacity", '(1 - thisProperty.propertyGroup()("Exposure")) * 100');
 
 var chroma = add_adj_layer("Chromatic Aberration");
 var chroma_QCA2 = add_effect(chroma, "PEQCAGL");
 set_prop(chroma_QCA2, "Position", 0);
 set_prop(chroma_QCA2, "Scale", 100.2);
 set_prop(chroma_QCA2, "Blur", 2.0);
+set_prop(chroma_QCA2, "Unmult", false);
 
 var lin_to_log = add_adj_layer("Lin to Log");
 var fx_lin_to_log = add_effect(lin_to_log, "ADBE Cineon Converter2");
@@ -37,6 +43,8 @@ set_prop(fx_lin_to_log, "10 Bit Black Point", 0);
 set_prop(fx_lin_to_log, "10 Bit White Point", 685);
 set_prop(fx_lin_to_log, "Gamma", 2.0);
 set_prop(fx_lin_to_log, "Highlight Rolloff", 0);
+var fx_curves = add_effect(lin_to_log, "ADBE CurvesCustom");
+// set_prop(fx_curves, "Curves", [[0.1,0.1], [0.9,0.9]]);
 
 var grain = add_adj_layer("Film Grain");
 var fx_grain = add_effect(grain, "VISINF Grain Implant");
