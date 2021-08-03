@@ -30,6 +30,30 @@ XButton1 & m:: toggle("measure.ahk")
 
 
 
+XButton1 & `::
+	MouseGetPos, x_orig, y_orig
+	Click, Down
+	mouse_pressed := True
+	Return
+
+#If mouse_pressed
+$LButton::
+	Click, Up
+	mouse_pressed := False
+	Return
+$*Esc::
+$*RButton::
+	MouseGetPos, x_new, y_new
+	MouseMove, %x_orig%, %y_orig%, 0
+	Click, Up
+	MouseMove, %x_new%, %y_new%, 0
+	mouse_pressed := False
+	Return
+
+#ifWinActive
+
+
+
 
 
 ; VOLUME & SOUND
@@ -50,11 +74,13 @@ XButton1 & 4:: Send, 1.57079632679 ; tau / 4
 XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 
 ; SYMBOLS
-+!<:: Send, {U+2264} ; ≤
-+!>:: Send, {U+2265} ; ≥
-::approx::{U+2248}   ; ≈
-::noteq::{U+2260}    ; ≠
-::+-::{U+00B1}       ; ±
++!<:: Send, {U+2264}	; ≤
++!>:: Send, {U+2265}	; ≥
+::approx::{U+2248}		; ≈
+::noteq::{U+2260}		; ≠
+::+-::{U+00B1}			; ±
+:*o:/alpha::{U+03B1}	; α
+:*o:/epsilon::{U+03B5}	; ε
 
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
@@ -188,6 +214,8 @@ XButton1 & f::
 		,"out": "https://outlook.office.com/mail/inbox"
 		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"
 		,"ig": "https://www.instagram.com/"
+		,"bldocs": "https://docs.blender.org/api/current/index.html"
+		,"fast": "https://fast.com/"
 		,"drive": "https://drive.google.com/drive/my-drive"}
 	if ErrorLevel {
 		Return
@@ -225,10 +253,19 @@ fx_subroutine(name, effect){
 	MouseClick, Middle, 1700, 1200,, 1
 }
 
+run_ae_script(script){
+	ae_dir := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
+	script_dir := A_ScriptDir . "\support_files\" . script
+	RunWait, %ComSpec% /c afterfx -r %script_dir%, %ae_dir%
+	WinMaximize, A
+}
+
 XButton1 & n::
-	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
-	script := A_ScriptDir . "\support_files\ae_process.jsx"
-	RunWait, %ComSpec% /c afterfx -r %script%, %directory%
+	run_ae_script("ae_process.jsx")
+	Return
+
+XButton1 & m::
+	run_ae_script("cineon.jsx")
 	Return
 
 ; Black colour
@@ -260,6 +297,7 @@ XButton1 & p::
 	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
 	script := "app.purge(PurgeTarget.ALL_CACHES)"
 	RunWait, %ComSpec% /c afterfx -s %script%, %directory%
+	WinMaximize, A
 	Return
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
@@ -275,8 +313,17 @@ XButton1 & p::
 #ifWinActive ahk_exe chrome.exe
 
 F1:: Send, ^+{Tab}
+; Moving tabs uses Rearrange Tabs:
+; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
+XButton1 & F1:: Send, +!{Left}
+XButton2 & F1:: Send, +!{Down}
+
 F2:: Send, ^w
+
 F3:: Send, ^{Tab}
+XButton1 & F3:: Send, +!{Right}
+XButton2 & F3:: Send, +!{Up}
+
 F4:: Send, ^t
 
 XButton2:: Send, ^w
@@ -375,6 +422,7 @@ XButton1 & F5::
 		}
 	}
 	Run, "X:\Software\Blender\stable\blender-windows64\blender.exe"
+	; Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.fafd21b14c23-windows.amd64-release\blender.exe"
 	Return
 
 

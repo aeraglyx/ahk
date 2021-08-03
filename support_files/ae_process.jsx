@@ -43,8 +43,8 @@ set_prop(fx_lin_to_log, "10 Bit Black Point", 0);
 set_prop(fx_lin_to_log, "10 Bit White Point", 685);
 set_prop(fx_lin_to_log, "Gamma", 2.0);
 set_prop(fx_lin_to_log, "Highlight Rolloff", 0);
-var fx_curves = add_effect(lin_to_log, "ADBE CurvesCustom");
-// set_prop(fx_curves, "Curves", [[0.1,0.1], [0.9,0.9]]);
+// var fx_curves = add_effect(lin_to_log, "ADBE CurvesCustom");
+lin_to_log.applyPreset(File("C:/Program Files/Adobe/Adobe After Effects 2021/Support Files/Presets/ax_curve_002.ffx"))
 
 var grain = add_adj_layer("Film Grain");
 var fx_grain = add_effect(grain, "VISINF Grain Implant");
