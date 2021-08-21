@@ -50,7 +50,7 @@ $*RButton::
 	mouse_pressed := False
 	Return
 
-#ifWinActive
+#ifWinActive  ; why?
 
 
 
@@ -105,7 +105,7 @@ XButton1 & e::
 	Sleep, 64
 	BlockInput, On
 	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 53, 206, 1 ; where's the on/off button
+	MouseClick, Left, 53, 206, 1
 	Sleep, 64
 	WinClose, A
 	MouseMove, %x_orig%, %y_orig%
@@ -125,6 +125,21 @@ XButton1 & a::
 	SendInput, {Enter}
 	Sleep, 256
 	SendInput, {Escape}
+	Return
+
+; FORCE MONO
+XButton1 & n::
+	Run, ms-settings:easeofaccess-audio
+	WinWaitActive, Settings
+	Send, #{Up}
+	Sleep, 64
+	BlockInput, On
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 366, 411, 1
+	Sleep, 64
+	WinClose, A
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
 	Return
 
 RAlt::Down
@@ -283,7 +298,7 @@ XButton1 & w::
 	Return
 
 ; Reload footage
-XButton1 & `::
+XButton2 & `::  ; TODO change hotkey + AE script
 	BlockInput, On
 	MouseClick, Right
 	MouseGetPos, x_orig, y_orig
@@ -355,7 +370,16 @@ XButton1 & p::
 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 	Return
 
-:o*:pyread::
+XButton1 & d::
+	WinGetTitle, title, A
+	if InStr(title, ".ahk")
+		char := ";"
+	else
+		char := "#"
+	Send, {End}{Space 2}{%char%}{Space}TODO{Space}
+	Return
+
+:o*:pyread::  ; TODO snipets
 (
 with open("file.txt", "r") as f:
 	data = []
