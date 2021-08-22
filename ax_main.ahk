@@ -371,12 +371,16 @@ XButton1 & p::
 	Return
 
 XButton1 & d::
+	if RegExMatch(selected(), "\w")
+		Send, {End}{Space 2}
 	WinGetTitle, title, A
 	if InStr(title, ".ahk")
-		char := ";"
+		Send, {;}
+	else if InStr(title, ".jsx")
+		Send, {//}
 	else
-		char := "#"
-	Send, {End}{Space 2}{%char%}{Space}TODO{Space}
+		Send, {#}
+	Send, {Space}TODO{Space}
 	Return
 
 :o*:pyread::  ; TODO snipets
@@ -445,8 +449,7 @@ XButton1 & F5::
 			FileCopyDir, %src%, %dst%, 1
 		}
 	}
-	Run, "X:\Software\Blender\stable\blender-windows64\blender.exe"
-	; Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.fafd21b14c23-windows.amd64-release\blender.exe"
+	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.6a4533dd02c0-windows.amd64-release\blender.exe"
 	Return
 
 
