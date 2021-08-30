@@ -314,13 +314,14 @@ XButton2:: Send, ^w
 ; ^z:: Send, !{Left}
 ; ^+z:: Send, !{Right}
 
+#ifWinActive
 
 
 ; FUSION
-#ifWinActive ahk_exe Resolve.exe
-^d:: Send, ^p
-#ifWinActive ahk_exe Fusion.exe
-^d:: Send, ^p
+^d::
+	if (WinActive("ahk_exe Resolve.exe") or WinActive("ahk_exe Fusion.exe"))
+		Send, ^p
+	return
 
 
 
