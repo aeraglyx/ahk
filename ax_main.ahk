@@ -207,40 +207,6 @@ XButton1 & w::
 	}
 	Return
 
-; XButton1 & t:: Run https://twitter.com/home
-; XButton1 & d:: Run, https://drive.google.com/drive/my-drive
-; XButton1 & n:: Run, https://www.notion.so/
-
-XButton1 & f::
-	InputBox, to_run, Run,,, 256, 128
-	array := {"monke": "https://monkeytype.com/"
-		,"assets": "X:\Assets"
-		,"utb": "X:\UTB"
-		,"rec": "X:\Cache\Desktop"
-		,"ideas": "X:\Aeraglyx\stolen_ideas"
-		,"exp": "X:\Aeraglyx\Experiments"
-		,"film": "X:\Films"
-		,"git": "https://github.com/aeraglyx"
-		,"we": "https://wetransfer.com/"
-		,"desmos": "https://www.desmos.com/calculator"
-		,"rcs": "https://blender.community/c/rightclickselect/"
-		,"devtalk": "https://devtalk.blender.org/"
-		,"dev": "https://developer.blender.org/"
-		,"out": "https://outlook.office.com/mail/inbox"
-		,"idos": "https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/"
-		,"ig": "https://www.instagram.com/"
-		,"bldocs": "https://docs.blender.org/api/current/index.html"
-		,"fast": "https://fast.com/"
-		,"drive": "https://drive.google.com/drive/my-drive"}
-	if ErrorLevel {
-		Return
-	}
-	else If (array.HasKey(to_run)) {
-		x := array[to_run]
-		Run, %x%
-	}
-	Return
-
 
 
 ; AFTER EFFECTS
@@ -348,7 +314,13 @@ XButton2:: Send, ^w
 ; ^z:: Send, !{Left}
 ; ^+z:: Send, !{Right}
 
-#ifWinActive
+
+
+; FUSION
+#ifWinActive ahk_exe Resolve.exe
+^d:: Send, ^p
+#ifWinActive ahk_exe Fusion.exe
+^d:: Send, ^p
 
 
 
@@ -377,7 +349,7 @@ XButton1 & d::
 	if InStr(title, ".ahk")
 		Send, {;}
 	else if InStr(title, ".jsx")
-		Send, {//}
+		SendRaw, //
 	else
 		Send, {#}
 	Send, {Space}TODO{Space}
