@@ -88,6 +88,12 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 :ro:fn::f(x)=
 :ro:finv::f^{-1}(x)=
 
+; SOFTWARE HELP
+::/bpy::Blender Python
+::/ae::After Effects
+::/fus::Blackmagic Fusion
+::/res::DaVinci Resolve
+
 ; spaces to underscores
 ; TODO other way around?
 XButton1 & u::
