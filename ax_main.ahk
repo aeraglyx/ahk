@@ -320,16 +320,21 @@ XButton2:: Send, ^w
 ; ^z:: Send, !{Left}
 ; ^+z:: Send, !{Right}
 
-#ifWinActive
 
 
-; FUSION
+
+; RESOLVE
+#ifWinActive ahk_exe Resolve.exe
 ^d::
-	if (WinActive("ahk_exe Resolve.exe") or WinActive("ahk_exe Fusion.exe"))
-		Send, ^p
+	Send, ^p
 	return
 
 
+; FUSION
+#ifWinActive ahk_exe Fusion.exe
+^d::
+	Send, ^p
+	return
 
 
 ; VS CODE
@@ -428,7 +433,7 @@ XButton1 & F5::
 			FileCopyDir, %src%, %dst%, 1
 		}
 	}
-	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.6a4533dd02c0-windows.amd64-release\blender.exe"
+	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.a3027fb09416-windows.amd64-release\blender.exe"
 	Return
 
 
