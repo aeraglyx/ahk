@@ -1,5 +1,6 @@
 #NoEnv
 #SingleInstance Force
+; #InstallKeybdHook
 #Persistent
 SendMode Input
 
@@ -324,10 +325,10 @@ XButton2:: Send, ^w
 
 
 ; RESOLVE
-#ifWinActive ahk_exe Resolve.exe
-^d::
-	Send, ^p
-	return
+; #ifWinActive ahk_exe Resolve.exe
+; ^d::
+; 	Send, ^p
+; 	return
 
 
 ; FUSION
@@ -433,7 +434,7 @@ XButton1 & F5::
 			FileCopyDir, %src%, %dst%, 1
 		}
 	}
-	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+master.a3027fb09416-windows.amd64-release\blender.exe"
+	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+daily.26dac33ce18f\blender.exe"
 	Return
 
 
