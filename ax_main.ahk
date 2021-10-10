@@ -338,6 +338,14 @@ XButton2:: Send, ^w
 	return
 
 
+; NUKE
+#ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
+
+Space:: Send, l
+
+!LButton:: Send, {Click}^+x
+
+
 ; VS CODE
 #ifWinActive ahk_exe Code.exe
 
