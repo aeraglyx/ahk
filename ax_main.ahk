@@ -17,7 +17,7 @@ XButton1 & q:: WinClose A
 XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
 
 ; COLOR PICKER
-XButton1 & b:: toggle("color_picker.ahk")
+XButton1 & c:: toggle("color_picker.ahk")
 
 ; MEASURE TOOL
 XButton1 & m:: toggle("measure.ahk")
@@ -162,26 +162,26 @@ Shift & RAlt::Up
 ; return
 
 ; encode time
-:r*?:ttt::
-	time_now := A_NowUTC
-	time_now -= 19700101000000, Seconds
-	time_now := Floor(time_now / 60)
-	time_now := to62(time_now)
-	SendRaw, %time_now%
-	Return
+; :r*?:ttt::
+; 	time_now := A_NowUTC
+; 	time_now -= 19700101000000, Seconds
+; 	time_now := Floor(time_now / 60)
+; 	time_now := to62(time_now)
+; 	SendRaw, %time_now%
+; 	Return
 
 ; decode time
-XButton1 & x::
-	SendInput, ^{c}
-	ClipWait, 1
-	Sleep, 64
-	unix := from62(Clipboard) * 60
-	diff := A_Now - A_NowUTC
-	out := 19700101000000 + diff
-	out += unix, Seconds
-	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
-	MsgBox,, Encoded at UTC, %out%
-	Return
+; XButton1 & x::
+; 	SendInput, ^{c}
+; 	ClipWait, 1
+; 	Sleep, 64
+; 	unix := from62(Clipboard) * 60
+; 	diff := A_Now - A_NowUTC
+; 	out := 19700101000000 + diff
+; 	out += unix, Seconds
+; 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
+; 	MsgBox,, Encoded at UTC, %out%
+; 	Return
 
 
 
@@ -345,6 +345,8 @@ Space:: Send, l
 
 !LButton:: Send, {Click}^+x
 
+; TODO y to connect, shift+y to connect upwards
+
 
 ; VS CODE
 #ifWinActive ahk_exe Code.exe
@@ -354,7 +356,7 @@ F1:: Send, ^{PgUp}
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
 ; comment
-XButton1 & c:: Send, ^{/}
+XButton1 & x:: Send, ^{/}
 
 ; PYTHON
 
