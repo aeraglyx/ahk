@@ -324,7 +324,7 @@ XButton2:: Send, ^w
 
 
 
-; RESOLVE
+; RESOLVE  ; TODO how to know which tab I'm in?
 ; #ifWinActive ahk_exe Resolve.exe
 ; ^d::
 ; 	Send, ^p
@@ -357,6 +357,12 @@ F3:: Send, ^{PgDn}
 F4:: Send, ^n
 ; comment
 XButton1 & x:: Send, ^{/}
+
+^+n::
+	Send, ^+n
+	Sleep, 512
+	Send, ^r
+	return
 
 ; PYTHON
 
