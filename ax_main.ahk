@@ -338,15 +338,31 @@ XButton2:: Send, ^w
 	return
 
 
+in_range_factor(x1, x2, y1, y2){
+	MouseGetPos, mouse_x, mouse_y
+	WinGetPos,,, w, h, A
+	if (mouse_x > x1/w && mouse_x < x2/w && mouse_y > y1/h && mouse_y < y2/h) {
+		return True
+	} else {
+		return False
+	}
+}
+
+in_range_abs(x1, x2, y1, y2){
+	MouseGetPos, mouse_x, mouse_y
+	if (mouse_x > x1 && mouse_x < x2 && mouse_y > y1 && mouse_y < y2) {
+		return True
+	} else {
+		return False
+	}
+}
+
 ; NUKE
 #ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
 
 Space::
 	CoordMode, Mouse, Client
-	MouseGetPos, orig_x, orig_y
-	; TODO percentage of window
-	; TODO function for xy range boolean
-	if (orig_x > 45 && orig_x < 1945 && orig_y > 45 && orig_y < 780) {
+	if in_range_abs(45, 1945, 45, 780) {
 		Send, l
 	} else {
 		Send, {Space}
