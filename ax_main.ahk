@@ -341,11 +341,21 @@ XButton2:: Send, ^w
 ; NUKE
 #ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
 
-Space:: Send, l
+Space::
+	CoordMode, Mouse, Client
+	MouseGetPos, orig_x, orig_y
+	; TODO percentage of window
+	; TODO function for xy range boolean
+	if (orig_x > 45 && orig_x < 1945 && orig_y > 45 && orig_y < 780) {
+		Send, l
+	} else {
+		Send, {Space}
+	}
+	return
 
-!LButton:: Send, {Click}^+x
+!LButton:: Send, {Click}^+x  ; TODO only in node graph
 
-; TODO y to connect, shift+y to connect upwards
+; TODO node wrangler y to connect, shift+y to connect upwards
 
 
 ; VS CODE
@@ -361,6 +371,7 @@ XButton1 & x:: Send, ^{/}
 ^+n::
 	Send, ^+n
 	Sleep, 512
+	WinMaximize, A
 	Send, ^r
 	return
 
@@ -407,7 +418,6 @@ Return
 
 
 
-; SPOTIFY SEARCH
 XButton1 & s::
 	if !WinExist("ahk_exe Spotify.exe"){
 		Run, C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe
@@ -415,19 +425,26 @@ XButton1 & s::
 	InputBox, to_play, Spotify Search, What to play on Spotify,, 256, 128
 	DetectHiddenWindows, On
 	;SetTitleMatchMode 2 
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	if (ErrorLevel = 0) {
 		MouseGetPos, OrigX, OrigY
 		WinActivate, ahk_exe Spotify.exe
 		WinWaitActive, ahk_exe Spotify.exe
-		MouseClick, Left, -1525, -15, 1
-		MouseClick, Left, -1100, -94, 3
-		Send, %to_play%
-		Sleep, 2000 ; timing
-		MouseClick, Left, -956, 176, 1
-		; Send, {ShiftDown}{Left 20}{ShiftUp}
+		; MouseClick, Left, 33, 105, 1
+		; MouseClick, Left, 638, 30, 3
+		; Send, %to_play%
+		
+		Run, Spotify:search:%to_play% ; TODO
+
+		Sleep, 1000 ; timing
+		; Sleep, 2000 ; timing
+		MouseClick, Left, 734, 300, 1
+		WinMinimize, ahk_exe Spotify.exe
+		; ; MouseClick, Left, -956, 176, 1
+		; ; Send, {ShiftDown}{Left 20}{ShiftUp}
 		MouseMove, %OrigX%, %OrigY%
-		; Run, Spotify:search:%searchQuery% ; TODO
+		
+		
 	}
 	Return
 
@@ -436,7 +453,7 @@ XButton1 & s::
 
 XButton1 & F5::
 	git := "X:\Aeraglyx\Git"
-	addons := ["fulcrum", "i-have-spoken", "bone_glow"]
+	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
 
 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
 		,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
@@ -455,5 +472,8 @@ XButton1 & F5::
 
 
 #ifWinActive ahk_exe blender.exe
+
 :*:fdfd::D.materials['Material'].node_tree.nodes.active.
+XButton1 & x:: Send, ^{/}
+
 #IfWinActive
