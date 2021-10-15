@@ -116,3 +116,22 @@ toggle(app) {
 		Run, %app%
 	}
 }
+
+in_range_factor(x1, x2, y1, y2){
+	MouseGetPos, mouse_x, mouse_y
+	WinGetPos,,, w, h, A
+	if (mouse_x > x1/w && mouse_x < x2/w && mouse_y > y1/h && mouse_y < y2/h) {
+		return True
+	} else {
+		return False
+	}
+}
+
+in_range_abs(x1, x2, y1, y2){
+	MouseGetPos, mouse_x, mouse_y
+	if (mouse_x > x1 && mouse_x < x2 && mouse_y > y1 && mouse_y < y2) {
+		return True
+	} else {
+		return False
+	}
+}
