@@ -378,8 +378,10 @@ F1:: Send, ^{PgUp}
 ; F2:: Send, ^w
 F3:: Send, ^{PgDn}
 F4:: Send, ^n
-; comment
 XButton1 & x:: Send, ^{/}
+
+^Up:: Send, {Up 8}
+^Down:: Send, {Down 8}
 
 ^+n::
 	Send, ^+n
@@ -387,6 +389,7 @@ XButton1 & x:: Send, ^{/}
 	WinMaximize, A
 	Send, ^r
 	return
+
 
 ; PYTHON
 
@@ -408,23 +411,23 @@ XButton1 & d::
 	Send, {Space}TODO{Space}
 	Return
 
-:o*:pyread::  ; TODO snipets
-(
-with open("file.txt", "r") as f:
-	data = []
-	for line in f.readlines():
-		data.append(float(line))
-)
-Return
+; :o*:pyread::  ; TODO snipets
+; (
+; with open("file.txt", "r") as f:
+; 	data = []
+; 	for line in f.readlines():
+; 		data.append(float(line))
+; )
+; Return
 
-:o*:pywrite::
-(
-with open("test.txt", "w") as f:
-	for thing in final:
-		f.write(str(thing))
-		f.write("\n")
-)
-Return
+; :o*:pywrite::
+; (
+; with open("test.txt", "w") as f:
+; 	for thing in final:
+; 		f.write(str(thing))
+; 		f.write("\n")
+; )
+; Return
 
 #ifWinActive
 
@@ -480,7 +483,7 @@ XButton1 & F5::
 			FileCopyDir, %src%, %dst%, 1
 		}
 	}
-	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+daily.26dac33ce18f\blender.exe"
+	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+daily.4a00faca1a5e\blender.exe"
 	Return
 
 
