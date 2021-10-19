@@ -1,6 +1,6 @@
 # AutoHotkey Scripts
 
-My janky scripts for improved eFFiCieNcY. Get AHK v1 here - https://www.autohotkey.com/
+My janky scripts for improved eFFiCieNcY. Made for v1.1.33, get AHK here - https://www.autohotkey.com/
 
 
 ## Main Script `ax_main.ahk`
@@ -13,7 +13,6 @@ Some of the functionality:
 - ± 40 volume for switching between headphones and speakers
 - Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
-- Shortcuts for favourite websites and folders
 - Hotstrings for `≤`, `≥`, `≈`, `≠`, `±`
 - Reloading Blender and copying folders for addon development
 - Encoding current time to 5 characters and vice versa
@@ -42,7 +41,7 @@ Similar to the above but for mouse movement. Slow mouse movements remain the sam
 For measuring distances on screen in pixels. The value gets automatically saved to clipboard. Default hotkey - `XButton1`+`M`.
 
 
-## Blender Colour Picker
+## Colour Picker
 
 Colour picker/checker that can "see" through Filmic in Blender. While running, `Ctrl`+`C` copies the data so you can paste it in any Blender colour input. Works only with Filmic + Medium Contrast (aka None). Default hotkey - `XButton1`+`C`.
 

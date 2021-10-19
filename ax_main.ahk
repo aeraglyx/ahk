@@ -13,6 +13,16 @@ Run, acc_scroll.ahk
 #Include *i secret.ahk
 #Include spotify_search.ahk
 
+; #InputLevel, 1
+; RAlt:: Send, {XButton1}
+
+; #InputLevel, 0
+
+; I want these to trigger with both XButton1 and RAlt
+; XButton1 & x:: do something
+; XButton1 & y:: do something
+; XButton1 & z:: do something
+
 XButton1 & r:: Reload
 XButton1 & q:: WinClose A
 XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
@@ -27,6 +37,60 @@ XButton1 & m:: toggle("measure.ahk")
 ~LAlt Up::
 	if (A_PriorKey = "LShift"){
 		toggle("en_cs_hybrid.ahk")
+	}
+	Return
+
+
+
+; -1 - minimized
+;  0 - normal
+;  1 - maximized
+
+; check_win_center(){
+; 	CoordMode, Mouse, Screen
+; 	WinGet, win_state, MinMax, A
+; 	WinGetPos, x, y, w, h, A
+; 	center := x + w/2
+; 	return
+; }
+
+XButton1 & F1::
+XButton1 & Numpad4::
+	; TODO check if it's on the right side, otherwise just make active?
+	CoordMode, Mouse, Screen
+	; WinGet, win_state, MinMax, A
+	WinGetPos, x, y, w, h, A
+	
+	center := x + w/2
+	if (center > 0) {
+		WinMove, A,, -1928, 905, 1936, 1056
+		WinMaximize, A
+	}
+	Return
+
+XButton1 & F2::
+XButton1 & Numpad5::
+	; TODO not finished
+	; restore to main monitor
+	CoordMode, Mouse, Screen
+	; WinGet, win_state, MinMax, A
+	WinRestore, A
+	WinGetPos, x, y, w, h
+	WinMove, A,, A_ScreenWidth/2 - 512, A_ScreenHeight/2 - 512, 1024, 1024
+	MsgBox, %A_ScreenWidth%
+	Return
+
+XButton1 & F3::
+XButton1 & Numpad6::
+
+	CoordMode, Mouse, Screen
+	; WinGet, win_state, MinMax, A
+	WinGetPos, x, y, w, h, A
+	; MsgBox, %x% %y% %w% %h%
+	center := x + w/2
+	if (center < 0) {
+		WinMove, A,, -8, -8, 2576, 1416
+		WinMaximize, A
 	}
 	Return
 
@@ -150,7 +214,7 @@ XButton1 & n::
 	BlockInput, Off
 	Return
 
-RAlt::Down
+; RAlt::Down
 Shift & RAlt::Up
 
 
