@@ -400,14 +400,14 @@ XButton2:: Send, ^w
 ; NUKE
 #ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
 
-Space::
-	CoordMode, Mouse, Client
-	if in_range_abs(45, 1945, 45, 780) {
-		Send, l
-	} else {
-		Send, {Space}
-	}
-	return
+; Space::
+; 	CoordMode, Mouse, Client
+; 	if in_range_abs(45, 1945, 45, 780) {
+; 		Send, l
+; 	} else {
+; 		Send, {Space}
+; 	}
+; 	return
 
 
 ; TODO then grab the node
@@ -475,14 +475,17 @@ XButton1 & d::
 
 
 ; BLENDER
-; Copy over my addon and restart Blender
+; Copy over addons and restart Blender
 
 XButton1 & F5::
+
 	git := "X:\Aeraglyx\Git"
 	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
 
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
-		,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
+	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 	
 	Process, Close, blender.exe
 
@@ -493,7 +496,20 @@ XButton1 & F5::
 			FileCopyDir, %src%, %dst%, 1
 		}
 	}
-	Run, "X:\Software\Blender\daily\blender-3.0.0-alpha+daily.4a00faca1a5e\blender.exe"
+
+	bl_folder := "X:\Software\Blender\daily"
+	newest_time := 0
+	Loop, Files, %bl_folder%\*, D
+	{
+		bl_time := A_LoopFileTimeCreated
+		if (bl_time > newest_time) {
+			newest_time := bl_time
+			newest_blender := A_LoopFileFullPath
+		}
+	}
+	newest_blender := newest_blender . "\blender.exe"
+	Run, %newest_blender%
+
 	Return
 
 
