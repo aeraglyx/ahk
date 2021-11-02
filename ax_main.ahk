@@ -116,13 +116,43 @@ $*RButton::
 
 
 ; VOLUME & SOUND
-; ± 40 for switching between headphones and speakers
-XButton1 & Volume_Down:: Send, {Volume_Down 20}
-XButton1 & Volume_Up:: Send, {Volume_Up 20}
 
-; XButton1 & LButton:: Send {Media_Prev}
-; XButton1 & MButton:: Send {Media_Play_Pause}
-; XButton1 & RButton:: Send {Media_Next}
+XButton1 & Left::
+XButton1 & PgUp::
+XButton1 & LButton::
+	Send {Media_Prev}
+	Return
+
+XButton1 & Space::
+XButton1 & MButton::
+	Send, {Media_Play_Pause}
+	Return
+
+XButton1 & Right::
+XButton1 & PgDn::
+XButton1 & RButton::
+	Send {Media_Next}
+	Return
+
+; ± 40 for switching between headphones and speakers
+XButton1 & Volume_Down::
+	; Send, {Volume_Down 20}
+	Loop, 20 {
+		Send, {Volume_Down}
+		Sleep, 64
+	}
+	Return
+XButton1 & Volume_Up::
+	; Send, {Volume_Up 20}
+	Loop, 20 {
+		Send, {Volume_Up}
+		Sleep, 64
+	}
+	Return
+
+
+
+
 
 ; NUMBERS - Maybe only in Blender?
 XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
