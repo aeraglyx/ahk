@@ -515,7 +515,7 @@ XButton1 & F5::
 	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
 	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"]
 	
 	Process, Close, blender.exe
 
