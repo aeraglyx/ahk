@@ -134,6 +134,24 @@ XButton1 & RButton::
 	Send {Media_Next}
 	Return
 
+
+; Spotify ± 30s
+XButton2 & Left::
+	WinGet, prev_pid, PID, A
+	WinActivate, ahk_exe Spotify.exe
+	Send, +{Left 6}
+	WinActivate, ahk_pid %prev_pid%
+	Return
+
+XButton2 & Right::
+	WinGet, prev_pid, PID, A
+	WinActivate, ahk_exe Spotify.exe
+	Send, +{Right 6}
+	WinActivate, ahk_pid %prev_pid%
+	Return
+
+
+
 ; ± 40 for switching between headphones and speakers
 XButton1 & Volume_Down::
 	; Send, {Volume_Down 20}
