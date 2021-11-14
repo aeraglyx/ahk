@@ -492,7 +492,7 @@ XButton1 & d::
 	WinGetTitle, title, A
 	if InStr(title, ".ahk")
 		Send, {;}
-	else if InStr(title, ".jsx")
+	else if InStr(title, ".jsx") or InStr(title, ".dctl")
 		SendRaw, //
 	else
 		Send, {#}
@@ -516,6 +516,7 @@ XButton1 & F5::
 	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 
 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"]
+	; TODO latest version OF latest version ?
 	
 	Process, Close, blender.exe
 
