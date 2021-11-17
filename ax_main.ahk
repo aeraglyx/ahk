@@ -19,9 +19,29 @@ Run, acc_scroll.ahk
 ; #InputLevel, 0
 
 
+
+
 XButton1 & r:: Reload
 XButton1 & q:: WinClose A
+
 XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
+XButton2 & t::
+	WinGet, windows, List
+	Loop, %windows%
+	{
+		this_id := "ahk_id " . windows%A_Index%
+		Winset, AlwaysOnTop, Off, %this_id%
+	}
+	WinGet, win_state, MinMax, A
+	WinMaximize, A  ; sort of twice, because the windows remained on top
+	WinRestore, A
+	if (win_state = 1) {  ; if it was maximized
+		WinMaximize, A
+	}
+	Return
+
+
+
 
 ; COLOR PICKER
 XButton1 & c:: toggle("color_picker.ahk")
