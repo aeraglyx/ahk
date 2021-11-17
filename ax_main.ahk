@@ -7,7 +7,7 @@ SendMode Input
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
 Run, acc_scroll.ahk
-;Run, acc_mouse.ahk
+Run, acc_mouse.ahk
 
 #Include functions.ahk
 #Include *i secret.ahk

@@ -4,10 +4,10 @@
 ;#NoTrayIcon
 
 interval := 64 ; higher = less responsive
-pivot := 8 ; low pivot gets easier to max speed, beyong is clamped
+pivot := 8 ; low pivot gets easier to max speed, beyond is clamped
 lim := 512 ; glitch cutoff in px, keep high. Low interval helps too.
 
-mult := 2.5 ; top speed multiplier, 1.0 = no effect
+mult := 1.8 ; top speed multiplier, 1.0 = no effect
 gamma := 2.5 ; shape, 1 = linear
 
 loop {
@@ -38,7 +38,7 @@ loop {
 	}
 
 	;x_debug := min((dist / px)**gamma, 1) * px * mult / dist
-	;ToolTip, %x_acc%, 256, 512
+	; ToolTip, %x_acc%, 256, 512
 
 	MouseMove, x_acc, y_acc, 0, Relative
 	MouseGetPos, x_last, y_last
