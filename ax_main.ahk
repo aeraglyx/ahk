@@ -124,6 +124,10 @@ XButton1 & Numpad6::
 	Return
 
 
+
+
+
+
 ; XButton1 & F6::
 ; 	MouseGetPos, x_orig, y_orig
 ; 	MouseClick, Left, 19, 53, 1
@@ -347,6 +351,8 @@ XButton1 & g::
 	txt := selected()
 	If (txt = "") {
 		Run, "https://www.google.com/"
+	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
+		Run, %txt%
 	} Else {
 		query("https://www.google.com/search?q=", txt)
 	}
@@ -471,6 +477,23 @@ XButton2 & F3:: Send, +!{Up}
 F4:: Send, ^t
 
 XButton2:: Send, ^w
+
+
+
+XButton1 & Numpad1::
+; 28, 17
+	WinGet, win_state, MinMax, A
+	if (win_state = 1){
+		
+	}
+	MouseGetPos, x_orig, y_orig
+	Click, Down
+	mouse_pressed := True
+
+	MouseClick, Left, 28, 17, 1
+	Return
+
+
 
 ; make Ctrl + Z work
 ; BUG reloading triggers this
