@@ -480,25 +480,26 @@ XButton2:: Send, ^w
 
 
 
-XButton1 & Numpad1::
-; 28, 17
-	WinGet, win_state, MinMax, A
-	if (win_state = 1){
+; XButton1 & Numpad1::
+; ; 28, 17
+; 	WinGet, win_state, MinMax, A
+; 	if (win_state = 1){
 		
-	}
-	MouseGetPos, x_orig, y_orig
-	Click, Down
-	mouse_pressed := True
+; 	}
+; 	MouseGetPos, x_orig, y_orig
+; 	Click, Down
+; 	mouse_pressed := True
 
-	MouseClick, Left, 28, 17, 1
-	Return
+; 	MouseClick, Left, 28, 17, 1
+; 	Return
 
 
 
 ; make Ctrl + Z work
-; BUG reloading triggers this
-; ^z:: Send, !{Left}
-; ^+z:: Send, !{Right}
+; BUG reloading triggers this (does it?)
+; TODO exception sites?
+^z:: Send, !{Left}
+^+z:: Send, !{Right}
 
 
 
