@@ -7,7 +7,7 @@ interval := 64 ; higher = less responsive
 pivot := 8 ; low pivot gets easier to max speed, beyond is clamped
 lim := 512 ; glitch cutoff in px, keep high. Low interval helps too.
 
-mult := 1.8 ; top speed multiplier, 1.0 = no effect
+mult := 1.6 ; top speed multiplier, 1.0 = no effect
 gamma := 2.5 ; shape, 1 = linear
 
 loop {

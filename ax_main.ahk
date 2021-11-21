@@ -19,6 +19,12 @@ Run, acc_mouse.ahk
 ; #InputLevel, 0
 
 
+; XButton2:: Send {F24}
+; F24 & Numpad8:: Send X
+
+; F24 & Numpad8::
+; 	Send, k
+; 	Return
 
 
 XButton1 & r:: Reload
@@ -70,6 +76,7 @@ XButton1 & m:: toggle("measure.ahk")
 ; 	return
 ; }
 
+#Numpad4::
 XButton2 & F1::
 XButton1 & Numpad4::
 	; TODO check if it's on the right side, otherwise just make active?
@@ -85,6 +92,7 @@ XButton1 & Numpad4::
 	}
 	Return
 
+#Numpad5::
 XButton2 & F2::
 XButton1 & Numpad5::
 	; center to main monitor
@@ -95,6 +103,14 @@ XButton1 & Numpad5::
 	WinMove, A,, A_ScreenWidth/2 - w/2, A_ScreenHeight/2 - h/2, w, h
 	Return
 
+#Numpad2::
+XButton1 & Numpad2::
+	CoordMode, Mouse, Screen
+	WinRestore, A
+	WinMove, A,, A_ScreenWidth/2 - 512, A_ScreenHeight/2 - 512, 1024, 1024
+	Return
+
+#Numpad6::
 XButton2 & F3::
 XButton1 & Numpad6::
 	; from left to right
@@ -108,6 +124,19 @@ XButton1 & Numpad6::
 	Return
 
 
+; XButton1 & F6::
+; 	MouseGetPos, x_orig, y_orig
+; 	MouseClick, Left, 19, 53, 1
+; 	Send, {PgUp}{Down 6}{Right}
+; 	; MouseMove, %x_orig%, %y_orig%, 0
+; 	Return
+
+
+
+
+
+
+; hold L click without holding it
 
 XButton1 & `::
 	MouseGetPos, x_orig, y_orig
@@ -130,6 +159,7 @@ $*RButton::
 	Return
 
 #ifWinActive  ; why?
+
 
 
 
