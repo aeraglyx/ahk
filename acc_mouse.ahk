@@ -1,7 +1,7 @@
 #NoEnv
 #SingleInstance Force
 #Persistent
-;#NoTrayIcon
+#NoTrayIcon
 
 interval := 64 ; higher = less responsive
 pivot := 8 ; low pivot gets easier to max speed, beyond is clamped

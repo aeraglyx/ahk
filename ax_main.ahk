@@ -404,7 +404,7 @@ fx_subroutine(name, effect){
 }
 
 run_ae_script(script){
-	ae_dir := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
+	ae_dir := "C:\Program Files\Adobe\Adobe After Effects 2022\Support Files"  ; XXX current AE version
 	script_dir := A_ScriptDir . "\support_files\" . script
 	RunWait, %ComSpec% /c afterfx -r %script_dir%, %ae_dir%
 	WinMaximize, A
@@ -414,7 +414,7 @@ XButton1 & n::
 	run_ae_script("ae_process.jsx")
 	Return
 
-XButton1 & m::
+XButton1 & i::
 	run_ae_script("cineon.jsx")
 	Return
 

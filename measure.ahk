@@ -6,7 +6,6 @@ CoordMode, Mouse, Screen
 MouseGetPos, x0, y0
 
 SetTimer, Timer, 32
-; Return
 
 Timer:
 	MouseGetPos, x1, y1

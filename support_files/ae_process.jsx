@@ -21,13 +21,16 @@ function set_expression(effect, property, value){
 }
 
 var glow = add_adj_layer("Glow");
-glow.blendingMode = BlendingMode.ADD;
+glow.opacity.setValue(12.5);
+// glow.blendingMode = BlendingMode.NORMAL;
 var fx_glow = add_effect(glow, "PEDG");
 set_prop(fx_glow, "Radius", 256);
-set_prop(fx_glow, "Exposure", 0.125);
+set_prop(fx_glow, "Exposure", 0.7);
 set_prop(fx_glow, "Threshold", 0);
 set_prop(fx_glow, "Threshold Smooth", 0);
-set_expression(fx_glow, "Source Opacity", '(1 - thisProperty.propertyGroup()("Exposure")) * 100');
+set_prop(fx_glow, "Blend Mode", 2);
+set_prop(fx_glow, "Source Opacity", 0);
+// set_expression(fx_glow, "Source Opacity", '(1 - thisProperty.propertyGroup()("Exposure")) * 100');
 
 var chroma = add_adj_layer("Chromatic Aberration");
 var chroma_QCA2 = add_effect(chroma, "PEQCAGL");
@@ -44,7 +47,7 @@ set_prop(fx_lin_to_log, "10 Bit White Point", 685);
 set_prop(fx_lin_to_log, "Gamma", 2.0);
 set_prop(fx_lin_to_log, "Highlight Rolloff", 0);
 // var fx_curves = add_effect(lin_to_log, "ADBE CurvesCustom");
-lin_to_log.applyPreset(File("C:/Program Files/Adobe/Adobe After Effects 2021/Support Files/Presets/ax_curve_002.ffx"))
+lin_to_log.applyPreset(File("C:/Program Files/Adobe/Adobe After Effects 2022/Support Files/Presets/ax_curve_003.ffx"));
 
 var grain = add_adj_layer("Film Grain");
 var fx_grain = add_effect(grain, "VISINF Grain Implant");
