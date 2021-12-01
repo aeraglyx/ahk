@@ -351,6 +351,8 @@ XButton1 & g::
 	txt := selected()
 	If (txt = "") {
 		Run, "https://www.google.com/"
+	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
+		Run, %txt%
 	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
 		Run, %txt%
 	} Else {
