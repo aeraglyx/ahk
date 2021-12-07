@@ -31,8 +31,8 @@ XButton1 & r:: Reload
 XButton1 & q:: WinClose A
 
 XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
-XButton2 & t::
 	WinGet, windows, List
+XButton2 & t::
 	Loop, %windows%
 	{
 		this_id := "ahk_id " . windows%A_Index%
@@ -81,8 +81,8 @@ XButton2 & F1::
 XButton1 & Numpad4::
 	; TODO check if it's on the right side, otherwise just make active?
 	CoordMode, Mouse, Screen
-	; WinGet, win_state, MinMax, A
 	WinGetPos, x, y, w, h, A
+	; WinGet, win_state, MinMax, A
 	; MsgBox, %x% %y% %w% %h%
 	
 	center := x + w/2
@@ -102,8 +102,8 @@ XButton1 & Numpad5::
 	WinRestore, A
 	WinMove, A,, A_ScreenWidth/2 - w/2, A_ScreenHeight/2 - h/2, w, h
 	Return
-
 #Numpad2::
+
 XButton1 & Numpad2::
 	CoordMode, Mouse, Screen
 	WinRestore, A
@@ -136,6 +136,10 @@ XButton1 & Numpad6::
 ; 	Return
 
 
+
+
+^!WheelUp:: Send, ^{Home}
+^!WheelDown:: Send, ^{End}
 
 
 
@@ -241,8 +245,8 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 ::noteq::{U+2260}		; ≠
 ::+-::{U+00B1}			; ±
 :*o:/alpha::{U+03B1}	; α
-:*o:/epsilon::{U+03B5}	; ε
 
+:*o:/epsilon::{U+03B5}	; ε
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
@@ -262,8 +266,8 @@ XButton1 & u::
 	txt := StrReplace(txt, " ", "_")
 	len := StrLen(txt)
 	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
-	Return
 
+	Return
 ; NIGHT LIGHT
 XButton1 & e::
 	Run, ms-settings:nightlight
@@ -274,8 +278,8 @@ XButton1 & e::
 	MouseGetPos, x_orig, y_orig
 	MouseClick, Left, 53, 206, 1
 	Sleep, 64
-	WinClose, A
 	MouseMove, %x_orig%, %y_orig%
+	WinClose, A
 	BlockInput, Off
 	Return
 
@@ -319,8 +323,8 @@ Shift & RAlt::Up
 ; :r*?:ttt::
 ; FormatTime, time_now,, yyyyMMdd_HHmmss
 ; SendInput, %time_now%
-; return
 
+; return
 ; encode time
 ; :r*?:ttt::
 ; 	time_now := A_NowUTC
@@ -337,8 +341,8 @@ Shift & RAlt::Up
 ; 	Sleep, 64
 ; 	unix := from62(Clipboard) * 60
 ; 	diff := A_Now - A_NowUTC
-; 	out := 19700101000000 + diff
 ; 	out += unix, Seconds
+; 	out := 19700101000000 + diff
 ; 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
 ; 	MsgBox,, Encoded at UTC, %out%
 ; 	Return
