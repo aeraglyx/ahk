@@ -126,6 +126,26 @@ XButton1 & Numpad6::
 
 
 
+XButton1 & Numpad7::  ; duplicate
+	Send, #p
+	Sleep, 64
+	Send, {Home}{Down}
+	Sleep, 64
+	Send, {Enter}{Escape}
+	Return
+
+XButton1 & Numpad9::  ; extend
+	Send, #p
+	Sleep, 64
+	Send, {Home}{Down 2}
+	Sleep, 64
+	Send, {Enter}{Escape}
+	Return
+
+
+
+
+
 
 
 ; XButton1 & F6::
