@@ -269,6 +269,16 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 ::+-::{U+00B1}			; ±
 :*o:/alpha::{U+03B1}	; α
 
+:*o:leftar::{U+2190}	; ←
+:*o:rightar::{U+2192}	; →
+:*o:upar::{U+2191}		; ↑
+:*o:downar::{U+2193}	; ↓
+
+!Numpad4:: Send, {U+2190}  ; ←
+!Numpad6:: Send, {U+2192}  ; →
+!Numpad8:: Send, {U+2191}  ; ↑
+!Numpad2:: Send, {U+2193}  ; ↓
+
 :*o:/epsilon::{U+03B5}	; ε
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
