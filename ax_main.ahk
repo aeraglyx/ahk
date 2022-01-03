@@ -482,6 +482,8 @@ XButton1 & p::
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
 ^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter} ; make current solid comp size
 
+!+z:: Send, ^+h  ; overlay toggle
+
 ; PREMIERE PRO
 ; #ifWinActive ahk_exe Adobe Premiere Pro.exe
 
@@ -636,7 +638,8 @@ XButton1 & F5::
 	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
 	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"]
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 	; TODO latest version OF latest version ?
 	
 	Process, Close, blender.exe
