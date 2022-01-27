@@ -62,6 +62,7 @@ Numpad9::  ; extend
 	Click, Down
 	mouse_pressed := True
 	Return
+#if
 #If mouse_pressed
 $LButton::
 	Click, Up
@@ -79,7 +80,7 @@ $*RButton::
 
 
 
-
+#if l1()
 ; VOLUME & SOUND
 
 Left::
@@ -444,7 +445,7 @@ XButton2 & Right::
 
 
 ; ± 40 for switching between headphones and speakers
-#if l1()
+#if
 
 
 
