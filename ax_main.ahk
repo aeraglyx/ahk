@@ -32,6 +32,253 @@ q:: WinClose A
 t:: Winset, AlwaysOnTop, Toggle, A
 	WinGet, windows, List
 
+; COLOR PICKER
+c:: toggle("color_picker.ahk")
+
+; MEASURE TOOL
+m:: toggle("measure.ahk")
+
+Numpad7::  ; duplicate
+	Send, #p
+	Sleep, 64
+	Send, {Home}{Down}
+	Sleep, 64
+	Send, {Enter}{Escape}
+	Return
+
+Numpad9::  ; extend
+	Send, #p
+	Sleep, 64
+	Send, {Home}{Down 2}
+	Sleep, 64
+	Send, {Enter}{Escape}
+	Return
+
+
+
+; hold L click without holding it
+`::
+	MouseGetPos, x_orig, y_orig
+	Click, Down
+	mouse_pressed := True
+	Return
+#If mouse_pressed
+$LButton::
+	Click, Up
+	mouse_pressed := False
+	Return
+$*Esc::`
+$*RButton::
+	MouseGetPos, x_new, y_new
+	MouseMove, %x_orig%, %y_orig%, 0
+	Click, Up
+	MouseMove, %x_new%, %y_new%, 0
+	mouse_pressed := False
+	Return
+; #ifWinActive  ; why?
+
+
+
+
+; VOLUME & SOUND
+
+Left::
+PgUp::
+LButton::
+	Send {Media_Prev}
+	Return
+
+Space::
+MButton::
+	Send, {Media_Play_Pause}
+	Return
+
+Right::
+PgDn::
+RButton::
+	Send {Media_Next}
+	Return
+
+XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
+XButton1 & 3:: Send, 1.73205080757 ; sqrt(3)
+XButton1 & 4:: Send, 1.57079632679 ; tau / 4
+
+
+; spaces to underscores
+; TODO other way around?
+u::
+	txt := selected()
+	txt := StrReplace(txt, " ", "_")
+	len := StrLen(txt)
+	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
+
+	Return
+; NIGHT LIGHT
+e::
+	Run, ms-settings:nightlight
+	WinWaitActive, Settings
+	Send, #{Up}
+	Sleep, 64
+	BlockInput, On
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 53, 206, 1
+	Sleep, 64
+	MouseMove, %x_orig%, %y_orig%
+	WinClose, A
+	BlockInput, Off
+	Return
+
+; FOCUS ASSIST
+assist := false
+a::
+	SendInput, #{b}{Left}{AppsKey}{Down}{Down}{Right}
+	if (assist = false) {
+		SendInput, {Up}
+		assist := true
+	} else {
+		assist := false
+	}
+	SendInput, {Enter}
+	Sleep, 256
+	SendInput, {Escape}
+	Return
+
+; FORCE MONO
+n::
+	Run, ms-settings:easeofaccess-audio
+	WinWaitActive, Settings
+	Send, #{Up}
+	Sleep, 64
+	BlockInput, On
+	MouseGetPos, x_orig, y_orig
+	MouseClick, Left, 366, 411, 1
+	Sleep, 64
+	WinClose, A
+	MouseMove, %x_orig%, %y_orig%
+	BlockInput, Off
+	Return
+
+
+; WEBSITES
+g::
+	txt := selected()
+	If (txt = "") {
+		Run, "https://www.google.com/"
+	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
+		Run, %txt%
+	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
+		Run, %txt%
+	} Else {
+		query("https://www.google.com/search?q=", txt)
+	}
+	Return
+
+y::
+	txt := selected()
+	If (txt = "") {
+		Run, "https://www.youtube.com/"
+		Sleep, 2000
+		Send, {Tab 4}
+	} Else {
+		query("https://www.youtube.com/results?search_query=", txt)
+	}      
+	Return
+
+w::
+	InputBox, to_solve, WolframAlpha,,, 256, 128
+	if !ErrorLevel {
+		query("https://www.wolframalpha.com/input/?i=", to_solve)
+	}
+	Return
+
+Volume_Down::
+	; Send, {Volume_Down 20}
+	Loop, 20 {
+		Send, {Volume_Down}
+		Sleep, 64
+	}
+	Return
+Volume_Up::
+	; Send, {Volume_Up 20}
+	Loop, 20 {
+		Send, {Volume_Up}
+		Sleep, 64
+	}
+	Return
+
+; BLENDER
+; Copy over addons and restart Blender
+#ifWinActive ahk_exe blender.exe
+
+F5::
+
+	git := "X:\Aeraglyx\Git"
+	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
+
+	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
+	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+	; TODO latest version OF latest version ?
+	
+	Process, Close, blender.exe
+
+	For version in versions {
+		For addon in addons {
+			src := git . "\" . addons[addon]
+			dst := versions[version] . "\" . addons[addon]
+			FileCopyDir, %src%, %dst%, 1
+		}
+	}
+
+	bl_folder := "X:\Software\Blender\daily"
+	newest_time := 0
+	Loop, Files, %bl_folder%\*, D
+	{
+		bl_time := A_LoopFileTimeCreated
+		if (bl_time > newest_time) {
+			newest_time := bl_time
+			newest_blender := A_LoopFileFullPath
+		}
+	}
+	newest_blender := newest_blender . "\blender.exe"
+	Run, %newest_blender%
+
+	Return
+
+
+
+:*:fdfd::D.materials['Material'].node_tree.nodes.active.
+x:: Send, ^{/}
+
+#IfWinActive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #if l2()
 t::
 	Loop, %windows%
@@ -47,16 +294,40 @@ t::
 	}
 	Return
 
-
-
-#if l1()
-; COLOR PICKER
-c:: toggle("color_picker.ahk")
-
-; MEASURE TOOL
-m:: toggle("measure.ahk")
+2:: Send, 0.70710678118 ; sqrt(2) / 2
+3:: Send, 0.86602540378 ; sqrt(3) / 2
+4:: Send, 0.78539816339 ; tau / 8
 
 #if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ; KEYBOARD LAYOUT
 ~LAlt Up::
 	if (A_PriorKey = "LShift"){
@@ -127,26 +398,6 @@ XButton1 & Numpad6::
 
 
 
-#if l1()
-
-XButton1 & Numpad7::  ; duplicate
-	Send, #p
-	Sleep, 64
-	Send, {Home}{Down}
-	Sleep, 64
-	Send, {Enter}{Escape}
-	Return
-
-XButton1 & Numpad9::  ; extend
-	Send, #p
-	Sleep, 64
-	Send, {Home}{Down 2}
-	Sleep, 64
-	Send, {Enter}{Escape}
-	Return
-
-#if
-
 
 
 
@@ -167,55 +418,11 @@ XButton1 & Numpad9::  ; extend
 
 
 
-; hold L click without holding it
-#if l1()
-`::
-	MouseGetPos, x_orig, y_orig
-	Click, Down
-	mouse_pressed := True
-	Return
-
-#If mouse_pressed
-$LButton::
-	Click, Up
-	mouse_pressed := False
-	Return
-$*Esc::`
-$*RButton::
-	MouseGetPos, x_new, y_new
-	MouseMove, %x_orig%, %y_orig%, 0
-	Click, Up
-	MouseMove, %x_new%, %y_new%, 0
-	mouse_pressed := False
-	Return
-#if
-
-; #ifWinActive  ; why?
 
 
 
 
 
-
-; VOLUME & SOUND
-#if l1()
-
-Left::
-PgUp::
-LButton::
-	Send {Media_Prev}
-	Return
-
-Space::
-MButton::
-	Send, {Media_Play_Pause}
-	Return
-
-Right::
-PgDn::
-RButton::
-	Send {Media_Next}
-	Return
 
 
 ; Spotify ± 30s
@@ -238,20 +445,7 @@ XButton2 & Right::
 
 ; ± 40 for switching between headphones and speakers
 #if l1()
-Volume_Down::
-	; Send, {Volume_Down 20}
-	Loop, 20 {
-		Send, {Volume_Down}
-		Sleep, 64
-	}
-	Return
-Volume_Up::
-	; Send, {Volume_Up 20}
-	Loop, 20 {
-		Send, {Volume_Up}
-		Sleep, 64
-	}
-	Return
+
 
 
 
@@ -261,15 +455,6 @@ Volume_Up::
 :*oc:boris::Mocha AE
 
 ; NUMBERS - Maybe only in Blender?
-#if l1()
-XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
-XButton1 & 3:: Send, 1.73205080757 ; sqrt(3)
-XButton1 & 4:: Send, 1.57079632679 ; tau / 4
-#if l2()
-XButton2 & 2:: Send, 0.70710678118 ; sqrt(2) / 2
-XButton2 & 3:: Send, 0.86602540378 ; sqrt(3) / 2
-XButton2 & 4:: Send, 0.78539816339 ; tau / 8
-#if
 
 ; SYMBOLS
 +!<:: Send, {U+2264}	; ≤
@@ -302,62 +487,7 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 ::/fus::Blackmagic Fusion
 ::/res::DaVinci Resolve
 
-#if l1()
-; spaces to underscores
-; TODO other way around?
-u::
-	txt := selected()
-	txt := StrReplace(txt, " ", "_")
-	len := StrLen(txt)
-	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
 
-	Return
-; NIGHT LIGHT
-e::
-	Run, ms-settings:nightlight
-	WinWaitActive, Settings
-	Send, #{Up}
-	Sleep, 64
-	BlockInput, On
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 53, 206, 1
-	Sleep, 64
-	MouseMove, %x_orig%, %y_orig%
-	WinClose, A
-	BlockInput, Off
-	Return
-
-; FOCUS ASSIST
-assist := false
-a::
-	SendInput, #{b}{Left}{AppsKey}{Down}{Down}{Right}
-	if (assist = false) {
-		SendInput, {Up}
-		assist := true
-	} else {
-		assist := false
-	}
-	SendInput, {Enter}
-	Sleep, 256
-	SendInput, {Escape}
-	Return
-
-; FORCE MONO
-n::
-	Run, ms-settings:easeofaccess-audio
-	WinWaitActive, Settings
-	Send, #{Up}
-	Sleep, 64
-	BlockInput, On
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 366, 411, 1
-	Sleep, 64
-	WinClose, A
-	MouseMove, %x_orig%, %y_orig%
-	BlockInput, Off
-	Return
-
-#if
 
 ; RAlt::Down
 Shift & RAlt::Up
@@ -395,41 +525,7 @@ Shift & RAlt::Up
 
 
 
-; WEBSITES
-#if l1()
 
-g::
-	txt := selected()
-	If (txt = "") {
-		Run, "https://www.google.com/"
-	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
-		Run, %txt%
-	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
-		Run, %txt%
-	} Else {
-		query("https://www.google.com/search?q=", txt)
-	}
-	Return
-
-y::
-	txt := selected()
-	If (txt = "") {
-		Run, "https://www.youtube.com/"
-		Sleep, 2000
-		Send, {Tab 4}
-	} Else {
-		query("https://www.youtube.com/results?search_query=", txt)
-	}      
-	Return
-
-w::
-	InputBox, to_solve, WolframAlpha,,, 256, 128
-	if !ErrorLevel {
-		query("https://www.wolframalpha.com/input/?i=", to_solve)
-	}
-	Return
-
-#if
 
 
 
@@ -653,45 +749,6 @@ XButton1 & d::
 
 
 
-; BLENDER
-; Copy over addons and restart Blender
-
-XButton1 & F5::
-
-	git := "X:\Aeraglyx\Git"
-	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
-
-	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
-	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
-
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
-	; TODO latest version OF latest version ?
-	
-	Process, Close, blender.exe
-
-	For version in versions {
-		For addon in addons {
-			src := git . "\" . addons[addon]
-			dst := versions[version] . "\" . addons[addon]
-			FileCopyDir, %src%, %dst%, 1
-		}
-	}
-
-	bl_folder := "X:\Software\Blender\daily"
-	newest_time := 0
-	Loop, Files, %bl_folder%\*, D
-	{
-		bl_time := A_LoopFileTimeCreated
-		if (bl_time > newest_time) {
-			newest_time := bl_time
-			newest_blender := A_LoopFileFullPath
-		}
-	}
-	newest_blender := newest_blender . "\blender.exe"
-	Run, %newest_blender%
-
-	Return
 
 
 #ifWinActive ahk_exe blender.exe
