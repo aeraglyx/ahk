@@ -13,26 +13,27 @@ Run, acc_mouse.ahk
 #Include *i secret.ahk
 #Include spotify_search.ahk
 
-; #InputLevel, 1
-; RAlt:: Send, {XButton1}
-
-; #InputLevel, 0
-
-
-; XButton2:: Send {F24}
-; F24 & Numpad8:: Send X
-
-; F24 & Numpad8::
-; 	Send, k
-; 	Return
-
-
 XButton1 & r:: Reload
-XButton1 & q:: WinClose A
 
-XButton1 & t:: Winset, AlwaysOnTop, Toggle, A
+
+l1() {
+	return GetKeyState("XButton1", "P")
+}
+l2() {
+	return GetKeyState("XButton2", "P")
+}
+
+
+#if l1()
+
+; r:: Reload
+q:: WinClose A
+
+t:: Winset, AlwaysOnTop, Toggle, A
 	WinGet, windows, List
-XButton2 & t::
+
+#if l2()
+t::
 	Loop, %windows%
 	{
 		this_id := "ahk_id " . windows%A_Index%
@@ -48,13 +49,14 @@ XButton2 & t::
 
 
 
-
+#if l1()
 ; COLOR PICKER
-XButton1 & c:: toggle("color_picker.ahk")
+c:: toggle("color_picker.ahk")
 
 ; MEASURE TOOL
-XButton1 & m:: toggle("measure.ahk")
+m:: toggle("measure.ahk")
 
+#if
 ; KEYBOARD LAYOUT
 ~LAlt Up::
 	if (A_PriorKey = "LShift"){
@@ -125,6 +127,7 @@ XButton1 & Numpad6::
 
 
 
+#if l1()
 
 XButton1 & Numpad7::  ; duplicate
 	Send, #p
@@ -142,7 +145,7 @@ XButton1 & Numpad9::  ; extend
 	Send, {Enter}{Escape}
 	Return
 
-
+#if
 
 
 
@@ -165,8 +168,8 @@ XButton1 & Numpad9::  ; extend
 
 
 ; hold L click without holding it
-
-XButton1 & `::
+#if l1()
+`::
 	MouseGetPos, x_orig, y_orig
 	Click, Down
 	mouse_pressed := True
@@ -177,7 +180,7 @@ $LButton::
 	Click, Up
 	mouse_pressed := False
 	Return
-$*Esc::
+$*Esc::`
 $*RButton::
 	MouseGetPos, x_new, y_new
 	MouseMove, %x_orig%, %y_orig%, 0
@@ -185,8 +188,9 @@ $*RButton::
 	MouseMove, %x_new%, %y_new%, 0
 	mouse_pressed := False
 	Return
+#if
 
-#ifWinActive  ; why?
+; #ifWinActive  ; why?
 
 
 
@@ -194,26 +198,28 @@ $*RButton::
 
 
 ; VOLUME & SOUND
+#if l1()
 
-XButton1 & Left::
-XButton1 & PgUp::
-XButton1 & LButton::
+Left::
+PgUp::
+LButton::
 	Send {Media_Prev}
 	Return
 
-XButton1 & Space::
-XButton1 & MButton::
+Space::
+MButton::
 	Send, {Media_Play_Pause}
 	Return
 
-XButton1 & Right::
-XButton1 & PgDn::
-XButton1 & RButton::
+Right::
+PgDn::
+RButton::
 	Send {Media_Next}
 	Return
 
 
 ; Spotify ± 30s
+#if l2()
 XButton2 & Left::
 	WinGet, prev_pid, PID, A
 	WinActivate, ahk_exe Spotify.exe
@@ -231,14 +237,15 @@ XButton2 & Right::
 
 
 ; ± 40 for switching between headphones and speakers
-XButton1 & Volume_Down::
+#if l1()
+Volume_Down::
 	; Send, {Volume_Down 20}
 	Loop, 20 {
 		Send, {Volume_Down}
 		Sleep, 64
 	}
 	Return
-XButton1 & Volume_Up::
+Volume_Up::
 	; Send, {Volume_Up 20}
 	Loop, 20 {
 		Send, {Volume_Up}
@@ -254,12 +261,15 @@ XButton1 & Volume_Up::
 :*oc:boris::Mocha AE
 
 ; NUMBERS - Maybe only in Blender?
+#if l1()
 XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
-XButton2 & 2:: Send, 0.70710678118 ; sqrt(2) / 2
 XButton1 & 3:: Send, 1.73205080757 ; sqrt(3)
-XButton2 & 3:: Send, 0.86602540378 ; sqrt(3) / 2
 XButton1 & 4:: Send, 1.57079632679 ; tau / 4
+#if l2()
+XButton2 & 2:: Send, 0.70710678118 ; sqrt(2) / 2
+XButton2 & 3:: Send, 0.86602540378 ; sqrt(3) / 2
 XButton2 & 4:: Send, 0.78539816339 ; tau / 8
+#if
 
 ; SYMBOLS
 +!<:: Send, {U+2264}	; ≤
@@ -292,9 +302,10 @@ XButton2 & 4:: Send, 0.78539816339 ; tau / 8
 ::/fus::Blackmagic Fusion
 ::/res::DaVinci Resolve
 
+#if l1()
 ; spaces to underscores
 ; TODO other way around?
-XButton1 & u::
+u::
 	txt := selected()
 	txt := StrReplace(txt, " ", "_")
 	len := StrLen(txt)
@@ -302,7 +313,7 @@ XButton1 & u::
 
 	Return
 ; NIGHT LIGHT
-XButton1 & e::
+e::
 	Run, ms-settings:nightlight
 	WinWaitActive, Settings
 	Send, #{Up}
@@ -318,7 +329,7 @@ XButton1 & e::
 
 ; FOCUS ASSIST
 assist := false
-XButton1 & a::
+a::
 	SendInput, #{b}{Left}{AppsKey}{Down}{Down}{Right}
 	if (assist = false) {
 		SendInput, {Up}
@@ -332,7 +343,7 @@ XButton1 & a::
 	Return
 
 ; FORCE MONO
-XButton1 & n::
+n::
 	Run, ms-settings:easeofaccess-audio
 	WinWaitActive, Settings
 	Send, #{Up}
@@ -345,6 +356,8 @@ XButton1 & n::
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
 	Return
+
+#if
 
 ; RAlt::Down
 Shift & RAlt::Up
@@ -383,8 +396,9 @@ Shift & RAlt::Up
 
 
 ; WEBSITES
+#if l1()
 
-XButton1 & g::
+g::
 	txt := selected()
 	If (txt = "") {
 		Run, "https://www.google.com/"
@@ -397,7 +411,7 @@ XButton1 & g::
 	}
 	Return
 
-XButton1 & y::
+y::
 	txt := selected()
 	If (txt = "") {
 		Run, "https://www.youtube.com/"
@@ -408,12 +422,14 @@ XButton1 & y::
 	}      
 	Return
 
-XButton1 & w::
+w::
 	InputBox, to_solve, WolframAlpha,,, 256, 128
 	if !ErrorLevel {
 		query("https://www.wolframalpha.com/input/?i=", to_solve)
 	}
 	Return
+
+#if
 
 
 
@@ -539,8 +555,8 @@ XButton2:: Send, ^w
 ; make Ctrl + Z work
 ; BUG reloading triggers this (does it?)
 ; TODO exception sites?
-^z:: Send, !{Left}
-^+z:: Send, !{Right}
+; ^z:: Send, !{Left}
+; ^+z:: Send, !{Right}
 
 
 
