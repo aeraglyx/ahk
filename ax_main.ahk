@@ -1,3 +1,6 @@
+; run as admin, otherwise some of the functionality (eg. chrome hotkeys) won't work
+; you'll need to have Python installed for some stuff
+
 #NoEnv
 #SingleInstance Force
 ; #InstallKeybdHook
@@ -6,15 +9,16 @@ SendMode Input
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
-Run, acc_scroll.ahk
-Run, acc_mouse.ahk
+Run, support_scripts\acc_scroll.ahk
+Run, support_scripts\acc_mouse.ahk
 
 #Include functions.ahk
 #Include *i secret.ahk
-#Include spotify_search.ahk
+; #Include spotify_search.ahk
 
 XButton1 & r:: Reload
 
+RAlt:: Send, {Enter}
 
 l1() {
 	return GetKeyState("XButton1", "P")
@@ -33,10 +37,16 @@ t:: Winset, AlwaysOnTop, Toggle, A
 	WinGet, windows, List
 
 ; COLOR PICKER
-c:: toggle("color_picker.ahk")
+c:: toggle("support_scripts\color_picker.ahk")
 
 ; MEASURE TOOL
-m:: toggle("measure.ahk")
+m:: toggle("support_scripts\measure.ahk")
+
+; SPOTIFY SEARCH
+s:: Run, "support_scripts\spotify_search.ahk"
+
+; NEW PROJECT
+p:: Run, "support_files\new_project.py"
 
 Numpad7::  ; duplicate
 	Send, #p
@@ -119,11 +129,11 @@ e::
 	Run, ms-settings:nightlight
 	WinWaitActive, Settings
 	Send, #{Up}
-	Sleep, 64
+	Sleep, 128
 	BlockInput, On
 	MouseGetPos, x_orig, y_orig
 	MouseClick, Left, 53, 206, 1
-	Sleep, 64
+	Sleep, 32
 	MouseMove, %x_orig%, %y_orig%
 	WinClose, A
 	BlockInput, Off
@@ -251,7 +261,7 @@ F5::
 
 
 :*:fdfd::D.materials['Material'].node_tree.nodes.active.
-x:: Send, ^{/}
+; x:: Send, ^{/}
 
 #IfWinActive
 
@@ -595,7 +605,7 @@ XButton2 & `::  ; TODO change hotkey + AE script
 	Return
 
 ; Clear cache
-XButton1 & p::
+XButton2 & p::
 	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
 	script := "app.purge(PurgeTarget.ALL_CACHES)"
 	RunWait, %ComSpec% /c afterfx -s %script%, %directory%
@@ -615,6 +625,8 @@ XButton1 & p::
 
 ; CHROME
 #ifWinActive ahk_exe chrome.exe
+
+; f:: MsgBox, chroooomeeeee
 
 F1:: Send, ^+{Tab}
 ; Moving tabs uses Rearrange Tabs:
@@ -727,10 +739,10 @@ XButton1 & x:: Send, ^{/}
 
 ; PYTHON
 
-XButton1 & p::
-	SendRaw, print(f"{x = }")
-	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
-	Return
+; XButton1 & p::
+; 	SendRaw, print(f"{x = }")
+; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
+; 	Return
 
 XButton1 & d::
 	if RegExMatch(selected(), "\w")
