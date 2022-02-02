@@ -3,8 +3,9 @@
 
 #NoEnv
 #SingleInstance Force
-; #InstallKeybdHook
+#InstallKeybdHook
 #Persistent
+#KeyHistory, 2
 SendMode Input
 
 ; SUB-SCRIPTS
@@ -28,6 +29,37 @@ l2() {
 }
 
 
+
+
+
+; d::
+; 	Send, {F24}
+; 	if (A_PriorKey != "F24") {
+; 		Send, d
+; 	} else {
+; 		Send, s
+; 	}
+; 	return
+
+; dd() {
+; 	if (A_TimeIdlePhysical < 250 && A_PriorKey = "d") {
+; 		return True
+; 	} else {
+; 		return False
+; 	}
+; }
+
+; dddddddddfdfdddfdfddfdf
+; #if dd()dddddddd
+; k:: Send, {5}fssskkkkkkk
+
+
+
+
+
+
+
+
 #if l1()
 
 ; r:: Reload
@@ -48,7 +80,7 @@ s:: Run, "support_scripts\spotify_search.ahk"
 ; NEW PROJECT
 p:: Run, "support_files\new_project.py"
 
-Numpad7::  ; duplicate
+Numpad7::  ; duplicate display
 	Send, #p
 	Sleep, 64
 	Send, {Home}{Down}
@@ -56,7 +88,7 @@ Numpad7::  ; duplicate
 	Send, {Enter}{Escape}
 	Return
 
-Numpad9::  ; extend
+Numpad9::  ; extend display
 	Send, #p
 	Sleep, 64
 	Send, {Home}{Down 2}

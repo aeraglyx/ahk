@@ -1,6 +1,5 @@
 import os
 import re
-# import datetime
 
 home_dir = os.path.dirname(__file__)
 
@@ -16,6 +15,8 @@ dirs = [
 proj_name = input("Project Name: ")
 proj_name = proj_name.strip()
 proj_name = re.sub(r"\W", "_", proj_name)
+
+# import datetime
 
 # date = datetime.datetime.now()
 # date = date.strftime("%Y_%m_%d")
