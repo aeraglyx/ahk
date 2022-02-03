@@ -17,7 +17,6 @@ Run, support_scripts\acc_mouse.ahk
 #Include *i secret.ahk
 ; #Include spotify_search.ahk
 
-XButton1 & r:: Reload
 
 RAlt:: Send, {Enter}
 
@@ -31,31 +30,39 @@ l2() {
 
 
 
+#`::
+	MouseGetPos, x_orig, y_orig
+	return
 
-; d::
-; 	Send, {F24}
-; 	if (A_PriorKey != "F24") {
-; 		Send, d
-; 	} else {
-; 		Send, s
-; 	}
-; 	return
+#` Up::
+	MouseGetPos, x_new, y_new
+	x_diff := x_new - x_orig
+	y_diff := y_new - y_orig
+	if (max(abs(x_diff), abs(y_diff)) > 64) {
+		if (abs(x_diff) > abs(y_diff)) {
+			; horizontal
+			if (x_diff < 0) {
+				; left
+				; MsgBox, left
+			} else {
+				; right
+				; MsgBox, right
+			}
+		} else {
+			;vertical
+			if (y_diff < 0) {
+				; up
+				; MsgBox, up
+			} else {
+				; down
+				; MsgBox, down
+			}
+		}
+	}
+	MouseMove, x_orig, y_orig
+	return
 
-; dd() {
-; 	if (A_TimeIdlePhysical < 250 && A_PriorKey = "d") {
-; 		return True
-; 	} else {
-; 		return False
-; 	}
-; }
 
-; dddddddddfdfdddfdfddfdf
-; #if dd()dddddddd
-; k:: Send, {5}fssskkkkkkk
-
-
-
-~XButton1::
 
 
 
@@ -64,11 +71,14 @@ l2() {
 
 #if l1()
 
+r:: Reload
+
 ; r:: Reload
 q:: WinClose A
 
 t:: Winset, AlwaysOnTop, Toggle, A
 	WinGet, windows, List
+	return
 
 ; COLOR PICKER
 c:: toggle("support_scripts\color_picker.ahk")
@@ -144,9 +154,12 @@ RButton::
 	Send {Media_Next}
 	Return
 
-XButton1 & 2:: Send, 1.41421356237 ; sqrt(2)
-XButton1 & 3:: Send, 1.73205080757 ; sqrt(3)
-XButton1 & 4:: Send, 1.57079632679 ; tau / 4
+
+#if l1()
+
+2:: Send, 1.41421356237 ; sqrt(2)
+3:: Send, 1.73205080757 ; sqrt(3)
+4:: Send, 1.57079632679 ; tau / 4
 
 
 ; spaces to underscores
@@ -343,6 +356,12 @@ t::
 3:: Send, 0.86602540378 ; sqrt(3) / 2
 4:: Send, 0.78539816339 ; tau / 8
 
+s::
+	Send, {Media_Play_Pause}
+	Sleep, 64
+	Send, {Media_Play_Pause}
+	return
+
 #if
 
 
@@ -394,52 +413,52 @@ t::
 ; 	return
 ; }
 
-#Numpad4::
-XButton2 & F1::
-XButton1 & Numpad4::
-	; TODO check if it's on the right side, otherwise just make active?
-	CoordMode, Mouse, Screen
-	WinGetPos, x, y, w, h, A
-	; WinGet, win_state, MinMax, A
-	; MsgBox, %x% %y% %w% %h%
+; #Numpad4::
+; XButton2 & F1::
+; XButton1 & Numpad4::
+; 	; TODO check if it's on the right side, otherwise just make active?
+; 	CoordMode, Mouse, Screen
+; 	WinGetPos, x, y, w, h, A
+; 	; WinGet, win_state, MinMax, A
+; 	; MsgBox, %x% %y% %w% %h%
 	
-	center := x + w/2
-	if (center > 0) {
-		WinMove, A,, -1928, 905, 1936, 1056
-		WinMaximize, A
-	}
-	Return
+; 	center := x + w/2
+; 	if (center > 0) {
+; 		WinMove, A,, -1928, 905, 1936, 1056
+; 		WinMaximize, A
+; 	}
+; 	Return
 
-#Numpad5::
-XButton2 & F2::
-XButton1 & Numpad5::
-	; center to main monitor
-	CoordMode, Mouse, Screen
-	; WinGet, win_state, MinMax, A
-	WinGetPos, x, y, w, h, A
-	WinRestore, A
-	WinMove, A,, A_ScreenWidth/2 - w/2, A_ScreenHeight/2 - h/2, w, h
-	Return
-#Numpad2::
+; #Numpad5::
+; XButton2 & F2::
+; XButton1 & Numpad5::
+; 	; center to main monitor
+; 	CoordMode, Mouse, Screen
+; 	; WinGet, win_state, MinMax, A
+; 	WinGetPos, x, y, w, h, A
+; 	WinRestore, A
+; 	WinMove, A,, A_ScreenWidth/2 - w/2, A_ScreenHeight/2 - h/2, w, h
+; 	Return
+; #Numpad2::
 
-XButton1 & Numpad2::
-	CoordMode, Mouse, Screen
-	WinRestore, A
-	WinMove, A,, A_ScreenWidth/2 - 512, A_ScreenHeight/2 - 512, 1024, 1024
-	Return
+; XButton1 & Numpad2::
+; 	CoordMode, Mouse, Screen
+; 	WinRestore, A
+; 	WinMove, A,, A_ScreenWidth/2 - 512, A_ScreenHeight/2 - 512, 1024, 1024
+; 	Return
 
-#Numpad6::
-XButton2 & F3::
-XButton1 & Numpad6::
-	; from left to right
-	CoordMode, Mouse, Screen
-	WinGetPos, x, y, w, h, A
-	center := x + w/2
-	if (center < 0) {
-		WinMove, A,, -8, -8, 2576, 1416
-		WinMaximize, A
-	}
-	Return
+; #Numpad6::
+; XButton2 & F3::
+; XButton1 & Numpad6::
+; 	; from left to right
+; 	CoordMode, Mouse, Screen
+; 	WinGetPos, x, y, w, h, A
+; 	center := x + w/2
+; 	if (center < 0) {
+; 		WinMove, A,, -8, -8, 2576, 1416
+; 		WinMaximize, A
+; 	}
+; 	Return
 
 
 
@@ -606,27 +625,27 @@ run_ae_script(script){
 	WinMaximize, A
 }
 
-XButton1 & n::
-	run_ae_script("ae_process.jsx")
-	Return
+; XButton1 & n::
+; 	run_ae_script("ae_process.jsx")
+; 	Return
 
-XButton1 & i::
-	run_ae_script("cineon.jsx")
-	Return
+; XButton1 & i::
+; 	run_ae_script("cineon.jsx")
+; 	Return
 
-; Black colour
-XButton1 & b::
-	MouseClick, Left
-	SendRaw, 000000
-	Send, {Tab}{Enter}
-	Return
+; ; Black colour
+; XButton1 & b::
+; 	MouseClick, Left
+; 	SendRaw, 000000
+; 	Send, {Tab}{Enter}
+; 	Return
 
-; White colour
-XButton1 & w::
-	MouseClick, Left
-	SendRaw, FFFFFF
-	Send, {Tab}{Enter}
-	Return
+; ; White colour
+; XButton1 & w::
+; 	MouseClick, Left
+; 	SendRaw, FFFFFF
+; 	Send, {Tab}{Enter}
+; 	Return
 
 ; Reload footage
 XButton2 & `::  ; TODO change hotkey + AE script
@@ -665,14 +684,14 @@ XButton2 & p::
 F1:: Send, ^+{Tab}
 ; Moving tabs uses Rearrange Tabs:
 ; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
-XButton1 & F1:: Send, +!{Left}
-XButton2 & F1:: Send, +!{Down}
+; XButton1 & F1:: Send, +!{Left}
+; XButton2 & F1:: Send, +!{Down}
 
 F2:: Send, ^w
 
 F3:: Send, ^{Tab}
-XButton1 & F3:: Send, +!{Right}
-XButton2 & F3:: Send, +!{Up}
+; XButton1 & F3:: Send, +!{Right}
+; XButton2 & F3:: Send, +!{Up}
 
 F4:: Send, ^t
 
@@ -778,18 +797,18 @@ XButton1 & x:: Send, ^{/}
 ; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 ; 	Return
 
-XButton1 & d::
-	if RegExMatch(selected(), "\w")
-		Send, {End}{Space 2}
-	WinGetTitle, title, A
-	if InStr(title, ".ahk")
-		Send, {;}
-	else if InStr(title, ".jsx") or InStr(title, ".dctl")
-		SendRaw, //
-	else
-		Send, {#}
-	Send, {Space}TODO{Space}
-	Return
+; XButton1 & d::
+; 	if RegExMatch(selected(), "\w")
+; 		Send, {End}{Space 2}
+; 	WinGetTitle, title, A
+; 	if InStr(title, ".ahk")
+; 		Send, {;}
+; 	else if InStr(title, ".jsx") or InStr(title, ".dctl")
+; 		SendRaw, //
+; 	else
+; 		Send, {#}
+; 	Send, {Space}TODO{Space}
+; 	Return
 
 
 #ifWinActive
@@ -801,6 +820,6 @@ XButton1 & d::
 #ifWinActive ahk_exe blender.exe
 
 :*:fdfd::D.materials['Material'].node_tree.nodes.active.
-XButton1 & x:: Send, ^{/}
+; XButton1 & x:: Send, ^{/}
 
 #IfWinActive

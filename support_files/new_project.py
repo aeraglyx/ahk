@@ -1,7 +1,7 @@
 import os
 import re
 
-home_dir = os.path.dirname(__file__)
+home_dir = "X:\projects"
 
 dirs = [
 	"01_assets",
