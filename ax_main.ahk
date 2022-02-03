@@ -38,28 +38,32 @@ l2() {
 	MouseGetPos, x_new, y_new
 	x_diff := x_new - x_orig
 	y_diff := y_new - y_orig
+	MouseMove, x_orig, y_orig
 	if (max(abs(x_diff), abs(y_diff)) > 64) {
 		if (abs(x_diff) > abs(y_diff)) {
 			; horizontal
 			if (x_diff < 0) {
 				; left
+				Run, "X:\projects"
+				WinActivate, projects
 				; MsgBox, left
 			} else {
 				; right
-				; MsgBox, right
+				chrome_new_tab()
 			}
 		} else {
 			;vertical
 			if (y_diff < 0) {
 				; up
-				; MsgBox, up
+				Run, "X:\UTB"
+				WinActivate, UTB
 			} else {
 				; down
-				; MsgBox, down
+				Run, "X:\assets"
+				WinActivate, assets
 			}
 		}
 	}
-	MouseMove, x_orig, y_orig
 	return
 
 
@@ -73,7 +77,6 @@ l2() {
 
 r:: Reload
 
-; r:: Reload
 q:: WinClose A
 
 t:: Winset, AlwaysOnTop, Toggle, A
@@ -797,18 +800,18 @@ XButton1 & x:: Send, ^{/}
 ; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 ; 	Return
 
-; XButton1 & d::
-; 	if RegExMatch(selected(), "\w")
-; 		Send, {End}{Space 2}
-; 	WinGetTitle, title, A
-; 	if InStr(title, ".ahk")
-; 		Send, {;}
-; 	else if InStr(title, ".jsx") or InStr(title, ".dctl")
-; 		SendRaw, //
-; 	else
-; 		Send, {#}
-; 	Send, {Space}TODO{Space}
-; 	Return
+XButton1 & d::
+	if RegExMatch(selected(), "\w")
+		Send, {End}{Space 2}
+	WinGetTitle, title, A
+	if InStr(title, ".ahk")
+		Send, {;}
+	else if InStr(title, ".jsx") or InStr(title, ".dctl")
+		SendRaw, //
+	else
+		Send, {#}
+	Send, {Space}TODO{Space}
+	Return
 
 
 #ifWinActive

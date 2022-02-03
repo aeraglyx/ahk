@@ -135,3 +135,20 @@ in_range_abs(x1, x2, y1, y2){
 		return False
 	}
 }
+
+chrome_new_tab() {
+	SetTitleMatchMode, 2
+	If !WinExist("ahk_exe chrome.exe") {
+		Run, "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+		WinWait, ahk_exe chrome.exe
+	}
+	WinActivate, ahk_exe chrome.exe
+	WinWaitActive, ahk_exe chrome.exe
+	WinGetTitle, title, ahk_exe chrome.exe
+	if (title = "New Tab - Google Chrome") {
+		Send, {Ctrl Down}l{Ctrl Up}
+	} else {
+		Send, {Ctrl Down}t{Ctrl Up}
+		Send, {Ctrl Down}l{Ctrl Up}
+	}
+}
