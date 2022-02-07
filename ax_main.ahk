@@ -10,12 +10,49 @@ SendMode Input
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
+; Run, support_scripts\colemak_dhm.ahk
 Run, support_scripts\acc_scroll.ahk
 Run, support_scripts\acc_mouse.ahk
 
 #Include functions.ahk
 #Include *i secret.ahk
 ; #Include spotify_search.ahk
+
+
+
+
+
+
+numpad_layer := false
+
+d::
+	numpad_layer := true
+	return
+
+d Up::
+	numpad_layer := false
+	if (A_PriorKey = "d") {
+		send, d
+	}
+	return
+
+
+#if (numpad_layer = true)
+j::Numpad1
+k::Numpad2
+l::Numpad3
+u::Numpad4
+i::Numpad5
+o::Numpad6
+8::Numpad7
+9::Numpad8
+0::Numpad9
+Space::Numpad0
+#if
+
+
+
+
 
 
 RAlt:: Send, {Enter}
@@ -398,7 +435,7 @@ s::
 ; KEYBOARD LAYOUT
 ~LAlt Up::
 	if (A_PriorKey = "LShift"){
-		toggle("en_cs_hybrid.ahk")
+		toggle("support_scripts\en_cs_hybrid.ahk")
 	}
 	Return
 

@@ -3,7 +3,7 @@
 #Persistent
 SendMode Input
 
-Menu, Tray, icon, %A_ScriptDir%\icons\icon_cs_18px_v2.ico
+Menu, Tray, icon, %A_ScriptDir%\..\icons\icon_cs_18px_v2.ico
 
 Loop {
 	MouseGetPos, x, y
