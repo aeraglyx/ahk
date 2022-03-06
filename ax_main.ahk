@@ -26,6 +26,12 @@ Run, support_scripts\acc_mouse.ahk
 
 
 
+
+; MOONLANDER MK1 stuff
+
+^+#!.:: Send, ...
+
+
 ; todo rest of umlaut
 
 ; á
