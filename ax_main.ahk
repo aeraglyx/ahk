@@ -13,6 +13,7 @@ SendMode Input
 ; Run, support_scripts\colemak_dhm.ahk
 Run, support_scripts\acc_scroll.ahk
 Run, support_scripts\acc_mouse.ahk
+Run, support_scripts\reminders.ahk
 
 #Include functions.ahk
 #Include *i secret.ahk
@@ -23,6 +24,8 @@ Run, support_scripts\acc_mouse.ahk
 ; ^+!d:: Send, {U+010F} ;ď
 ; ^+!e:: Send, {U+011B} ;ě
 ; ^+!i:: Send, {U+00ED} ;í
+
+
 
 
 
