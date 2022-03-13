@@ -13,124 +13,12 @@ SendMode Input
 ; Run, support_scripts\colemak_dhm.ahk
 Run, support_scripts\acc_scroll.ahk
 Run, support_scripts\acc_mouse.ahk
-Run, support_scripts\reminders.ahk
+; Run, support_scripts\reminders.ahk
 
 #Include functions.ahk
+#Include kb_layout_stuff.ahk
 #Include *i secret.ahk
 ; #Include spotify_search.ahk
-
-
-; ^+!c:: Send, {U+010D} ;č
-; ^+!d:: Send, {U+010F} ;ď
-; ^+!e:: Send, {U+011B} ;ě
-; ^+!i:: Send, {U+00ED} ;í
-
-
-
-
-
-
-; MOONLANDER MK1 stuff
-
-^+#!.:: Send, ...
-
-
-; todo rest of umlaut
-
-; á
-:c*?:A--::{U+00C1}
-:c*?:a--::{U+00E1}
-; ä
-:c*?:A==::{U+00C4}
-:c*?:a==::{U+00E4}
-
-; č
-:c*?:C--::{U+010C}
-:c*?:c--::{U+010D}
-
-; ď
-:c*?:D--::{U+010E}
-:c*?:d--::{U+010F}
-
-; ě
-:c*?:E++::{U+011A}
-:c*?:e++::{U+011B}
-; é
-:c*?:E--::{U+00C9}
-:c*?:e--::{U+00E9}
-
-; í
-:c*?:I--::{U+00CD}
-:c*?:i--::{U+00ED}
-
-; ň
-:c*?:N--::{U+0147}
-:c*?:n--::{U+0148}
-
-; ó
-:c*?:O--::{U+00D3}
-:c*?:o--::{U+00F3}
-
-; ř
-:c*?:R--::{U+0158}
-:c*?:r--::{U+0159}
-
-; š
-:c*?:S--::{U+0160}
-:c*?:s--::{U+0161}
-
-; ť
-:c*?:T--::{U+0164}
-:c*?:t--::{U+0165}
-
-; ů
-:c*?:U**::{U+016E}
-:c*?:u**::{U+016F}
-; ú
-:c*?:U--::{U+00DA}
-:c*?:u--::{U+00FA}
-
-; ý
-:c*?:Y--::{U+00DD}
-:c*?:y--::{U+00FD}
-
-; ž
-:c*?:Z--::{U+017D}
-:c*?:z--::{U+017E}
-
-
-
-
-
-
-
-; use_colemak := 1
-
-; #if (use_colemak == true)
-
-; e::f
-; r::p
-; t::b
-; y::j
-; u::l
-; i::u
-; o::y
-
-; s::r
-; d::s
-; f::t
-; h::m
-; j::n
-; k::e
-; l::i
-; SC027::o
-
-; v::d
-; b::v
-; n::k
-; m::h
-
-; #if
 
 
 
@@ -331,6 +219,7 @@ u::
 
 	Return
 ; NIGHT LIGHT
+^+!e::
 e::
 	Run, ms-settings:nightlight
 	WinWaitActive, Settings
@@ -554,11 +443,11 @@ c:: toggle("support_scripts\colemak_dhm.ahk")
 
 
 ; KEYBOARD LAYOUT
-~LAlt Up::
-	if (A_PriorKey = "LShift"){
-		toggle("support_scripts\en_cs_hybrid.ahk")
-	}
-	Return
+; ~LAlt Up::
+; 	if (A_PriorKey = "LShift"){
+; 		toggle("support_scripts\en_cs_hybrid.ahk")
+; 	}
+; 	Return
 
 
 
@@ -665,10 +554,6 @@ XButton2 & Right::
 	Send, +{Right 6}
 	WinActivate, ahk_pid %prev_pid%
 	Return
-
-
-
-; ± 40 for switching between headphones and speakers
 #if
 
 
