@@ -16,41 +16,9 @@ Run, support_scripts\acc_mouse.ahk
 ; Run, support_scripts\reminders.ahk
 
 #Include functions.ahk
-#Include kb_layout_stuff.ahk
+#Include support_scripts\kb_layout_stuff.ahk
 #Include *i secret.ahk
 ; #Include spotify_search.ahk
-
-
-
-
-; numpad_layer := false
-
-; d::
-; 	numpad_layer := true
-; 	return
-
-; d Up::
-; 	numpad_layer := false
-; 	if (A_PriorKey = "d") {
-; 		send, d
-; 	}
-; 	return
-
-
-; #if (numpad_layer = true)
-; j::Numpad1
-; k::Numpad2
-; l::Numpad3
-; u::Numpad4
-; i::Numpad5
-; o::Numpad6
-; 8::Numpad7
-; 9::Numpad8
-; 0::Numpad9
-; Space::Numpad0
-; #if
-
-
 
 
 
