@@ -1,22 +1,21 @@
 ; run as admin, otherwise some of the functionality (eg. chrome hotkeys) won't work
 ; you'll need to have Python installed for some stuff
 
-#NoEnv
-#SingleInstance Force
-#InstallKeybdHook
-#Persistent
-#KeyHistory, 2
+SingleInstance Force
+InstallKeybdHook
+Persistent
+KeyHistory(2)
 SendMode Input
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
-Run, support_scripts\acc_scroll.ahk
-Run, support_scripts\acc_mouse.ahk
+Run("support_scripts\acc_scroll.ah2")
+Run("support_scripts\acc_mouse.ah2")
 
-#Include functions.ahk
-#Include support_scripts\kb_layout_stuff.ahk
-#Include *i secret.ahk
-; #Include spotify_search.ahk
+;#Include "functions.ah2"
+#Include "support_scripts\kb_layout_stuff.ah2"
+#Include "*i secret.ah2"
+; #Include spotify_search.ah2
 
 
 
@@ -33,38 +32,38 @@ l2() {
 
 
 
-^Volume_Down::
-	Loop, 20 {
-		Send, {Volume_Down}
-		Sleep, 64
+^Volume_Down:: {
+	Loop 20 {
+		Send {Volume_Down}
+		Sleep 64
 	}
-	Return
-^Volume_Up::
-	Loop, 20 {
-		Send, {Volume_Up}
-		Sleep, 64
+}
+^Volume_Up:: {
+	Loop 20 {
+		Send {Volume_Up}
+		Sleep 64
 	}
-	Return
+}
 
 
 
 
-#`::
-	MouseGetPos, x_orig, y_orig
-	return
+#`:: {
+	MouseGetPos	x_orig, y_orig
+}
 
-#` Up::
-	MouseGetPos, x_new, y_new
+#` Up:: {
+	MouseGetPos x_new, y_new
 	x_diff := x_new - x_orig
 	y_diff := y_new - y_orig
-	MouseMove, x_orig, y_orig
+	MouseMove x_orig, y_orig
 	if (max(abs(x_diff), abs(y_diff)) > 64) {
 		if (abs(x_diff) > abs(y_diff)) {
 			; horizontal
 			if (x_diff < 0) {
 				; left
-				Run, "X:\projects"
-				WinActivate, projects
+				Run "X:\projects"
+				WinActivate projects
 				; MsgBox, left
 			} else {
 				; right
@@ -74,16 +73,16 @@ l2() {
 			;vertical
 			if (y_diff < 0) {
 				; up
-				Run, "X:\UTB"
-				WinActivate, UTB
+				Run "X:\UTB"
+				WinActivate UTB
 			} else {
 				; down
-				Run, "X:\assets"
-				WinActivate, assets
+				Run "X:\assets"
+				WinActivate assets
 			}
 		}
 	}
-	return
+}
 
 
 
@@ -92,144 +91,141 @@ l2() {
 
 
 
-#if l1()
+if l1() {
 
-; esc:: Reload
-r:: Reload
-; r::
-; 	WinGetTitle, title, A
-; 	if InStr(title, ".ahk")
-; 		Send, {CtrlDown}s{CtrlUp}
-; 	Reload
+	; esc:: Reload
+	r:: Reload
+	; r::
+	; 	WinGetTitle, title, A
+	; 	if InStr(title, ".ahk")
+	; 		Send, {CtrlDown}s{CtrlUp}
+	; 	Reload
 
 
-q:: WinClose A
+	q:: WinClose A
 
-t:: Winset, AlwaysOnTop, Toggle, A
-	WinGet, windows, List
-	return
-
-; COLOR PICKER
-c:: toggle("support_scripts\color_picker.ahk")
-
-; MEASURE TOOL
-m:: toggle("support_scripts\measure.ahk")
-
-; SPOTIFY SEARCH
-s:: Run, "support_scripts\spotify_search.ahk"
-
-; NEW PROJECT
-p:: Run, "support_files\new_project.py"
-
-Numpad7::  ; duplicate display
-	Send, #p
-	Sleep, 64
-	Send, {Home}{Down}
-	Sleep, 64
-	Send, {Enter}{Escape}
-	Return
-
-Numpad9::  ; extend display
-	Send, #p
-	Sleep, 64
-	Send, {Home}{Down 2}
-	Sleep, 64
-	Send, {Enter}{Escape}
-	Return
+	t:: Winset AlwaysOnTop, Toggle, A
 
 
 
-; hold L click without holding it
-`::
-	MouseGetPos, x_orig, y_orig
-	Click, Down
-	mouse_pressed := True
-	Return
-#if
-#If mouse_pressed
-$LButton::
-	Click, Up
-	mouse_pressed := False
-	Return
-$*Esc::`
-$*RButton::
-	MouseGetPos, x_new, y_new
-	MouseMove, %x_orig%, %y_orig%, 0
-	Click, Up
-	MouseMove, %x_new%, %y_new%, 0
-	mouse_pressed := False
-	Return
+	; COLOR PICKER
+	c:: toggle("support_scripts\color_picker.ahk")
+
+	; MEASURE TOOL
+	m:: toggle("support_scripts\measure.ahk")
+
+	; SPOTIFY SEARCH
+	s:: Run "support_scripts\spotify_search.ahk"
+
+	; NEW PROJECT
+	p:: Run "support_files\new_project.py"
+
+	Numpad7:: {  ; duplicate display
+		Send "#p"
+		Sleep 64
+		Send {Home}{Down}
+		Sleep 64
+		Send {Enter}{Escape}
+	}
+
+	Numpad9:: {  ; extend display
+		Send "#p"
+		Sleep 64
+		Send {Home}{Down 2}
+		Sleep 64
+		Send {Enter}{Escape}
+	}
+
+
+
+	; hold L click without holding it
+	`:: {
+		MouseGetPos x_orig, y_orig
+		Click Down
+		mouse_pressed := True
+	}
+}
+if mouse_pressed {
+	$LButton:: {
+		Click Up
+		mouse_pressed := False
+	}
+	$*Esc::`
+	$*RButton:: {
+		MouseGetPos x_new, y_new
+		MouseMove %x_orig%, %y_orig%, 0
+		Click Up
+		MouseMove %x_new%, %y_new%, 0
+		mouse_pressed := False
+	}
+}
 ; #ifWinActive  ; why?
 
 
 
-#if l1()
+if l1() {
 ; VOLUME & SOUND
 
 Left::
-PgUp::
+PgUp:: {
 ; LButton::
 	Send {Media_Prev}
-	Return
-
-Space::
+}
+Space:: {
 ; MButton::
-	Send, {Media_Play_Pause}
-	Return
-
+	Send {Media_Play_Pause}
+}
 Right::
-PgDn::
+PgDn:: {
 ; RButton::
 	Send {Media_Next}
-	Return
+}
 
 
-#if l1()
-
-2:: Send, 1.41421356237 ; sqrt(2)
-3:: Send, 1.73205080757 ; sqrt(3)
-4:: Send, 1.57079632679 ; tau / 4
+2:: Send "1.41421356237" ; sqrt(2)
+3:: Send "1.73205080757" ; sqrt(3)
+4:: Send "1.57079632679" ; tau / 4
 
 
 ; spaces to underscores
 ; TODO other way around?
-u::
+u:: {
 	txt := selected()
 	txt := StrReplace(txt, " ", "_")
 	len := StrLen(txt)
-	Send, %txt%{ShiftDown}{Left %len%}{ShiftUp}
+	Send %txt%{ShiftDown}{Left %len%}{ShiftUp}
+}
 
-	Return
 ; NIGHT LIGHT
 ^+!e::
-e::
-	Run, ms-settings:nightlight
-	WinWaitActive, Settings
-	Send, #{Up}
-	Sleep, 128
-	BlockInput, On
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 53, 206, 1
-	Sleep, 32
-	MouseMove, %x_orig%, %y_orig%
-	WinClose, A
-	BlockInput, Off
-	Return
+e:: {
+	Run ms-settings:nightlight
+	WinWaitActive Settings
+	Send "#{Up}"
+	Sleep 128
+	BlockInput On
+	MouseGetPos x_orig, y_orig
+	MouseClick Left, 53, 206, 1
+	Sleep 32
+	MouseMove %x_orig%, %y_orig%
+	WinClose A
+	BlockInput Off
+}
 
 ; FOCUS ASSIST
 assist := false
-a::
-	SendInput, #{b}{Left}{AppsKey}{Down}{Down}{Right}
+a:: {
+	SendInput "#{b}{Left}{AppsKey}{Down}{Down}{Right}"
 	if (assist = false) {
-		SendInput, {Up}
+		SendInput "{Up}"
 		assist := true
 	} else {
 		assist := false
 	}
-	SendInput, {Enter}
-	Sleep, 256
-	SendInput, {Escape}
-	Return
+	SendInput "{Enter}"
+	Sleep 256
+	SendInput "{Escape}"
+}
 
 ; FORCE MONO
 ; n::
@@ -248,151 +244,173 @@ a::
 
 
 ; WEBSITES
-g::
+g:: {
 	txt := selected()
 	If (txt = "") {
-		Run, "https://www.google.com/"
+		Run "https://www.google.com/"
 	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
-		Run, %txt%
+		Run %txt%
 	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
-		Run, %txt%
+		Run %txt%
 	} Else {
 		query("https://www.google.com/search?q=", txt)
 	}
-	Return
+}
 
-y::
+y:: {
 	txt := selected()
 	If (txt = "") {
-		Run, "https://www.youtube.com/"
-		Sleep, 2000
-		Send, {Tab 4}
+		Run "https://www.youtube.com/"
+		Sleep 2000
+		Send {Tab 4}
 	} Else {
 		query("https://www.youtube.com/results?search_query=", txt)
 	}      
-	Return
+}
 
-w::
-	InputBox, to_solve, WolframAlpha,,, 256, 128
+w:: {
+	to_solve := InputBox("WolframAlpha",,, 256, 128)
 	if !ErrorLevel {
 		query("https://www.wolframalpha.com/input/?i=", to_solve)
 	}
-	Return
+}
 
-Volume_Down::
+Volume_Down:: {
 	; Send, {Volume_Down 20}
-	Loop, 20 {
-		Send, {Volume_Down}
-		Sleep, 64
+	Loop 20 {
+		Send {Volume_Down}
+		Sleep 64
 	}
-	Return
-Volume_Up::
+}
+Volume_Up:: {
 	; Send, {Volume_Up 20}
-	Loop, 20 {
-		Send, {Volume_Up}
-		Sleep, 64
+	Loop 20 {
+		Send {Volume_Up}
+		Sleep 64
 	}
-	Return
+}
+}
 
 ; BLENDER
 ; Copy over addons and restart Blender
-#ifWinActive ahk_exe blender.exe
+; #ifWinActive ahk_exe blender.exe
 
-F5::
+; F5:: {
 
-	git := "X:\Aeraglyx\Git"
-	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
+; 	git := "X:\Aeraglyx\Git"
+; 	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
 
-	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
-	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
+; 	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
+; 	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
 
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
-	; TODO latest version OF latest version ?
+; 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"
+; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
+; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
+; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]
+; 	; TODO latest version OF latest version ?
 	
-	Process, Close, blender.exe
+; 	Process, Close, blender.exe
 
-	For version in versions {
-		For addon in addons {
-			src := git . "\" . addons[addon]
-			dst := versions[version] . "\" . addons[addon]
-			FileCopyDir, %src%, %dst%, 1
+; 	For version in versions {
+; 		For addon in addons {
+; 			src := git . "\" . addons[addon]
+; 			dst := versions[version] . "\" . addons[addon]
+; 			FileCopyDir, %src%, %dst%, 1
+; 		}
+; 	}
+
+; 	bl_folder := "X:\Software\Blender\daily"
+; 	newest_time := 0
+; 	Loop, Files, %bl_folder%\*, D
+; 	{
+; 		bl_time := A_LoopFileTimeCreated
+; 		if (bl_time > newest_time) {
+; 			newest_time := bl_time
+; 			newest_blender := A_LoopFileFullPath
+; 		}
+; 	}
+; 	newest_blender := newest_blender . "\blender.exe"
+; 	Run, %newest_blender%
+
+; }
+
+
+
+; :*:fdfd::D.materials['Material'].node_tree.nodes.active.
+; ; x:: Send, ^{/}
+
+; #IfWinActive
+
+
+
+
+
+
+
+
+
+
+
+
+
+^!WheelUp:: Send, ^{Home}
+^!WheelDown:: Send, ^{End}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if l2() {
+
+	t:: {
+		Loop, %windows% {
+			this_id := "ahk_id " . windows%A_Index%
+			Winset, AlwaysOnTop, Off, %this_id%
+		}
+		WinGet, win_state, MinMax, A
+		WinMaximize, A  ; sort of twice, because the windows remained on top
+		WinRestore, A
+		if (win_state = 1) {  ; if it was maximized
+			WinMaximize, A
 		}
 	}
 
-	bl_folder := "X:\Software\Blender\daily"
-	newest_time := 0
-	Loop, Files, %bl_folder%\*, D
-	{
-		bl_time := A_LoopFileTimeCreated
-		if (bl_time > newest_time) {
-			newest_time := bl_time
-			newest_blender := A_LoopFileFullPath
-		}
+	2:: Send, 0.70710678118 ; sqrt(2) / 2
+	3:: Send, 0.86602540378 ; sqrt(3) / 2
+	4:: Send, 0.78539816339 ; tau / 8
+
+	s:: {
+		Send, {Media_Play_Pause}
+		Sleep, 64
+		Send, {Media_Play_Pause}
 	}
-	newest_blender := newest_blender . "\blender.exe"
-	Run, %newest_blender%
 
-	Return
-
-
-
-:*:fdfd::D.materials['Material'].node_tree.nodes.active.
-; x:: Send, ^{/}
-
-#IfWinActive
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if l2()
-t::
-	Loop, %windows%
-	{
-		this_id := "ahk_id " . windows%A_Index%
-		Winset, AlwaysOnTop, Off, %this_id%
+	Left:: {
+		WinGet, prev_pid, PID, A
+		WinActivate, ahk_exe Spotify.exe
+		Send, +{Left 6}
+		WinActivate, ahk_pid %prev_pid%
 	}
-	WinGet, win_state, MinMax, A
-	WinMaximize, A  ; sort of twice, because the windows remained on top
-	WinRestore, A
-	if (win_state = 1) {  ; if it was maximized
-		WinMaximize, A
+
+	Right:: {
+		WinGet, prev_pid, PID, A
+		WinActivate, ahk_exe Spotify.exe
+		Send, +{Right 6}
+		WinActivate, ahk_pid %prev_pid%
 	}
-	Return
 
-2:: Send, 0.70710678118 ; sqrt(2) / 2
-3:: Send, 0.86602540378 ; sqrt(3) / 2
-4:: Send, 0.78539816339 ; tau / 8
-
-s::
-	Send, {Media_Play_Pause}
-	Sleep, 64
-	Send, {Media_Play_Pause}
-	return
-
-#if
+}
 
 
 
@@ -496,35 +514,6 @@ s::
 
 
 
-^!WheelUp:: Send, ^{Home}
-^!WheelDown:: Send, ^{End}
-
-
-
-
-
-
-
-
-
-
-
-; Spotify ± 30s
-#if l2()
-XButton2 & Left::
-	WinGet, prev_pid, PID, A
-	WinActivate, ahk_exe Spotify.exe
-	Send, +{Left 6}
-	WinActivate, ahk_pid %prev_pid%
-	Return
-
-XButton2 & Right::
-	WinGet, prev_pid, PID, A
-	WinActivate, ahk_exe Spotify.exe
-	Send, +{Right 6}
-	WinActivate, ahk_pid %prev_pid%
-	Return
-#if
 
 
 
@@ -664,22 +653,22 @@ run_ae_script(script){
 ; 	Return
 
 ; Reload footage
-XButton2 & `::  ; TODO change hotkey + AE script
+XButton2 & `:: {  ; TODO change hotkey + AE script
 	BlockInput, On
 	MouseClick, Right
 	MouseGetPos, x_orig, y_orig
 	MouseClick, Left, 42, 190,, 1,, R
 	MouseMove, %x_orig%, %y_orig%
 	BlockInput, Off
-	Return
+}
 
 ; Clear cache
-XButton2 & p::
+XButton2 & p:: {
 	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
 	script := "app.purge(PurgeTarget.ALL_CACHES)"
 	RunWait, %ComSpec% /c afterfx -s %script%, %directory%
 	WinMaximize, A
-	Return
+}
 
 ^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
 ^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter} ; make current solid comp size
@@ -748,9 +737,7 @@ XButton2:: Send, ^w
 
 ; FUSION
 #ifWinActive ahk_exe Fusion.exe
-^d::
-	Send, ^p
-	return
+^d:: Send, ^p
 
 
 
@@ -798,12 +785,12 @@ XButton1 & c:: Send, ^{/}
 ^Up:: Send, {Up 8}
 ^Down:: Send, {Down 8}
 
-^+n::
+^+n:: {
 	Send, ^+n
 	Sleep, 512
 	WinMaximize, A
 	Send, ^r
-	return
+}
 
 
 ; PYTHON
@@ -813,7 +800,7 @@ XButton1 & c:: Send, ^{/}
 ; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 ; 	Return
 
-XButton1 & d::
+XButton1 & d:: {
 	if RegExMatch(selected(), "\w")
 		Send, {End}{Space 2}
 	WinGetTitle, title, A
@@ -824,7 +811,7 @@ XButton1 & d::
 	else
 		Send, {#}
 	Send, {Space}TODO{Space}
-	Return
+}
 
 
 #ifWinActive

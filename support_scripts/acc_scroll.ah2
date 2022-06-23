@@ -1,4 +1,3 @@
-#NoEnv
 #SingleInstance Force
 #Persistent
 #NoTrayIcon
@@ -16,18 +15,18 @@ lines(x, thr, min, max, exp) {
 	return out
 }
 
-WheelDown::
+WheelDown:: {
 	diff := A_TickCount - last_down
 	n := lines(diff, thr, min, max, exp)
 	Send, {WheelDown %n%}
 	last_down := A_TickCount
 	; ToolTip, down`nd = %diff%`nn = %n%
-	return
+}
 
-WheelUp::
+WheelUp:: {
 	diff := A_TickCount - last_up
 	n := lines(diff, thr, min, max, exp)
 	Send, {WheelUp %n%}
 	last_up := A_TickCount
 	; ToolTip, up`nd = %diff%`nn = %n%
-	return
+}
