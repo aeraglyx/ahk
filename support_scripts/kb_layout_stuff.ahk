@@ -1,5 +1,7 @@
 ^+#!.:: Send, ...
 
+; ~w & y:: Send, {CtrlDown}s{CtrlUp}
+
 
 ; TODO rest of umlaut
 

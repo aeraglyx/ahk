@@ -10,10 +10,8 @@ SendMode Input
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
-; Run, support_scripts\colemak_dhm.ahk
 Run, support_scripts\acc_scroll.ahk
 Run, support_scripts\acc_mouse.ahk
-; Run, support_scripts\reminders.ahk
 
 #Include functions.ahk
 #Include support_scripts\kb_layout_stuff.ahk
@@ -31,6 +29,22 @@ l1() {
 l2() {
 	return GetKeyState("XButton2", "P")
 }
+
+
+
+
+^Volume_Down::
+	Loop, 20 {
+		Send, {Volume_Down}
+		Sleep, 64
+	}
+	Return
+^Volume_Up::
+	Loop, 20 {
+		Send, {Volume_Up}
+		Sleep, 64
+	}
+	Return
 
 
 
@@ -154,18 +168,18 @@ $*RButton::
 
 Left::
 PgUp::
-LButton::
+; LButton::
 	Send {Media_Prev}
 	Return
 
 Space::
-MButton::
+; MButton::
 	Send, {Media_Play_Pause}
 	Return
 
 Right::
 PgDn::
-RButton::
+; RButton::
 	Send {Media_Next}
 	Return
 
@@ -218,19 +232,19 @@ a::
 	Return
 
 ; FORCE MONO
-n::
-	Run, ms-settings:easeofaccess-audio
-	WinWaitActive, Settings
-	Send, #{Up}
-	Sleep, 64
-	BlockInput, On
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 366, 411, 1
-	Sleep, 64
-	WinClose, A
-	MouseMove, %x_orig%, %y_orig%
-	BlockInput, Off
-	Return
+; n::
+; 	Run, ms-settings:easeofaccess-audio
+; 	WinWaitActive, Settings
+; 	Send, #{Up}
+; 	Sleep, 64
+; 	BlockInput, On
+; 	MouseGetPos, x_orig, y_orig
+; 	MouseClick, Left, 366, 411, 1
+; 	Sleep, 64
+; 	WinClose, A
+; 	MouseMove, %x_orig%, %y_orig%
+; 	BlockInput, Off
+; 	Return
 
 
 ; WEBSITES
@@ -378,8 +392,6 @@ s::
 	Send, {Media_Play_Pause}
 	return
 
-c:: toggle("support_scripts\colemak_dhm.ahk")
-
 #if
 
 
@@ -406,16 +418,6 @@ c:: toggle("support_scripts\colemak_dhm.ahk")
 
 
 
-
-
-
-
-; KEYBOARD LAYOUT
-; ~LAlt Up::
-; 	if (A_PriorKey = "LShift"){
-; 		toggle("support_scripts\en_cs_hybrid.ahk")
-; 	}
-; 	Return
 
 
 

@@ -4,7 +4,8 @@
 #NoTrayIcon
 
 thr := 16 ; fastest scroll [ms]
-max := 8 ; max scroll
+max := 16 ; max scroll
+min :=  2 ; min scroll  ; TODO 
 exp := 16 ; spread, higher => bigger effect
 
 last_down := A_TickCount - 1000
