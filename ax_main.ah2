@@ -12,12 +12,14 @@ SendMode "Input"
 Run("support_scripts\acc_scroll.ah2")
 Run("support_scripts\acc_mouse.ah2")
 
-;#Include "functions.ah2"
+#Include "functions.ah2"
 #Include "support_scripts\kb_layout_stuff.ah2"
 #Include "*i secret.ah2"
 ; #Include spotify_search.ah2
 
 ^!+x::ExitApp
+
+SoundSetVolume 12.0
 
 
 
@@ -53,7 +55,8 @@ Volume_Up:: {
 		volume *= 1.25
 	}
 	SoundSetVolume volume
-	ToolTip round(volume, 2)
+	CoordMode "ToolTip", "Screen"
+	ToolTip round(volume, 2), 1280, 720
 	SetTimer () => ToolTip(), -750
 }
 
@@ -218,36 +221,38 @@ p:: Run "support_files\new_project.py"
 
 
 ; WEBSITES
-; g:: {
-; 	txt := selected()
-; 	If (txt = "") {
-; 		Run "https://www.google.com/"
-; 	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
-; 		Run %txt%
-; 	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
-; 		Run %txt%
-; 	} Else {
-; 		query("https://www.google.com/search?q=", txt)
-; 	}
-; }
+g:: {
+	txt := selected()
+	if (txt = "") {
+		Run "https://www.google.com/"
+	} else if RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
+		Run(txt)
+	} else if RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
+		Run(txt)
+	} else {
+		query("https://www.google.com/search?q=", txt)
+	}
+}
 
-; y:: {
-; 	txt := selected()
-; 	If (txt = "") {
-; 		Run "https://www.youtube.com/"
-; 		Sleep 2000
-; 		Send "{Tab 4}"
-; 	} Else {
-; 		query("https://www.youtube.com/results?search_query=", txt)
-; 	}      
-; }
+y:: {
+	txt := selected()
+	if (txt = "") {
+		Run "https://www.youtube.com/"
+		Sleep 2000
+		Send "{Tab 4}"
+	} else {
+		query("https://www.youtube.com/results?search_query=", txt)
+	}      
+}
 
 ; w:: {
-; 	to_solve := InputBox("WolframAlpha",,, 256, 128)
-; 	if !ErrorLevel {
+; 	to_solve := InputBox(,"WolframAlpha", "w256 h128")
+; 	; bad := ["OK", "Cancel", "Timeout"]
+; 	if !(to_solve = "OK" | to_solve = "Cancel" | to_solve = "Timeout") {
 ; 		query("https://www.wolframalpha.com/input/?i=", to_solve)
 ; 	}
 ; }
+
 
 
 
@@ -690,18 +695,21 @@ XButton1 & c:: Send "^{/}"
 ; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 ; 	Return
 
-; XButton1 & d:: {
-; 	if RegExMatch(selected(), "\w")
-; 		Send "{End}{Space 2}"
-; 	WinGetTitle &title, "A"
-; 	if InStr(title, ".ahk")
-; 		Send "{;}"
-; 	else if InStr(title, ".jsx") or InStr(title, ".dctl")
-; 		SendRaw "//"
-; 	else
-; 		Send "{#}"
-; 	Send "{Space}TODO{Space}"
-; }
+
+XButton1 & d:: {
+	if RegExMatch(selected(), "\w"){
+		Send("{End}{Space 2}")
+	}
+	title := WinGetTitle("A")
+	dict := Map("ahk", "{;}", "ah2", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
+	for ext in dict {
+		if InStr(title, "." . ext){
+			Send(dict[ext])
+		}
+		break
+	}
+	Send("{Space}TODO{Space}")
+}
 
 
 #HotIf

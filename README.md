@@ -10,12 +10,11 @@ This is the script that calls other sub-scripts and contains the most important 
 Some of the functionality:
 - Easier tab navigation (Chrome, VS Code)
 - Quick search on Google, Wolfram Alpha, YouTube, Spotify
-- ± 40 volume for switching between headphones and speakers
 - Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
 - Hotstrings for `≤`, `≥`, `≈`, `≠`, `±`
 - Reloading Blender and copying folders for addon development
-- Encoding current time to 5 characters and vice versa
+- Multiplicative volume control
 - Etc.
 
 
