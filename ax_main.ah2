@@ -31,24 +31,35 @@ l2() {
 	return GetKeyState("XButton2", "P")
 }
 
+; ^Volume_Down:: {
+; 	Loop 20 {
+; 		Send "{Volume_Down}"
+; 		Sleep 64
+; 	}
+; }
+; ^Volume_Up:: {
+; 	Loop 20 {
+; 		Send "{Volume_Up}"
+; 		Sleep 64
+; 	}
+; }
 
-
-
-^Volume_Down:: {
-	Loop 20 {
-		Send "{Volume_Down}"
-		Sleep 64
+Volume_Down::
+Volume_Up:: {
+	volume := SoundGetVolume()
+	if A_ThisHotkey = "Volume_Down" {
+		volume /= 1.25
+	} else {
+		volume *= 1.25
 	}
-}
-^Volume_Up:: {
-	Loop 20 {
-		Send "{Volume_Up}"
-		Sleep 64
-	}
+	SoundSetVolume volume
+	ToolTip round(volume, 2)
+	SetTimer () => ToolTip(), -750
 }
 
 
-
+^!WheelUp:: Send "^{Home}"
+^!WheelDown:: Send "^{End}"
 
 ; #`:: {
 ; 	MouseGetPos	&x_orig, &y_orig
@@ -89,38 +100,22 @@ l2() {
 
 
 
-
-
-
-
 #HotIf l1()
 
-; esc:: Reload
 r:: Reload
-; r::
-; 	WinGetTitle, title, A
-; 	if InStr(title, ".ahk")
-; 		Send, {CtrlDown}s{CtrlUp}
-; 	Reload
-
-
 q:: WinClose "A"
+t:: Send "^#{a}"
 
-t:: WinSetAlwaysOnTop -1, "A"
-
-
-
-; COLOR PICKER
 ; c:: toggle("support_scripts\color_picker.ahk")
-
-; MEASURE TOOL
 ; m:: toggle("support_scripts\measure.ahk")
 
-; SPOTIFY SEARCH
 s:: Run "support_scripts\spotify_search.ahk"
-
-; NEW PROJECT
 p:: Run "support_files\new_project.py"
+
+2:: Send "1.41421356237" ; sqrt(2)
+3:: Send "1.73205080757" ; sqrt(3)
+4:: Send "1.57079632679" ; tau / 4
+
 
 ; Numpad7:: {  ; duplicate display
 ; 	Send "#p"
@@ -137,8 +132,6 @@ p:: Run "support_files\new_project.py"
 ; 	Sleep 64
 ; 	Send "{Enter}{Escape}"
 ; }
-
-
 
 ; hold L click without holding it
 ; `:: {
@@ -166,27 +159,6 @@ p:: Run "support_files\new_project.py"
 
 
 
-; VOLUME & SOUND
-
-Left::
-PgUp:: {
-; LButton::
-	Send "{Media_Prev}"
-}
-Space:: {
-; MButton::
-	Send "{Media_Play_Pause}"
-}
-Right::
-PgDn:: {
-; RButton::
-	Send "{Media_Next}"
-}
-
-
-2:: Send "1.41421356237" ; sqrt(2)
-3:: Send "1.73205080757" ; sqrt(3)
-4:: Send "1.57079632679" ; tau / 4
 
 
 ; spaces to underscores
@@ -277,20 +249,6 @@ PgDn:: {
 ; 	}
 ; }
 
-Volume_Down:: {
-	; Send, {Volume_Down 20}
-	Loop 20 {
-		Send "{Volume_Down}"
-		Sleep 64
-	}
-}
-Volume_Up:: {
-	; Send, {Volume_Up 20}
-	Loop 20 {
-		Send "{Volume_Up}"
-		Sleep 64
-	}
-}
 
 
 ; BLENDER
@@ -342,17 +300,6 @@ Volume_Up:: {
 ; ; x:: Send, ^{/}
 
 ; #IfWinActive
-
-#HotIf
-
-
-
-
-
-^!WheelUp:: Send "^{Home}"
-^!WheelDown:: Send "^{End}"
-
-
 
 
 
@@ -636,22 +583,16 @@ Shift & RAlt::Up
 ; CHROME
 #HotIf WinActive("ahk_exe chrome.exe")
 
-; f:: MsgBox, chroooomeeeee
-
 F1:: Send "^+{Tab}"
 ; Moving tabs uses Rearrange Tabs:
 ; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
 ; XButton1 & F1:: Send, +!{Left}
 ; XButton2 & F1:: Send, +!{Down}
-
 F2:: Send "^w"
-
 F3:: Send "^{Tab}"
 ; XButton1 & F3:: Send, +!{Right}
 ; XButton2 & F3:: Send, +!{Up}
-
 F4:: Send "^t"
-
 XButton2:: Send "^w"
 
 
@@ -705,7 +646,6 @@ XButton2:: Send "^w"
 ; 	}
 ; 	return
 
-
 ; TODO then grab the node
 ; problem - zoom level - avg dist or find color or sth
 
@@ -713,14 +653,12 @@ XButton2:: Send "^w"
 ; !LButton:: Send, {Click}^+
 ; #If
 
-
 ; TODO node wrangler y to connect, shift+y to connect upwards
 ; !LButton::
 ; 	loop {
 ; 		MouseClick, Left
 ; 	}
 ; 	return
-
 
 
 
