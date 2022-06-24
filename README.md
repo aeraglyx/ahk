@@ -1,6 +1,6 @@
 # AutoHotkey Scripts
 
-My janky scripts for improved eFFiCieNcY. Made for v1.1.33, get AHK here - https://www.autohotkey.com/
+My janky scripts for improved eFFiCieNcY. Made for v2, get AHK here - https://www.autohotkey.com/
 
 
 ## Main Script `ax_main.ahk`

@@ -1,32 +1,34 @@
 #SingleInstance Force
-#Persistent
+Persistent
 #NoTrayIcon
 
+^!+x::ExitApp
+
 thr := 16 ; fastest scroll [ms]
-min :=  2 ; min scroll
-max := 12 ; max scroll
-exp := 32 ; spread, higher => bigger effect
+speed_min :=  2 ; min scroll speed
+speed_max := 12 ; max scroll speed
+shaping := 32 ; spread, higher => bigger effect
 
-last_down := A_TickCount - 1000
-last_up := last_down
+global last_down := A_TickCount - 1000
+global last_up := last_down
 
-lines(x, thr, min, max, exp) {
-	out := round((max - min) * exp((thr - x) / exp)) + min
+lines(x, thr, speed_min, speed_max, shaping) {
+	out := round((speed_max - speed_min) * exp((thr - x) / shaping)) + speed_min
 	return out
 }
 
 WheelDown:: {
 	diff := A_TickCount - last_down
-	n := lines(diff, thr, min, max, exp)
-	Send, {WheelDown %n%}
-	last_down := A_TickCount
-	; ToolTip, down`nd = %diff%`nn = %n%
+	n := lines(diff, thr, speed_min, speed_max, shaping)
+	Click "WheelDown", n
+	global last_down := A_TickCount
+	; ToolTip "down`nd = " . diff . "`nn = " . n
 }
 
 WheelUp:: {
 	diff := A_TickCount - last_up
-	n := lines(diff, thr, min, max, exp)
-	Send, {WheelUp %n%}
-	last_up := A_TickCount
-	; ToolTip, up`nd = %diff%`nn = %n%
+	n := lines(diff, thr, speed_min, speed_max, shaping)
+	Click "WheelUp", n
+	global last_up := A_TickCount
+	; ToolTip "up`nd = " . diff . "`nn = " . n
 }

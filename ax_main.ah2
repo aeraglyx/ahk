@@ -1,11 +1,11 @@
 ; run as admin, otherwise some of the functionality (eg. chrome hotkeys) won't work
 ; you'll need to have Python installed for some stuff
 
-SingleInstance Force
+#SingleInstance Force
 InstallKeybdHook
 Persistent
-KeyHistory(2)
-SendMode Input
+KeyHistory 2
+SendMode "Input"
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
@@ -16,6 +16,8 @@ Run("support_scripts\acc_mouse.ah2")
 #Include "support_scripts\kb_layout_stuff.ah2"
 #Include "*i secret.ah2"
 ; #Include spotify_search.ah2
+
+^!+x::ExitApp
 
 
 
@@ -34,13 +36,13 @@ l2() {
 
 ^Volume_Down:: {
 	Loop 20 {
-		Send {Volume_Down}
+		Send "{Volume_Down}"
 		Sleep 64
 	}
 }
 ^Volume_Up:: {
 	Loop 20 {
-		Send {Volume_Up}
+		Send "{Volume_Up}"
 		Sleep 64
 	}
 }
@@ -48,137 +50,137 @@ l2() {
 
 
 
-#`:: {
-	MouseGetPos	x_orig, y_orig
-}
+; #`:: {
+; 	MouseGetPos	&x_orig, &y_orig
+; }
 
-#` Up:: {
-	MouseGetPos x_new, y_new
-	x_diff := x_new - x_orig
-	y_diff := y_new - y_orig
-	MouseMove x_orig, y_orig
-	if (max(abs(x_diff), abs(y_diff)) > 64) {
-		if (abs(x_diff) > abs(y_diff)) {
-			; horizontal
-			if (x_diff < 0) {
-				; left
-				Run "X:\projects"
-				WinActivate projects
-				; MsgBox, left
-			} else {
-				; right
-				chrome_new_tab()
-			}
-		} else {
-			;vertical
-			if (y_diff < 0) {
-				; up
-				Run "X:\UTB"
-				WinActivate UTB
-			} else {
-				; down
-				Run "X:\assets"
-				WinActivate assets
-			}
-		}
-	}
-}
-
-
+; #` Up:: {
+; 	MouseGetPos &x_new, &y_new
+; 	x_diff := x_new - x_orig
+; 	y_diff := y_new - y_orig
+; 	MouseMove x_orig, y_orig
+; 	if (max(abs(x_diff), abs(y_diff)) > 64) {
+; 		if (abs(x_diff) > abs(y_diff)) {
+; 			; horizontal
+; 			if (x_diff < 0) {
+; 				; left
+; 				Run "X:\projects"
+; 				WinActivate "projects"
+; 				; MsgBox, left
+; 			} else {
+; 				; right
+; 				; chrome_new_tab()
+; 			}
+; 		} else {
+; 			;vertical
+; 			if (y_diff < 0) {
+; 				; up
+; 				Run "X:\UTB"
+; 				WinActivate "UTB"
+; 			} else {
+; 				; down
+; 				Run "X:\assets"
+; 				WinActivate "assets"
+; 			}
+; 		}
+; 	}
+; }
 
 
 
 
 
 
-if l1() {
-
-	; esc:: Reload
-	r:: Reload
-	; r::
-	; 	WinGetTitle, title, A
-	; 	if InStr(title, ".ahk")
-	; 		Send, {CtrlDown}s{CtrlUp}
-	; 	Reload
 
 
-	q:: WinClose A
+#HotIf l1()
 
-	t:: Winset AlwaysOnTop, Toggle, A
+; esc:: Reload
+r:: Reload
+; r::
+; 	WinGetTitle, title, A
+; 	if InStr(title, ".ahk")
+; 		Send, {CtrlDown}s{CtrlUp}
+; 	Reload
 
 
+q:: WinClose "A"
 
-	; COLOR PICKER
-	c:: toggle("support_scripts\color_picker.ahk")
-
-	; MEASURE TOOL
-	m:: toggle("support_scripts\measure.ahk")
-
-	; SPOTIFY SEARCH
-	s:: Run "support_scripts\spotify_search.ahk"
-
-	; NEW PROJECT
-	p:: Run "support_files\new_project.py"
-
-	Numpad7:: {  ; duplicate display
-		Send "#p"
-		Sleep 64
-		Send {Home}{Down}
-		Sleep 64
-		Send {Enter}{Escape}
-	}
-
-	Numpad9:: {  ; extend display
-		Send "#p"
-		Sleep 64
-		Send {Home}{Down 2}
-		Sleep 64
-		Send {Enter}{Escape}
-	}
+t:: WinSetAlwaysOnTop -1, "A"
 
 
 
-	; hold L click without holding it
-	`:: {
-		MouseGetPos x_orig, y_orig
-		Click Down
-		mouse_pressed := True
-	}
-}
-if mouse_pressed {
-	$LButton:: {
-		Click Up
-		mouse_pressed := False
-	}
-	$*Esc::`
-	$*RButton:: {
-		MouseGetPos x_new, y_new
-		MouseMove %x_orig%, %y_orig%, 0
-		Click Up
-		MouseMove %x_new%, %y_new%, 0
-		mouse_pressed := False
-	}
-}
+; COLOR PICKER
+; c:: toggle("support_scripts\color_picker.ahk")
+
+; MEASURE TOOL
+; m:: toggle("support_scripts\measure.ahk")
+
+; SPOTIFY SEARCH
+s:: Run "support_scripts\spotify_search.ahk"
+
+; NEW PROJECT
+p:: Run "support_files\new_project.py"
+
+; Numpad7:: {  ; duplicate display
+; 	Send "#p"
+; 	Sleep 64
+; 	Send "{Home}{Down}"
+; 	Sleep 64
+; 	Send "{Enter}{Escape}"
+; }
+
+; Numpad9:: {  ; extend display
+; 	Send "#p"
+; 	Sleep 64
+; 	Send "{Home}{Down 2}"
+; 	Sleep 64
+; 	Send "{Enter}{Escape}"
+; }
+
+
+
+; hold L click without holding it
+; `:: {
+; 	MouseGetPos &x_orig, &y_orig
+; 	Click "Down"
+; 	mouse_pressed := True
+; }
+
+; if mouse_pressed {
+; 	$LButton:: {
+; 		Click "Up"
+; 		mouse_pressed := False
+; 	}
+; 	$*Esc::`
+; 	$*RButton:: {
+; 		MouseGetPos &x_new, &y_new
+; 		MouseMove x_orig, y_orig, 0
+; 		Click "Up"
+; 		MouseMove x_new, y_new, 0
+; 		mouse_pressed := False
+; 	}
+; }
 ; #ifWinActive  ; why?
 
 
 
-if l1() {
+
 ; VOLUME & SOUND
 
 Left::
 PgUp:: {
 ; LButton::
-	Send {Media_Prev}
+	Send "{Media_Prev}"
 }
 Space:: {
 ; MButton::
-	Send {Media_Play_Pause}
+	Send "{Media_Play_Pause}"
 }
 Right::
 PgDn:: {
 ; RButton::
-	Send {Media_Next}
+	Send "{Media_Next}"
 }
 
 
@@ -189,43 +191,43 @@ PgDn:: {
 
 ; spaces to underscores
 ; TODO other way around?
-u:: {
-	txt := selected()
-	txt := StrReplace(txt, " ", "_")
-	len := StrLen(txt)
-	Send %txt%{ShiftDown}{Left %len%}{ShiftUp}
-}
+; u:: {
+; 	txt := selected()
+; 	txt := StrReplace(txt, " ", "_")
+; 	len := StrLen(txt)
+; 	Send %txt%{ShiftDown}{Left %len%}{ShiftUp}
+; }
 
 ; NIGHT LIGHT
-^+!e::
-e:: {
-	Run ms-settings:nightlight
-	WinWaitActive Settings
-	Send "#{Up}"
-	Sleep 128
-	BlockInput On
-	MouseGetPos x_orig, y_orig
-	MouseClick Left, 53, 206, 1
-	Sleep 32
-	MouseMove %x_orig%, %y_orig%
-	WinClose A
-	BlockInput Off
-}
+; ^+!e::
+; e:: {
+; 	Run "ms-settings:nightlight"
+; 	WinWaitActive "Settings"
+; 	Send "#{Up}"
+; 	Sleep 128
+; 	BlockInput true
+; 	MouseGetPos &x_orig, &y_orig
+; 	MouseClick "Left", 53, 206, 1
+; 	Sleep 32
+; 	MouseMove x_orig, y_orig
+; 	WinClose "A"
+; 	BlockInput false
+; }
 
 ; FOCUS ASSIST
-assist := false
-a:: {
-	SendInput "#{b}{Left}{AppsKey}{Down}{Down}{Right}"
-	if (assist = false) {
-		SendInput "{Up}"
-		assist := true
-	} else {
-		assist := false
-	}
-	SendInput "{Enter}"
-	Sleep 256
-	SendInput "{Escape}"
-}
+; assist := false
+; a:: {
+; 	SendInput "#{b}{Left}{AppsKey}{Down}{Down}{Right}"
+; 	if (assist = false) {
+; 		SendInput "{Up}"
+; 		assist := true
+; 	} else {
+; 		assist := false
+; 	}
+; 	SendInput "{Enter}"
+; 	Sleep 256
+; 	SendInput "{Escape}"
+; }
 
 ; FORCE MONO
 ; n::
@@ -244,52 +246,52 @@ a:: {
 
 
 ; WEBSITES
-g:: {
-	txt := selected()
-	If (txt = "") {
-		Run "https://www.google.com/"
-	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
-		Run %txt%
-	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
-		Run %txt%
-	} Else {
-		query("https://www.google.com/search?q=", txt)
-	}
-}
+; g:: {
+; 	txt := selected()
+; 	If (txt = "") {
+; 		Run "https://www.google.com/"
+; 	} Else If RegExMatch(txt, "^[a-zA-Z]:\\[\\\S|*\S]?.*$") {
+; 		Run %txt%
+; 	} Else If RegExMatch(txt, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$") {
+; 		Run %txt%
+; 	} Else {
+; 		query("https://www.google.com/search?q=", txt)
+; 	}
+; }
 
-y:: {
-	txt := selected()
-	If (txt = "") {
-		Run "https://www.youtube.com/"
-		Sleep 2000
-		Send {Tab 4}
-	} Else {
-		query("https://www.youtube.com/results?search_query=", txt)
-	}      
-}
+; y:: {
+; 	txt := selected()
+; 	If (txt = "") {
+; 		Run "https://www.youtube.com/"
+; 		Sleep 2000
+; 		Send "{Tab 4}"
+; 	} Else {
+; 		query("https://www.youtube.com/results?search_query=", txt)
+; 	}      
+; }
 
-w:: {
-	to_solve := InputBox("WolframAlpha",,, 256, 128)
-	if !ErrorLevel {
-		query("https://www.wolframalpha.com/input/?i=", to_solve)
-	}
-}
+; w:: {
+; 	to_solve := InputBox("WolframAlpha",,, 256, 128)
+; 	if !ErrorLevel {
+; 		query("https://www.wolframalpha.com/input/?i=", to_solve)
+; 	}
+; }
 
 Volume_Down:: {
 	; Send, {Volume_Down 20}
 	Loop 20 {
-		Send {Volume_Down}
+		Send "{Volume_Down}"
 		Sleep 64
 	}
 }
 Volume_Up:: {
 	; Send, {Volume_Up 20}
 	Loop 20 {
-		Send {Volume_Up}
+		Send "{Volume_Up}"
 		Sleep 64
 	}
 }
-}
+
 
 ; BLENDER
 ; Copy over addons and restart Blender
@@ -341,97 +343,57 @@ Volume_Up:: {
 
 ; #IfWinActive
 
+#HotIf
 
 
 
 
 
+^!WheelUp:: Send "^{Home}"
+^!WheelDown:: Send "^{End}"
 
 
 
 
 
+#HotIf l2()
 
+; t:: {
+; 	Loop, %windows% {
+; 		this_id := "ahk_id " . windows%A_Index%
+; 		Winset, AlwaysOnTop, Off, %this_id%
+; 	}
+; 	WinGet, win_state, MinMax, A
+; 	WinMaximize, A  ; sort of twice, because the windows remained on top
+; 	WinRestore, A
+; 	if (win_state = 1) {  ; if it was maximized
+; 		WinMaximize, A
+; 	}
+; }
 
-^!WheelUp:: Send, ^{Home}
-^!WheelDown:: Send, ^{End}
+; 2:: Send "0.70710678118" ; sqrt(2) / 2
+; 3:: Send "0.86602540378" ; sqrt(3) / 2
+; 4:: Send "0.78539816339" ; tau / 8
 
+; s:: {
+; 	Send "{Media_Play_Pause}"
+; 	Sleep 64
+; 	Send "{Media_Play_Pause}"
+; }
 
+; Left:: {
+; 	WinGet prev_pid, PID, A
+; 	WinActivate ahk_exe Spotify.exe
+; 	Send "+{Left 6}"
+; 	WinActivate ahk_pid %prev_pid%
+; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-if l2() {
-
-	t:: {
-		Loop, %windows% {
-			this_id := "ahk_id " . windows%A_Index%
-			Winset, AlwaysOnTop, Off, %this_id%
-		}
-		WinGet, win_state, MinMax, A
-		WinMaximize, A  ; sort of twice, because the windows remained on top
-		WinRestore, A
-		if (win_state = 1) {  ; if it was maximized
-			WinMaximize, A
-		}
-	}
-
-	2:: Send, 0.70710678118 ; sqrt(2) / 2
-	3:: Send, 0.86602540378 ; sqrt(3) / 2
-	4:: Send, 0.78539816339 ; tau / 8
-
-	s:: {
-		Send, {Media_Play_Pause}
-		Sleep, 64
-		Send, {Media_Play_Pause}
-	}
-
-	Left:: {
-		WinGet, prev_pid, PID, A
-		WinActivate, ahk_exe Spotify.exe
-		Send, +{Left 6}
-		WinActivate, ahk_pid %prev_pid%
-	}
-
-	Right:: {
-		WinGet, prev_pid, PID, A
-		WinActivate, ahk_exe Spotify.exe
-		Send, +{Right 6}
-		WinActivate, ahk_pid %prev_pid%
-	}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+; Right:: {
+; 	WinGet prev_pid, PID, A
+; 	WinActivate ahk_exe Spotify.exe
+; 	Send "+{Right 6}"
+; 	WinActivate ahk_pid %prev_pid%
+; }
 
 
 
@@ -499,11 +461,6 @@ if l2() {
 ; 	Return
 
 
-
-
-
-
-
 ; XButton1 & F6::
 ; 	MouseGetPos, x_orig, y_orig
 ; 	MouseClick, Left, 19, 53, 1
@@ -511,10 +468,7 @@ if l2() {
 ; 	; MouseMove, %x_orig%, %y_orig%, 0
 ; 	Return
 
-
-
-
-
+#HotIf
 
 
 
@@ -526,8 +480,8 @@ if l2() {
 ; NUMBERS - Maybe only in Blender?
 
 ; SYMBOLS
-+!<:: Send, {U+2264}	; ≤
-+!>:: Send, {U+2265}	; ≥
++!<:: Send "{U+2264}"	; ≤
++!>:: Send "{U+2265}"	; ≥
 ::approx::{U+2248}		; ≈
 ::noteq::{U+2260}		; ≠
 ::+-::{U+00B1}			; ±
@@ -538,10 +492,10 @@ if l2() {
 :*o:upar::{U+2191}		; ↑
 :*o:downar::{U+2193}	; ↓
 
-!Numpad4:: Send, {U+2190}  ; ←
-!Numpad6:: Send, {U+2192}  ; →
-!Numpad8:: Send, {U+2191}  ; ↑
-!Numpad2:: Send, {U+2193}  ; ↓
+!Numpad4:: Send "{U+2190}"  ; ←
+!Numpad6:: Send "{U+2192}"  ; →
+!Numpad8:: Send "{U+2191}"  ; ↑
+!Numpad2:: Send "{U+2193}"  ; ↓
 
 :*o:/epsilon::{U+03B5}	; ε
 ; LATEX
@@ -596,39 +550,37 @@ Shift & RAlt::Up
 
 
 
-
-
 ; AFTER EFFECTS
-#ifWinActive ahk_exe AfterFX.exe
+#HotIf WinActive("ahk_exe AfterFX.exe")
 
-fx_console(effect){
-	Send, {LControl down}
-	Sleep, 128
-	Send, {Space down}
-	Sleep, 128
-	Send, {LControl up}
-	Sleep, 128
-	Send, {Space up}
-	Sleep, 256
-	Send, %effect%
-	Sleep, 256
-	Send, {Enter}
-	Sleep, 256
-}
+; fx_console(effect){
+; 	Send "{LControl down}"
+; 	Sleep 128
+; 	Send "{Space down}"
+; 	Sleep 128
+; 	Send "{LControl up}"
+; 	Sleep 128
+; 	Send "{Space up}"
+; 	Sleep 256
+; 	Send effect
+; 	Sleep 256
+; 	Send "{Enter}"
+; 	Sleep 256
+; }
 
-fx_subroutine(name, effect){
-	Send, ^!y
-	Send, {Enter}%name%{Enter}
-	fx_console(effect)
-	MouseClick, Middle, 1700, 1200,, 1
-}
+; fx_subroutine(name, effect){
+; 	Send "^!y"
+; 	Send "{Enter}%name%{Enter}"
+; 	fx_console(effect)
+; 	MouseClick "Middle", 1700, 1200,, 1
+; }
 
-run_ae_script(script){
-	ae_dir := "C:\Program Files\Adobe\Adobe After Effects 2022\Support Files"  ; XXX current AE version
-	script_dir := A_ScriptDir . "\support_files\" . script
-	RunWait, %ComSpec% /c afterfx -r %script_dir%, %ae_dir%
-	WinMaximize, A
-}
+; run_ae_script(script){
+; 	ae_dir := "C:\Program Files\Adobe\Adobe After Effects 2022\Support Files"  ; XXX current AE version
+; 	script_dir := A_ScriptDir . "\support_files\" . script
+; 	RunWait %ComSpec% /c afterfx -r %script_dir%, %ae_dir%
+; 	WinMaximize "A"
+; }
 
 ; XButton1 & n::
 ; 	run_ae_script("ae_process.jsx")
@@ -653,27 +605,27 @@ run_ae_script(script){
 ; 	Return
 
 ; Reload footage
-XButton2 & `:: {  ; TODO change hotkey + AE script
-	BlockInput, On
-	MouseClick, Right
-	MouseGetPos, x_orig, y_orig
-	MouseClick, Left, 42, 190,, 1,, R
-	MouseMove, %x_orig%, %y_orig%
-	BlockInput, Off
-}
+; XButton2 & `:: {  ; TODO change hotkey + AE script
+; 	BlockInput "On"
+; 	MouseClick "Right"
+; 	MouseGetPos x_orig, y_orig
+; 	MouseClick "Left", 42, 190,, 1,, R
+; 	MouseMove %x_orig%, %y_orig%
+; 	BlockInput "Off"
+; }
 
 ; Clear cache
-XButton2 & p:: {
-	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
-	script := "app.purge(PurgeTarget.ALL_CACHES)"
-	RunWait, %ComSpec% /c afterfx -s %script%, %directory%
-	WinMaximize, A
-}
+; XButton2 & p:: {
+; 	directory := "C:\Program Files\Adobe\Adobe After Effects 2021\Support Files"
+; 	script := "app.purge(PurgeTarget.ALL_CACHES)"
+; 	RunWait %ComSpec% /c afterfx -s %script%, %directory%
+; 	WinMaximize A
+; }
 
-^y:: Send, ^y{Tab 6}{Enter}{Tab 4} ; force new solids to have comp size
-^+y:: Send, ^+y{Tab 6}{Enter}{Tab 3}{Enter} ; make current solid comp size
+^y:: Send "^y{Tab 6}{Enter}{Tab 4}" ; force new solids to have comp size
+^+y:: Send "^+y{Tab 6}{Enter}{Tab 3}{Enter}" ; make current solid comp size
 
-!+z:: Send, ^+h  ; overlay toggle
+!+z:: Send "^+h"  ; overlay toggle
 
 ; PREMIERE PRO
 ; #ifWinActive ahk_exe Adobe Premiere Pro.exe
@@ -682,25 +634,25 @@ XButton2 & p:: {
 
 
 ; CHROME
-#ifWinActive ahk_exe chrome.exe
+#HotIf WinActive("ahk_exe chrome.exe")
 
 ; f:: MsgBox, chroooomeeeee
 
-F1:: Send, ^+{Tab}
+F1:: Send "^+{Tab}"
 ; Moving tabs uses Rearrange Tabs:
 ; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
 ; XButton1 & F1:: Send, +!{Left}
 ; XButton2 & F1:: Send, +!{Down}
 
-F2:: Send, ^w
+F2:: Send "^w"
 
-F3:: Send, ^{Tab}
+F3:: Send "^{Tab}"
 ; XButton1 & F3:: Send, +!{Right}
 ; XButton2 & F3:: Send, +!{Up}
 
-F4:: Send, ^t
+F4:: Send "^t"
 
-XButton2:: Send, ^w
+XButton2:: Send "^w"
 
 
 
@@ -736,13 +688,13 @@ XButton2:: Send, ^w
 
 
 ; FUSION
-#ifWinActive ahk_exe Fusion.exe
-^d:: Send, ^p
+; #ifWinActive ahk_exe Fusion.exe
+; ^d:: Send, ^p
 
 
 
 ; NUKE
-#ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
+; #ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
 
 ; Space::
 ; 	CoordMode, Mouse, Client
@@ -757,9 +709,9 @@ XButton2:: Send, ^w
 ; TODO then grab the node
 ; problem - zoom level - avg dist or find color or sth
 
-#If in_range_abs(50, 1930, 800, 1350)
-!LButton:: Send, {Click}^+
-#If
+; #If in_range_abs(50, 1930, 800, 1350)
+; !LButton:: Send, {Click}^+
+; #If
 
 
 ; TODO node wrangler y to connect, shift+y to connect upwards
@@ -774,22 +726,22 @@ XButton2:: Send, ^w
 
 
 ; VS CODE
-#ifWinActive ahk_exe Code.exe
+#HotIf WinActive("ahk_exe Code.exe")
 
-F1:: Send, ^{PgUp}
+F1:: Send "^{PgUp}"
 ; F2:: Send, ^w
-F3:: Send, ^{PgDn}
-F4:: Send, ^n
-XButton1 & c:: Send, ^{/}
+F3:: Send "^{PgDn}"
+F4:: Send "^n"
+XButton1 & c:: Send "^{/}"
 
-^Up:: Send, {Up 8}
-^Down:: Send, {Down 8}
+^Up:: Send "{Up 8}"
+^Down:: Send "{Down 8}"
 
 ^+n:: {
-	Send, ^+n
-	Sleep, 512
-	WinMaximize, A
-	Send, ^r
+	Send "^+n"
+	Sleep 512
+	WinMaximize "A"
+	Send "^r"
 }
 
 
@@ -800,29 +752,29 @@ XButton1 & c:: Send, ^{/}
 ; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
 ; 	Return
 
-XButton1 & d:: {
-	if RegExMatch(selected(), "\w")
-		Send, {End}{Space 2}
-	WinGetTitle, title, A
-	if InStr(title, ".ahk")
-		Send, {;}
-	else if InStr(title, ".jsx") or InStr(title, ".dctl")
-		SendRaw, //
-	else
-		Send, {#}
-	Send, {Space}TODO{Space}
-}
+; XButton1 & d:: {
+; 	if RegExMatch(selected(), "\w")
+; 		Send "{End}{Space 2}"
+; 	WinGetTitle &title, "A"
+; 	if InStr(title, ".ahk")
+; 		Send "{;}"
+; 	else if InStr(title, ".jsx") or InStr(title, ".dctl")
+; 		SendRaw "//"
+; 	else
+; 		Send "{#}"
+; 	Send "{Space}TODO{Space}"
+; }
 
 
-#ifWinActive
+#HotIf
 
 
 
 
 
-#ifWinActive ahk_exe blender.exe
+; #ifWinActive ahk_exe blender.exe
 
-:*:fdfd::D.materials['Material'].node_tree.nodes.active.
-; XButton1 & x:: Send, ^{/}
+; :*:fdfd::D.materials['Material'].node_tree.nodes.active.
+; ; XButton1 & x:: Send, ^{/}
 
-#IfWinActive
+; #HotIf
