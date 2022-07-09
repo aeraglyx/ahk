@@ -56,7 +56,7 @@ Volume_Up:: {
 	}
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
-	ToolTip round(volume, 2), 1280, 720
+	ToolTip round(volume, 2), 64, 128
 	SetTimer () => ToolTip(), -750
 }
 
