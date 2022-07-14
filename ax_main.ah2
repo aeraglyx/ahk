@@ -24,10 +24,10 @@ SoundSetVolume 12.5
 
 
 
-^!+t:: switch_to("chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-^!+s:: switch_to("Code")
-^!+r:: switch_to("Spotify")
-^!+f:: switch_to("blender", newest_blender())
+XButton2 & t:: switch_to("chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+XButton2 & c:: switch_to("Code", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+XButton2 & s:: switch_to("Spotify", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+XButton2 & f:: switch_to("blender", newest_blender())
 
 
 
@@ -116,12 +116,12 @@ t:: Send "^#{a}"
 ; c:: toggle("support_scripts\color_picker.ahk")
 ; m:: toggle("support_scripts\measure.ahk")
 
-s:: Run "support_scripts\spotify_search.ahk"
+; s:: Run "support_scripts\spotify_search.ah2"
 p:: Run "support_files\new_project.py"
 
-2:: Send "1.41421356237" ; sqrt(2)
-3:: Send "1.73205080757" ; sqrt(3)
-4:: Send "1.57079632679" ; tau / 4
+; 2:: Send "1.41421356237" ; sqrt(2)
+; 3:: Send "1.73205080757" ; sqrt(3)
+; 4:: Send "1.57079632679" ; tau / 4
 
 
 ; Numpad7:: {  ; duplicate display
@@ -264,15 +264,11 @@ y:: {
 ; Copy over addons and restart Blender
 
 F5:: {
-
 	git := "X:\git"
 	addons := ["fulcrum"]
-
 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]
-	
 	ProcessClose "blender.exe"
-
 	for version in versions {
 		for addon in addons {
 			src := git . "\" . addon
@@ -280,20 +276,7 @@ F5:: {
 			DirCopy src, dst, 1
 		}
 	}
-
-	; bl_folder := "X:\software\Blender\daily"
-	; newest_time := 0
-	; Loop Files, bl_folder "\*.*", "D" {
-	; 	bl_time := A_LoopFileTimeCreated
-	; 	if (bl_time > newest_time) {
-	; 		newest_time := bl_time
-	; 		newest_blender := A_LoopFileFullPath
-	; 	}
-	; }
-	; newest_blender := newest_blender . "\blender.exe"
-	; newest_blender := newest_blender()
 	Run newest_blender()
-
 }
 
 
@@ -323,12 +306,6 @@ F5:: {
 ; 2:: Send "0.70710678118" ; sqrt(2) / 2
 ; 3:: Send "0.86602540378" ; sqrt(3) / 2
 ; 4:: Send "0.78539816339" ; tau / 8
-
-; s:: {
-; 	Send "{Media_Play_Pause}"
-; 	Sleep 64
-; 	Send "{Media_Play_Pause}"
-; }
 
 ; Left:: {
 ; 	WinGet prev_pid, PID, A
@@ -502,6 +479,11 @@ Shift & RAlt::Up
 ; AFTER EFFECTS
 #HotIf WinActive("ahk_exe AfterFX.exe")
 
+^y:: Send "^y{Tab 6}{Enter}{Tab 4}" ; force new solids to have comp size
+^+y:: Send "^+y{Tab 6}{Enter}{Tab 3}{Enter}" ; make current solid comp size
+
+!+z:: Send "^+h"  ; overlay toggle
+
 ; fx_console(effect){
 ; 	Send "{LControl down}"
 ; 	Sleep 128
@@ -571,14 +553,6 @@ Shift & RAlt::Up
 ; 	WinMaximize A
 ; }
 
-^y:: Send "^y{Tab 6}{Enter}{Tab 4}" ; force new solids to have comp size
-^+y:: Send "^+y{Tab 6}{Enter}{Tab 3}{Enter}" ; make current solid comp size
-
-!+z:: Send "^+h"  ; overlay toggle
-
-; PREMIERE PRO
-; #ifWinActive ahk_exe Adobe Premiere Pro.exe
-
 
 
 
@@ -588,14 +562,10 @@ Shift & RAlt::Up
 F1:: Send "^+{Tab}"
 ; Moving tabs uses Rearrange Tabs:
 ; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
-; XButton1 & F1:: Send, +!{Left}
-; XButton2 & F1:: Send, +!{Down}
 F2:: Send "^w"
 F3:: Send "^{Tab}"
-; XButton1 & F3:: Send, +!{Right}
-; XButton2 & F3:: Send, +!{Up}
 F4:: Send "^t"
-XButton2:: Send "^w"
+; XButton2:: Send "^w"
 
 
 
@@ -623,21 +593,39 @@ XButton2:: Send "^w"
 
 
 
-; RESOLVE  ; TODO how to know which tab I'm in?
-; #ifWinActive ahk_exe Resolve.exe
-; ^d::
-; 	Send, ^p
-; 	return
+; ; RESOLVE  ; TODO how to know which tab I'm in?
+; #HotIf WinActive("ahk_exe Resolve.exe")
+; ^d:: Send "^p"
 
-
-; FUSION
-; #ifWinActive ahk_exe Fusion.exe
-; ^d:: Send, ^p
+; ; FUSION
+; #HotIf WinActive("ahk_exe Fusion.exe")
+; ^d:: Send "^p"
 
 
 
 ; NUKE
-; #ifWinActive ahk_exe Nuke13.0.exe  ; XXX version
+#HotIf WinActive("ahk_exe Nuke13.2.exe")  ; XXX version
+
+y1 := 0
+y2 := 0
+
+!RButton:: {
+	CoordMode "Mouse", "Screen"
+	BlockInput "On"
+	MouseGetPos , &y1
+	Send "{Click}"
+	BlockInput "Off"
+}
+!RButton UP:: {
+	CoordMode "Mouse", "Screen"
+	MouseGetPos , &y2
+	Send "+{Click}"
+	if (y2 > y1) {
+		Send "+y"
+	} else {
+		Send "y"
+	}
+}
 
 ; Space::
 ; 	CoordMode, Mouse, Client
@@ -653,14 +641,6 @@ XButton2:: Send "^w"
 
 ; #If in_range_abs(50, 1930, 800, 1350)
 ; !LButton:: Send, {Click}^+
-; #If
-
-; TODO node wrangler y to connect, shift+y to connect upwards
-; !LButton::
-; 	loop {
-; 		MouseClick, Left
-; 	}
-; 	return
 
 
 
