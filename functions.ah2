@@ -3,6 +3,88 @@ E :=  2.71828182846
 PI := 3.14159265359
 TAU := 6.28318530718
 
+url_encode(txt) {
+	chars := Map("!", "%21"
+		,"#", "%23"
+		,"$", "%24"
+		,"&", "%26"
+		,"'", "%27"
+		,"(", "%28"
+		,")", "%29"
+		,"*", "%2A"
+		,"+", "%2B"
+		,",", "%2C"
+		,"/", "%2F"
+		,":", "%3A"
+		,";", "%3B"
+		,"=", "%3D"
+		,"?", "%3F"
+		,"@", "%40"
+		,"[", "%5B"
+		,"]", "%5D") ; ,"%", "%25"
+	for key, value in chars {
+		txt := StrReplace(txt, key, value)
+	}
+	txt := StrReplace(txt, "`r`n", " ")
+	return txt
+}
+
+query(site, txt) {
+	txt := url_encode(txt)
+	url := site . txt
+	Run(url)
+}
+
+selected() {
+	clipboard_prev := A_Clipboard
+	A_Clipboard := ""
+	SendInput "^{c}"
+	ClipWait 1
+	Sleep 64
+	out := A_Clipboard
+	A_Clipboard := clipboard_prev
+	return out
+}
+
+toggle(app) {
+	DetectHiddenWindows "On"
+	SetTitleMatchMode 2
+	if WinExist(app) {
+		WinClose app
+	} else {
+		Run app
+	}
+}
+
+switch_to(name, exe:="") {
+	SetTitleMatchMode 2
+	title := "ahk_exe " . name . ".exe"
+	if !WinExist(title) {
+		if (exe = "") {
+			MsgBox "No .exe file specified."
+		} else {
+			Run exe
+			WinWait title
+		}
+	}
+	WinActivate title
+	WinWaitActive title
+}
+
+newest_blender() {
+	bl_folder := "X:\software\Blender\daily"
+	newest_time := 0
+	Loop Files, bl_folder "\*.*", "D" {
+		bl_time := A_LoopFileTimeCreated
+		if (bl_time > newest_time) {
+			newest_time := bl_time
+			newest_blender := A_LoopFileFullPath
+		}
+	}
+	newest_blender := newest_blender . "\blender.exe"
+	return newest_blender
+}
+
 ; MATHS
 ; sign(x) {
 ; 	return (x > 0) ? 1 : (x < 0) ? -1 : 0
@@ -65,59 +147,6 @@ TAU := 6.28318530718
 ; 	Return x
 ; }
 ; 
-url_encode(txt) {
-	chars := Map("!", "%21"
-		,"#", "%23"
-		,"$", "%24"
-		,"&", "%26"
-		,"'", "%27"
-		,"(", "%28"
-		,")", "%29"
-		,"*", "%2A"
-		,"+", "%2B"
-		,",", "%2C"
-		,"/", "%2F"
-		,":", "%3A"
-		,";", "%3B"
-		,"=", "%3D"
-		,"?", "%3F"
-		,"@", "%40"
-		,"[", "%5B"
-		,"]", "%5D") ; ,"%", "%25"
-	for key, value in chars {
-		txt := StrReplace(txt, key, value)
-	}
-	txt := StrReplace(txt, "`r`n", " ")
-	return txt
-}
-; 
-query(site, txt) {
-	txt := url_encode(txt)
-	url := site . txt
-	Run(url)
-}
-
-selected() {
-	clipboard_prev := A_Clipboard
-	A_Clipboard := ""
-	SendInput "^{c}"
-	ClipWait 1
-	Sleep 64
-	out := A_Clipboard
-	A_Clipboard := clipboard_prev
-	return out
-}
-
-toggle(app) {
-	DetectHiddenWindows "On"
-	SetTitleMatchMode 2
-	if WinExist(app) {
-		WinClose app
-	} else {
-		Run app
-	}
-}
-
 ; in_range_factor(x1, x2, y1, y2){
 ; 	MouseGetPos, mouse_x, mouse_y
 ; 	WinGetPos,,, w, h, A

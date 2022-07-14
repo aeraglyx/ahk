@@ -17,9 +17,18 @@ Run("support_scripts\acc_mouse.ah2")
 #Include "*i secret.ah2"
 ; #Include spotify_search.ah2
 
-^!+x::ExitApp
+^!+x:: ExitApp
 
-SoundSetVolume 12.0
+SoundSetVolume 12.5
+
+
+
+
+^!+t:: switch_to("chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+^!+s:: switch_to("Code")
+^!+r:: switch_to("Spotify")
+^!+f:: switch_to("blender", newest_blender())
+
 
 
 
@@ -39,25 +48,20 @@ l2() {
 ; 		Sleep 64
 ; 	}
 ; }
-; ^Volume_Up:: {
-; 	Loop 20 {
-; 		Send "{Volume_Up}"
-; 		Sleep 64
-; 	}
-; }
 
 Volume_Down::
 Volume_Up:: {
 	volume := SoundGetVolume()
+	ratio := 1.25992105  ; 2^(1/n) means n strokes for doubling
 	if A_ThisHotkey = "Volume_Down" {
-		volume /= 1.25
+		volume /= ratio
 	} else {
-		volume *= 1.25
+		volume *= ratio
 	}
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
 	ToolTip round(volume, 2), 64, 128
-	SetTimer () => ToolTip(), -750
+	SetTimer () => ToolTip(), -1000
 }
 
 
@@ -258,46 +262,39 @@ y:: {
 
 ; BLENDER
 ; Copy over addons and restart Blender
-; #ifWinActive ahk_exe blender.exe
 
-; F5:: {
+F5:: {
 
-; 	git := "X:\Aeraglyx\Git"
-; 	addons := ["fulcrum", "bbp_tools"]  ; "i-have-spoken"
+	git := "X:\git"
+	addons := ["fulcrum"]
 
-; 	; versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\2.93\scripts\addons"
-; 	; 	,"C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"]
-
-; 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.0\scripts\addons"
-; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
-; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
-; 		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]
-; 	; TODO latest version OF latest version ?
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]
 	
-; 	Process, Close, blender.exe
+	ProcessClose "blender.exe"
 
-; 	For version in versions {
-; 		For addon in addons {
-; 			src := git . "\" . addons[addon]
-; 			dst := versions[version] . "\" . addons[addon]
-; 			FileCopyDir, %src%, %dst%, 1
-; 		}
-; 	}
+	for version in versions {
+		for addon in addons {
+			src := git . "\" . addon
+			dst := version . "\" . addon
+			DirCopy src, dst, 1
+		}
+	}
 
-; 	bl_folder := "X:\Software\Blender\daily"
-; 	newest_time := 0
-; 	Loop, Files, %bl_folder%\*, D
-; 	{
-; 		bl_time := A_LoopFileTimeCreated
-; 		if (bl_time > newest_time) {
-; 			newest_time := bl_time
-; 			newest_blender := A_LoopFileFullPath
-; 		}
-; 	}
-; 	newest_blender := newest_blender . "\blender.exe"
-; 	Run, %newest_blender%
+	; bl_folder := "X:\software\Blender\daily"
+	; newest_time := 0
+	; Loop Files, bl_folder "\*.*", "D" {
+	; 	bl_time := A_LoopFileTimeCreated
+	; 	if (bl_time > newest_time) {
+	; 		newest_time := bl_time
+	; 		newest_blender := A_LoopFileFullPath
+	; 	}
+	; }
+	; newest_blender := newest_blender . "\blender.exe"
+	; newest_blender := newest_blender()
+	Run newest_blender()
 
-; }
+}
 
 
 
