@@ -28,6 +28,7 @@ XButton2 & t:: switch_to("chrome", "C:\Program Files (x86)\Google\Chrome\Applica
 XButton2 & c:: switch_to("Code", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
 XButton2 & s:: switch_to("Spotify", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
 XButton2 & f:: switch_to("blender", newest_blender())
+XButton2 & z:: switch_to("Nuke13.2", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
 
 
 
@@ -68,21 +69,32 @@ Volume_Up:: {
 ^!WheelUp:: Send "^{Home}"
 ^!WheelDown:: Send "^{End}"
 
-; #`:: {
-; 	MouseGetPos	&x_orig, &y_orig
+
+; x_orig_whaat := 0
+; y_orig_whaat := 0
+; x_new_whaat := 0
+; y_new_whaat := 0
+
+; CoordMode "Mouse", "Screen"
+; SetTitleMatchMode 1
+
+; +XButton1:: {
+; 	MouseGetPos	&x_orig_whaat, &y_orig_whaat
 ; }
 
-; #` Up:: {
-; 	MouseGetPos &x_new, &y_new
-; 	x_diff := x_new - x_orig
-; 	y_diff := y_new - y_orig
-; 	MouseMove x_orig, y_orig
-; 	if (max(abs(x_diff), abs(y_diff)) > 64) {
-; 		if (abs(x_diff) > abs(y_diff)) {
+; +XButton1 Up:: {
+; 	MouseGetPos &x_new_whaat, &y_new_whaat
+; 	x_diff_whaat := x_new_whaat - x_orig_whaat
+; 	y_diff_whaat := y_new_whaat - y_orig_whaat
+; 	BlockInput "On"
+; 	MouseMove x_orig_whaat, y_orig_whaat
+; 	BlockInput "Off"
+; 	if (max(abs(x_diff_whaat), abs(y_diff_whaat)) > 64) {
+; 		if (abs(x_diff_whaat) > abs(y_diff_whaat)) {
 ; 			; horizontal
-; 			if (x_diff < 0) {
+; 			if (x_diff_whaat < 0) {
 ; 				; left
-; 				Run "X:\projects"
+; 				RunWait "X:\projects"
 ; 				WinActivate "projects"
 ; 				; MsgBox, left
 ; 			} else {
@@ -91,13 +103,13 @@ Volume_Up:: {
 ; 			}
 ; 		} else {
 ; 			;vertical
-; 			if (y_diff < 0) {
+; 			if (y_diff_whaat < 0) {
 ; 				; up
-; 				Run "X:\UTB"
+; 				RunWait "X:\UTB"
 ; 				WinActivate "UTB"
 ; 			} else {
 ; 				; down
-; 				Run "X:\assets"
+; 				RunWait "X:\assets"
 ; 				WinActivate "assets"
 ; 			}
 ; 		}
