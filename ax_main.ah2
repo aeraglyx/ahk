@@ -19,16 +19,17 @@ Run("support_scripts\acc_mouse.ah2")
 
 ^!+x:: ExitApp
 
-SoundSetVolume 12.5
+; SoundSetVolume 12.5
 
 
 
 
-XButton2 & t:: switch_to("chrome", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-XButton2 & c:: switch_to("Code", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-XButton2 & s:: switch_to("Spotify", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-XButton2 & f:: switch_to("blender", newest_blender())
-XButton2 & z:: switch_to("Nuke13.2", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
+XButton2 & f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
+XButton2 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+XButton2 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+XButton2 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+XButton2 & d:: switch_to("ahk_exe blender.exe", newest_blender())
+XButton2 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
 
 
 
@@ -62,7 +63,44 @@ Volume_Up:: {
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
 	ToolTip round(volume, 2), 64, 128
-	SetTimer () => ToolTip(), -1000
+	SetTimer () => ToolTip(), -1250
+}
+
+title_last := ""
+
+update_song_title() {
+	Sleep 256
+	title := WinGetTitle("ahk_exe Spotify.exe")
+	if title != "Spotify Premium" {
+		global title_last := title
+	}
+}
+
+~Media_Play_Pause::
+~Media_Prev::
+~Media_Next:: {
+
+	update_song_title()
+
+	if title_last != "" {
+		word_array := StrSplit(title_last, " - ")
+
+		MyGui := Gui()
+		MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
+		MyGui.BackColor := "151515"
+		WinSetTransparent 255
+		; WinSetTransColor("151515", MyGui)
+		MyGui.SetFont("s24 w700", "Fira Code")
+		MyGui.Add("Text", "c888888", word_array[2])
+		MyGui.SetFont("s16 w700", "Fira Code")
+		MyGui.Add("Text", "c444444 y+0", word_array[1])
+		MyGui.Show("Center")
+		Sleep 2000
+		MyGui.Destroy()
+	}
+	
+	; ToolTip title_last, 64, 128
+	; SetTimer () => ToolTip(), -1500
 }
 
 

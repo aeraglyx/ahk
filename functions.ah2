@@ -56,9 +56,8 @@ toggle(app) {
 	}
 }
 
-switch_to(name, exe:="") {
+switch_to(title, exe:="") {
 	SetTitleMatchMode 2
-	title := "ahk_exe " . name . ".exe"
 	if !WinExist(title) {
 		if (exe = "") {
 			MsgBox "No .exe file specified."
