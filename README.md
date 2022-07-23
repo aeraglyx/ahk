@@ -10,12 +10,14 @@ The rest of this *readme* is kinda out of date since v2 refactor...
 This is the script that calls other sub-scripts and contains the most important hotkeys.
 
 Some of the functionality:
-- Quick search on Google, Wolfram Alpha, YouTube, Spotify
+- Quick app launcher (includes finding the newest Blender version)
+- Search on Google, Wolfram Alpha, YouTube, Spotify
 - Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
 - Hotstrings for `≤`, `≥`, `≈`, `≠`, `±`
 - Reloading Blender and copying folders for addon development
 - Multiplicative volume control
+- GUI for what song is playing and volume
 - Etc.
 
 

@@ -44,12 +44,7 @@ l2() {
 	return GetKeyState("XButton2", "P")
 }
 
-; ^Volume_Down:: {
-; 	Loop 20 {
-; 		Send "{Volume_Down}"
-; 		Sleep 64
-; 	}
-; }
+
 
 Volume_Down::
 Volume_Up:: {
@@ -62,46 +57,58 @@ Volume_Up:: {
 	}
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
-	ToolTip round(volume, 2), 64, 128
-	SetTimer () => ToolTip(), -1250
+	; if WinExist("muhahahaha") {
+	; 	WinClose("muhahahaha")
+	; }
+	MyGui := Gui(, "muhahahaha")
+	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
+	MyGui.BackColor := "161616"
+	WinSetTransparent 255
+	MyGui.SetFont("s24 w700", "Fira Code")
+	MyGui.Add("Text", "c888888", round(volume, 2))
+	active_id := WinGetID("A")
+	MyGui.Show("Center")
+	WinActivate active_id
+	destroy_gui() {
+		MyGui.Destroy()
+	}
+	SetTimer destroy_gui, -1000
 }
 
 title_last := ""
-
-update_song_title() {
-	Sleep 256
+~Media_Play_Pause::
+~Media_Prev::
+~Media_Next:: {
+	Sleep 192
 	title := WinGetTitle("ahk_exe Spotify.exe")
 	if title != "Spotify Premium" {
 		global title_last := title
 	}
-}
-
-~Media_Play_Pause::
-~Media_Prev::
-~Media_Next:: {
-
-	update_song_title()
-
-	if title_last != "" {
-		word_array := StrSplit(title_last, " - ")
-
-		MyGui := Gui()
-		MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
-		MyGui.BackColor := "151515"
-		WinSetTransparent 255
-		; WinSetTransColor("151515", MyGui)
-		MyGui.SetFont("s24 w700", "Fira Code")
-		MyGui.Add("Text", "c888888", word_array[2])
-		MyGui.SetFont("s16 w700", "Fira Code")
-		MyGui.Add("Text", "c444444 y+0", word_array[1])
-		MyGui.Show("Center")
-		Sleep 2000
+	if title_last = "" {
+		return
+	}
+	word_array := StrSplit(title_last, " - ")
+	if WinExist("muhahahaha") {
+		WinClose("muhahahaha")
+	}
+	MyGui := Gui(, "muhahahaha")
+	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
+	MyGui.BackColor := "161616"
+	WinSetTransparent 255
+	MyGui.SetFont("s24 w700", "Fira Code")
+	MyGui.Add("Text", "c888888", word_array[2])
+	MyGui.SetFont("s16 w700", "Fira Code")
+	MyGui.Add("Text", "c444444 y+0", word_array[1])
+	active_id := WinGetID("A")
+	MyGui.Show("Center")
+	WinActivate active_id
+	destroy_gui() {
 		MyGui.Destroy()
 	}
-	
-	; ToolTip title_last, 64, 128
-	; SetTimer () => ToolTip(), -1500
+	SetTimer destroy_gui, -2000
 }
+
+
 
 
 ^!WheelUp:: Send "^{Home}"
