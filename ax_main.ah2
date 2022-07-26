@@ -19,11 +19,11 @@ Run("support_scripts\acc_mouse.ah2")
 
 ^!+x:: ExitApp
 
-; SoundSetVolume 12.5
+SoundSetVolume 12.5
 
 
 
-
+; APP SWITCHER
 XButton2 & f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
 XButton2 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 XButton2 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
@@ -32,10 +32,6 @@ XButton2 & d:: switch_to("ahk_exe blender.exe", newest_blender())
 XButton2 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
 
 
-
-
-
-; RAlt:: Send, {Backspace}
 
 l1() {
 	return GetKeyState("XButton1", "P")
@@ -57,9 +53,9 @@ Volume_Up:: {
 	}
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
-	; if WinExist("muhahahaha") {
-	; 	WinClose("muhahahaha")
-	; }
+	if WinExist("muhahahaha") {
+		WinClose("muhahahaha")
+	}
 	MyGui := Gui(, "muhahahaha")
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
 	MyGui.BackColor := "161616"
@@ -79,7 +75,13 @@ title_last := ""
 ~Media_Play_Pause::
 ~Media_Prev::
 ~Media_Next:: {
-	Sleep 192
+	; if SubStr(ThisHotkey, 2) = "Media_Play_Pause" {
+	; 	Sleep 512
+	; 	Send "{Media_Play_Pause}"
+	; 	Sleep 512
+	; 	Send "{Media_Play_Pause}"
+	; }
+	Sleep 256
 	title := WinGetTitle("ahk_exe Spotify.exe")
 	if title != "Spotify Premium" {
 		global title_last := title
@@ -98,7 +100,7 @@ title_last := ""
 	MyGui.SetFont("s24 w700", "Fira Code")
 	MyGui.Add("Text", "c888888", word_array[2])
 	MyGui.SetFont("s16 w700", "Fira Code")
-	MyGui.Add("Text", "c444444 y+0", word_array[1])
+	MyGui.Add("Text", "c555555 y+0", word_array[1])
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
 	WinActivate active_id
@@ -324,7 +326,7 @@ F5:: {
 	git := "X:\git"
 	addons := ["fulcrum"]
 	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]  ; TODO
 	ProcessClose "blender.exe"
 	for version in versions {
 		for addon in addons {
@@ -467,20 +469,15 @@ F5:: {
 +!>:: Send "{U+2265}"	; ≥
 ::approx::{U+2248}		; ≈
 ::noteq::{U+2260}		; ≠
-::+-::{U+00B1}			; ±
-:*o:/alpha::{U+03B1}	; α
+:*o:+-::{U+00B1}		; ±
+:*o:?alpha::{U+03B1}	; α
 
 :*o:leftar::{U+2190}	; ←
 :*o:rightar::{U+2192}	; →
 :*o:upar::{U+2191}		; ↑
 :*o:downar::{U+2193}	; ↓
 
-!Numpad4:: Send "{U+2190}"  ; ←
-!Numpad6:: Send "{U+2192}"  ; →
-!Numpad8:: Send "{U+2191}"  ; ↑
-!Numpad2:: Send "{U+2193}"  ; ↓
-
-:*o:/epsilon::{U+03B5}	; ε
+:*o:?epsilon::{U+03B5}	; ε
 ; LATEX
 :o:ltx::/latex{Down}{Enter} ; get LaTeX on Notion
 :o:frac::\frac{{}{}}{{}{}}{Left 3}
@@ -488,15 +485,14 @@ F5:: {
 :ro:finv::f^{-1}(x)=
 
 ; SOFTWARE HELP
-::/bpy::Blender Python
-::/ae::After Effects
-::/fus::Blackmagic Fusion
-::/res::DaVinci Resolve
+::?bpy::Blender Python
+::?ae::After Effects
+::?fus::Blackmagic Fusion
+::?res::DaVinci Resolve
+::?vsc::Visual Studio Code
+::?win::Windows 11
 
 
-
-; RAlt::Down
-Shift & RAlt::Up
 
 
 
@@ -735,7 +731,7 @@ XButton1 & d:: {
 		Send("{End}{Space 2}")
 	}
 	title := WinGetTitle("A")
-	dict := Map("ahk", "{;}", "ah2", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
+	dict := map("ahk", "{;}", "ah2", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
 	for ext in dict {
 		if InStr(title, "." . ext){
 			Send(dict[ext])

@@ -1,4 +1,4 @@
-^+#!.:: Send "..."
+^+!.:: Send "..."
 
 ; ~w & y:: Send, {CtrlDown}s{CtrlUp}
 
