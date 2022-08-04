@@ -30,6 +30,7 @@ XButton2 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Loca
 XButton2 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
 XButton2 & d:: switch_to("ahk_exe blender.exe", newest_blender())
 XButton2 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
+XButton2 & p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 
 
@@ -325,8 +326,10 @@ y:: {
 F5:: {
 	git := "X:\git"
 	addons := ["fulcrum"]
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"]  ; TODO
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addons"]  ; TODO
 	ProcessClose "blender.exe"
 	for version in versions {
 		for addon in addons {
@@ -727,9 +730,10 @@ XButton1 & c:: Send "^{/}"
 
 
 XButton1 & d:: {
-	if RegExMatch(selected(), "\w"){
-		Send("{End}{Space 2}")
-	}
+	; if RegExMatch(selected(), "\w"){
+	; 	Send("{End}{Space 2}")
+	; }
+	SetTitleMatchMode 2
 	title := WinGetTitle("A")
 	dict := map("ahk", "{;}", "ah2", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
 	for ext in dict {
