@@ -29,6 +29,7 @@ XButton2 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Ch
 XButton2 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
 XButton2 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
 XButton2 & d:: switch_to("ahk_exe blender.exe", newest_blender())
+XButton2 & b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
 XButton2 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
 XButton2 & p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
@@ -338,7 +339,8 @@ F5:: {
 			DirCopy src, dst, 1
 		}
 	}
-	Run newest_blender()
+	; Run newest_blender()
+	Run "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"
 }
 
 
