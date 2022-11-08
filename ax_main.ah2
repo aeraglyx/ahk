@@ -24,14 +24,14 @@ SoundSetVolume 12.5
 
 
 ; APP SWITCHER
-XButton2 & f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
-XButton2 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-XButton2 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-XButton2 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-XButton2 & d:: switch_to("ahk_exe blender.exe", newest_blender())
-XButton2 & b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
-XButton2 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
-XButton2 & p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
+; XButton1 & f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
+; XButton1 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+; XButton1 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+; XButton1 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+; XButton1 & d:: switch_to("ahk_exe blender.exe", newest_blender())
+; XButton1 & b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
+; XButton1 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
+; XButton1 & p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 
 
@@ -172,13 +172,21 @@ title_last := ""
 
 r:: Reload
 q:: WinClose "A"
-t:: Send "^#{a}"
+; t:: Send "^#{a}"
 
 ; c:: toggle("support_scripts\color_picker.ahk")
 ; m:: toggle("support_scripts\measure.ahk")
 
 ; s:: Run "support_scripts\spotify_search.ah2"
-p:: Run "support_files\new_project.py"
+
+f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+d:: switch_to("ahk_exe blender.exe", newest_blender())
+b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
+x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 ; 2:: Send "1.41421356237" ; sqrt(2)
 ; 3:: Send "1.73205080757" ; sqrt(3)
@@ -327,10 +335,9 @@ y:: {
 F5:: {
 	git := "X:\git"
 	addons := ["fulcrum"]
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.1\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.2\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addons"]  ; TODO
+	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addons"
+		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.5\scripts\addons"]  ; TODO
 	ProcessClose "blender.exe"
 	for version in versions {
 		for addon in addons {
@@ -339,8 +346,8 @@ F5:: {
 			DirCopy src, dst, 1
 		}
 	}
-	; Run newest_blender()
-	Run "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"
+	Run newest_blender()
+	; Run "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"
 }
 
 
@@ -353,6 +360,8 @@ F5:: {
 
 
 #HotIf l2()
+
+p:: Run "support_files\new_project.py"
 
 ; t:: {
 ; 	Loop, %windows% {
@@ -710,7 +719,7 @@ F1:: Send "^{PgUp}"
 ; F2:: Send, ^w
 F3:: Send "^{PgDn}"
 F4:: Send "^n"
-XButton1 & c:: Send "^{/}"
+XButton2 & c:: Send "^{/}"
 
 ^Up:: Send "{Up 8}"
 ^Down:: Send "{Down 8}"
