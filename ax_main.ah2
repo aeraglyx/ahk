@@ -361,7 +361,22 @@ F5:: {
 
 #HotIf l2()
 
-p:: Run "support_files\new_project.py"
+p:: {
+	; Run "support_files\new_project.py"
+	; TODO
+	MyGui := Gui()
+	; MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound")
+	; MyGui.SetFont("s24 w700", "Fira Code")
+	MyGui.Add("Edit", "r1 vname w236", "")
+	MyGui.Add("CheckBox", "v2d Checked", "2D")
+	MyGui.Add("CheckBox", "v3d Checked", "3D")
+	MyBtn := MyGui.Add("Button", "Default w236", "OK")
+	; MyBtn_Click(MyGui){
+	; 	MyGui.Destroy()
+	; }
+	; MyBtn.OnEvent("Click", MyBtn_Click(MyGui))
+	MyGui.Show("Center w256")
+}
 
 ; t:: {
 ; 	Loop, %windows% {
