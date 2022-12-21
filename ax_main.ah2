@@ -19,28 +19,55 @@ Run("support_scripts\acc_mouse.ah2")
 
 ^!+x:: ExitApp
 
-SoundSetVolume 12.5
+; SoundSetVolume 12.5
+
+
+l1() {
+	return GetKeyState("XButton1", "P")}
+l2() {
+	return GetKeyState("XButton2", "P")}
+
+
+main_pc() {
+	return A_ComputerName = "FULCRUM"}
+bbp_pc() {
+	return A_ComputerName = "BBP-P-N03"}
+home_pc() {
+	return A_ComputerName = "BEN"}
+
+; MsgBox home_pc()
+
 
 
 
 ; APP SWITCHER
-; XButton1 & f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
-; XButton1 & t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-; XButton1 & s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-; XButton1 & c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-; XButton1 & d:: switch_to("ahk_exe blender.exe", newest_blender())
-; XButton1 & b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
-; XButton1 & x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
-; XButton1 & p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
+#HotIf l1() and main_pc()
+f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+d:: switch_to("ahk_exe blender.exe", newest_blender())
+b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
+x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
+#HotIf l1() and bbp_pc()  ; FIXME
+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")  ; FIXME
+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
-l1() {
-	return GetKeyState("XButton1", "P")
-}
-l2() {
-	return GetKeyState("XButton2", "P")
-}
+#HotIf home_pc()
+^!+f:: switch_to("ahk_exe explorer.exe", "C:\Windows\explorer.exe")  ; FIXME
+^!+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+^!+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+^!+c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+^!+b:: switch_to("ahk_exe blender.exe", "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe")
+^!+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
+
+#HotIf
 
 
 
@@ -179,15 +206,6 @@ q:: WinClose "A"
 
 ; s:: Run "support_scripts\spotify_search.ah2"
 
-f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
-t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-d:: switch_to("ahk_exe blender.exe", newest_blender())
-b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
-x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
-p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
-
 ; 2:: Send "1.41421356237" ; sqrt(2)
 ; 3:: Send "1.73205080757" ; sqrt(3)
 ; 4:: Send "1.57079632679" ; tau / 4
@@ -293,6 +311,9 @@ p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 ; 	Return
 
 
+
+#HotIf l1()
+
 ; WEBSITES
 g:: {
 	txt := selected()
@@ -326,27 +347,43 @@ y:: {
 ; 	}
 ; }
 
-
+#HotIf
 
 
 ; BLENDER
 ; Copy over addons and restart Blender
-
-F5:: {
-	git := "X:\git"
+^!+u::
+XButton1 & F5:: {
+	
 	addons := ["fulcrum"]
-	versions := ["C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addons"
-		, "C:\Users\Vladislav\AppData\Roaming\Blender Foundation\Blender\3.5\scripts\addons"]  ; TODO
-	ProcessClose "blender.exe"
+	switch A_ComputerName {
+		case "FULCRUM":
+			git := "X:\git"
+			versions := [3.3, 3.4, 3.5]
+		case "BEN":
+			git := "C:\Users\Aeraglyx\Desktop\git"
+			versions := [3.4, 3.5]
+		case "BBP-P-N03":
+			git := "C:\Users\Aeraglyx\Desktop\git"
+			versions := [3.3, 3.4]
+	}
+	
+	ProcessClose "blender.exe"  ; XXX kinda dangerous
 	for version in versions {
 		for addon in addons {
 			src := git . "\" . addon
-			dst := version . "\" . addon
+			dst := A_AppData . "\Blender Foundation\Blender\" . version . "\scripts\addons\" . addon
+			DirDelete dst, 1
 			DirCopy src, dst, 1
 		}
 	}
-	Run newest_blender()
+
+	switch A_ComputerName {
+		case "FULCRUM": 	run newest_blender()
+		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
+		case "BBP-P-N03": 	run "C:\blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"  ; TODO
+	}
+	; Run newest_blender()
 	; Run "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"
 }
 
