@@ -23,17 +23,22 @@ Run("support_scripts\acc_mouse.ah2")
 
 
 l1() {
-	return GetKeyState("XButton1", "P")}
+	return GetKeyState("XButton1", "P")
+}
 l2() {
-	return GetKeyState("XButton2", "P")}
+	return GetKeyState("XButton2", "P")
+}
 
 
 main_pc() {
-	return A_ComputerName = "FULCRUM"}
+	return A_ComputerName = "FULCRUM"
+}
 bbp_pc() {
-	return A_ComputerName = "BBP-P-N03"}
+	return A_ComputerName = "BBP-P-N03"
+}
 home_pc() {
-	return A_ComputerName = "BEN"}
+	return A_ComputerName = "BEN"
+}
 
 ; MsgBox home_pc()
 
@@ -74,12 +79,17 @@ p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 Volume_Down::
 Volume_Up:: {
 	volume := SoundGetVolume()
-	ratio := 1.25992105  ; 2^(1/n) means n strokes for doubling
+	a := 3.0
+	b := 0.06
+	; ratio := 1.25992105  ; 2^(1/n) means n strokes for doubling
 	if A_ThisHotkey = "Volume_Down" {
-		volume /= ratio
+		volume := (volume - a) / (1.0 + b)
+		volume := max(volume, 0.0)
 	} else {
-		volume *= ratio
+		volume += a + volume * b
+		volume := min(volume, 100.0)
 	}
+	; volume := round(volume, 0)
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
 	if WinExist("muhahahaha") {
@@ -90,7 +100,7 @@ Volume_Up:: {
 	MyGui.BackColor := "161616"
 	WinSetTransparent 255
 	MyGui.SetFont("s24 w700", "Fira Code")
-	MyGui.Add("Text", "c888888", round(volume, 2))
+	MyGui.Add("Text", "c888888", round(volume / 100, 2))
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
 	WinActivate active_id
