@@ -81,7 +81,6 @@ Volume_Up:: {
 	volume := SoundGetVolume()
 	a := 3.0
 	b := 0.06
-	; ratio := 1.25992105  ; 2^(1/n) means n strokes for doubling
 	if A_ThisHotkey = "Volume_Down" {
 		volume := (volume - a) / (1.0 + b)
 		volume := max(volume, 0.0)
@@ -89,7 +88,6 @@ Volume_Up:: {
 		volume += a + volume * b
 		volume := min(volume, 100.0)
 	}
-	; volume := round(volume, 0)
 	SoundSetVolume volume
 	CoordMode "ToolTip", "Screen"
 	if WinExist("muhahahaha") {
@@ -378,11 +376,11 @@ XButton1 & F5:: {
 			versions := [3.3, 3.4]
 	}
 	
-	ProcessClose "blender.exe"  ; XXX kinda dangerous
+	ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
 	for version in versions {
 		for addon in addons {
 			src := git . "\" . addon
-			dst := A_AppData . "\Blender Foundation\Blender\" . version . "\scripts\addons\" . addon
+			dst := A_AppData . "\Blender Foundation\Blender\" . round(version, 1) . "\scripts\addons\" . addon
 			DirDelete dst, 1
 			DirCopy src, dst, 1
 		}
@@ -393,8 +391,6 @@ XButton1 & F5:: {
 		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
 		case "BBP-P-N03": 	run "C:\blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"  ; TODO
 	}
-	; Run newest_blender()
-	; Run "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"
 }
 
 
