@@ -64,13 +64,13 @@ c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Micr
 b:: switch_to("ahk_exe blender.exe", "C:\Blender\stable\blender-3.4.0+stable.a95bf1ac01be\blender.exe")
 p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
-#HotIf home_pc()
-^!+f:: switch_to("ahk_exe explorer.exe", "C:\Windows\explorer.exe")  ; FIXME
-^!+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-^!+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-^!+c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-^!+b:: switch_to("ahk_exe blender.exe", "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe")
-^!+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
+; #HotIf home_pc()
+; ^!+f:: switch_to("ahk_exe explorer.exe", "C:\Windows\explorer.exe")  ; FIXME
+; ^!+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+; ^!+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
+; ^!+c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+; ^!+b:: switch_to("ahk_exe blender.exe", "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe")
+; ^!+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 #HotIf
 
