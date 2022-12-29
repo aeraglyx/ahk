@@ -61,7 +61,7 @@ p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
 s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
 c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")  ; FIXME
+b:: switch_to("ahk_exe blender.exe", "C:\Blender\stable\blender-3.4.0+stable.a95bf1ac01be\blender.exe")
 p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 #HotIf home_pc()
@@ -389,7 +389,7 @@ XButton1 & F5:: {
 	switch A_ComputerName {
 		case "FULCRUM": 	run newest_blender()
 		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
-		case "BBP-P-N03": 	run "C:\blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe"  ; TODO
+		case "BBP-P-N03": 	run "C:\Blender\stable\blender-3.4.0+stable.a95bf1ac01be\blender.exe"
 	}
 }
 
