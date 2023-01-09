@@ -381,7 +381,9 @@ XButton1 & F5:: {
 		for addon in addons {
 			src := git . "\" . addon
 			dst := A_AppData . "\Blender Foundation\Blender\" . round(version, 1) . "\scripts\addons\" . addon
-			DirDelete dst, 1
+			if DirExist(dst) {
+				DirDelete dst, 1
+			}
 			DirCopy src, dst, 1
 		}
 	}
