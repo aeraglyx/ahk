@@ -391,7 +391,7 @@ XButton1 & F5:: {
 	switch A_ComputerName {
 		case "FULCRUM": 	run newest_blender()
 		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
-		case "BBP-P-N03": 	run "C:\Blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
+		case "BBP-P-N03": 	run "C:\Blender\stable\blender-3.3.1+lts.b292cfe5a936\blender.exe"
 	}
 }
 
