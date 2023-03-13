@@ -9,13 +9,13 @@ SendMode "Input"
 
 ; SUB-SCRIPTS
 ; has to be run before any hotkeys/returns etc.
-Run("support_scripts\acc_scroll.ah2")
-Run("support_scripts\acc_mouse.ah2")
+Run("support_scripts\acc_scroll.ahk")
+Run("support_scripts\acc_mouse.ahk")
 
-#Include "functions.ah2"
-#Include "support_scripts\kb_layout_stuff.ah2"
-#Include "*i secret.ah2"
-; #Include spotify_search.ah2
+#Include "functions.ahk"
+#Include "support_scripts\kb_layout_stuff.ahk"
+#Include "*i secret.ahk"
+; #Include spotify_search.ahk
 
 ^!+x:: ExitApp
 
@@ -212,7 +212,7 @@ q:: WinClose "A"
 ; c:: toggle("support_scripts\color_picker.ahk")
 ; m:: toggle("support_scripts\measure.ahk")
 
-; s:: Run "support_scripts\spotify_search.ah2"
+; s:: Run "support_scripts\spotify_search.ahk"
 
 ; 2:: Send "1.41421356237" ; sqrt(2)
 ; 3:: Send "1.73205080757" ; sqrt(3)
@@ -806,7 +806,7 @@ XButton1 & d:: {
 	; }
 	SetTitleMatchMode 2
 	title := WinGetTitle("A")
-	dict := map("ahk", "{;}", "ah2", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
+	dict := map("ahk", "{;}", "ahk", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
 	for ext in dict {
 		if InStr(title, "." . ext){
 			Send(dict[ext])
