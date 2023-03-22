@@ -362,6 +362,8 @@ y:: {
 ; Copy over addons and restart Blender
 ^!+u::
 XButton1 & F5:: {
+
+	; MsgBox(A_ComputerName)
 	
 	addons := ["fulcrum"]
 	switch A_ComputerName {
@@ -374,9 +376,12 @@ XButton1 & F5:: {
 		case "BBP-P-N03":
 			git := "C:\Users\Aeraglyx\Desktop\git"
 			versions := [3.3, 3.4]
+		case "BBP-N3":
+			git := "C:\Users\user\Desktop\aeraglyx\git"
+			versions := [3.3, 3.4]
 	}
 	
-	ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
+	; ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
 	for version in versions {
 		for addon in addons {
 			src := git . "\" . addon
@@ -392,6 +397,7 @@ XButton1 & F5:: {
 		case "FULCRUM": 	run newest_blender()
 		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
 		case "BBP-P-N03": 	run "C:\Blender\stable\blender-3.3.1+lts.b292cfe5a936\blender.exe"
+		case "BBP-N3": 		run "C:\Blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
 	}
 }
 
@@ -779,7 +785,7 @@ F1:: Send "^{PgUp}"
 ; F2:: Send, ^w
 F3:: Send "^{PgDn}"
 F4:: Send "^n"
-XButton2 & c:: Send "^{/}"
+XButton1 & c:: Send "^{/}"
 
 ^Up:: Send "{Up 8}"
 ^Down:: Send "{Down 8}"
