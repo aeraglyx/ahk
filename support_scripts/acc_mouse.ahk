@@ -37,9 +37,9 @@ loop {
 		multiplier := 1.0
 	} else {
 		multiplier := min((dist / px)**gamma, 1) * px * (mult - 1) / dist
-		if meh() {
-			multiplier := 0.25 - 1.0
-		}
+		; if meh() {
+		; 	multiplier := 0.25 - 1.0
+		; }
 	}
 
 	if (x_jerk > lim) {

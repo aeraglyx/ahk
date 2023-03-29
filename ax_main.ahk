@@ -365,20 +365,23 @@ XButton1 & F5:: {
 
 	; MsgBox(A_ComputerName)
 	
-	addons := ["fulcrum"]
 	switch A_ComputerName {
 		case "FULCRUM":
 			git := "X:\git"
 			versions := [3.3, 3.4, 3.5]
+			addons := ["fulcrum"]
 		case "BEN":
 			git := "C:\Users\Aeraglyx\Desktop\git"
 			versions := [3.4, 3.5]
+			addons := ["fulcrum"]
 		case "BBP-P-N03":
 			git := "C:\Users\Aeraglyx\Desktop\git"
 			versions := [3.3, 3.4]
+			addons := ["fulcrum"]
 		case "BBP-N3":
 			git := "C:\Users\user\Desktop\aeraglyx\git"
 			versions := [3.3, 3.4]
+			addons := ["fulcrum", "bbpipeline"]
 	}
 	
 	; ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
@@ -730,9 +733,9 @@ F4:: Send "^t"
 ; #HotIf WinActive("ahk_exe Resolve.exe")
 ; ^d:: Send "^p"
 
-; ; FUSION
-; #HotIf WinActive("ahk_exe Fusion.exe")
-; ^d:: Send "^p"
+; FUSION
+#HotIf WinActive("ahk_exe Fusion.exe")
+^d:: Send "^p"
 
 
 
