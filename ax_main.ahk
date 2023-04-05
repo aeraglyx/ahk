@@ -790,7 +790,8 @@ F1:: Send "^{PgUp}"
 ; F2:: Send, ^w
 F3:: Send "^{PgDn}"
 F4:: Send "^n"
-XButton1 & c:: Send "^{/}"
+XButton1 & c::
+XButton1 & x:: Send "^{/}"
 
 ^Up:: Send "{Up 8}"
 ^Down:: Send "{Down 8}"
