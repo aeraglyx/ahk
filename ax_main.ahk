@@ -360,7 +360,7 @@ y:: {
 
 ; BLENDER
 ; Copy over addons and restart Blender
-^!+u::
+^!+a::
 XButton1 & F5:: {
 
 	; MsgBox(A_ComputerName)
@@ -368,7 +368,7 @@ XButton1 & F5:: {
 	switch A_ComputerName {
 		case "FULCRUM":
 			git := "X:\git"
-			versions := [3.3, 3.4, 3.5]
+			versions := [3.4, 3.5]
 			addons := ["fulcrum"]
 		case "BEN":
 			git := "C:\Users\Aeraglyx\Desktop\git"
@@ -376,12 +376,12 @@ XButton1 & F5:: {
 			addons := ["fulcrum"]
 		case "BBP-P-N03":
 			git := "C:\Users\Aeraglyx\Desktop\git"
-			versions := [3.3, 3.4]
+			versions := [3.4]
 			addons := ["fulcrum"]
 		case "BBP-N3":
 			git := "C:\Users\user\Desktop\aeraglyx\git"
-			versions := [3.3, 3.4]
-			addons := ["fulcrum", "bbpipeline"]
+			versions := [3.4, 3.5]
+			addons := ["fulcrum", "bbproducer"]
 	}
 	
 	; ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
