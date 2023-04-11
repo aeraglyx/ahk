@@ -5,7 +5,7 @@ Persistent
 ^!+x::ExitApp
 
 thr := 16 ; fastest scroll [ms]
-speed_min :=  2 ; min scroll speed
+speed_min :=  1 ; min scroll speed
 speed_max := 12 ; max scroll speed
 shaping := 32 ; spread, higher => bigger effect
 
