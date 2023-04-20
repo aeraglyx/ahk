@@ -5,7 +5,7 @@ Persistent
 ^!+x::ExitApp
 
 speed_max := 14  ; max scroll speed at the threshold
-response := 24  ; spread, higher -> bigger effect
+response := 32  ; spread, higher -> bigger effect
 smooth := 0.2  ; [0-1] higher -> smoother but more sluggish
 threshold := 16  ; [ms] scroll speed at which speed_max is set
 

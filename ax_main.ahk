@@ -806,10 +806,15 @@ XButton1 & x:: Send "^{/}"
 
 ; PYTHON
 
-; XButton1 & p::
-; 	SendRaw, print(f"{x = }")
-; 	Send, {Left 7}{ShiftDown}{Right}{ShiftUp}
-; 	Return
+XButton1 & p:: {
+	A_Clipboard := ""
+	Send "^c"
+	ClipWait
+	Send "^{Enter}"
+	Send("{Raw}print(f`"{ = }`")")
+	Send("{Left 6}")
+	Send "^v^{Left}^+{Right}"
+}
 
 
 XButton1 & d:: {
