@@ -207,6 +207,19 @@ title_last := ""
 
 r:: Reload
 q:: WinClose "A"
+
+
+; MAGNIFIER
+
+global magnifier := false
+v:: {
+	if magnifier {
+		Send "#{Escape}"
+	} else {
+		Send "#{NumpadAdd}"
+	}
+	global magnifier := !magnifier
+}
 ; t:: Send "^#{a}"
 
 ; c:: toggle("support_scripts\color_picker.ahk")
@@ -380,7 +393,7 @@ XButton1 & F5:: {
 			addons := ["fulcrum"]
 		case "BBP-N3":
 			git := "C:\Users\user\Desktop\aeraglyx\git"
-			versions := [3.4, 3.5]
+			versions := [3.3, 3.4, 3.5]
 			addons := ["fulcrum", "bbproducer"]
 	}
 	
@@ -736,8 +749,12 @@ F4:: Send "^t"
 ; ^d:: Send "^p"
 
 ; FUSION
-#HotIf WinActive("ahk_exe Fusion.exe")
+#HotIf WinActive("ahk_exe Fusion.exe") or WinActive("ahk_exe Resolve.exe")
 ^d:: Send "^p"
+XButton1 & [:: Send "{[ 4}"
+XButton1 & ]:: Send "{] 4}"
+XButton2 & [:: Send "{[ 16}"
+XButton2 & ]:: Send "{] 16}"
 
 
 
@@ -812,8 +829,9 @@ XButton1 & p:: {
 	ClipWait
 	Send "^{Enter}"
 	Send("{Raw}print(f`"{ = }`")")
-	Send("{Left 6}")
-	Send "^v^{Left}^+{Right}"
+	Send("{Left 6}^v")
+	Send("{End}")
+	; Send("^{Left}^+{Right}")
 }
 
 
