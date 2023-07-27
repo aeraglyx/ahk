@@ -393,7 +393,7 @@ XButton1 & F5:: {
 			addons := ["fulcrum"]
 		case "BBP-N3":
 			git := "C:\Users\user\Desktop\aeraglyx\git"
-			versions := [3.3, 3.4, 3.5]
+			versions := [3.5, 3.6]
 			addons := ["fulcrum", "bbproducer"]
 	}
 	
