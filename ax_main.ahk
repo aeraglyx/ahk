@@ -34,7 +34,7 @@ main_pc() {
 	return A_ComputerName = "FULCRUM"
 }
 bbp_pc() {
-	return A_ComputerName = "BBP-P-N03"
+	return A_ComputerName = "BBP-N3"
 }
 home_pc() {
 	return A_ComputerName = "BEN"
@@ -152,6 +152,26 @@ title_last := ""
 
 ^!WheelUp:: Send "^{Home}"
 ^!WheelDown:: Send "^{End}"
+
+
+
+; TODO
+
+; #HotIf GetKeyState("D", "P") and A_TimeIdleKeyboard > 200
+; f:: Send("g")
+; #HotIf
+
+; f:: {
+; 	; time_elapsed := A_TickCount - LastKeyTime
+; 	if GetKeyState("D", "P") and A_TimeIdleKeyboard > 200 {
+; 		Send("g")
+; 	} else {
+; 		Send("f")
+; 	}
+; }
+
+
+
 
 
 ; x_orig_whaat := 0
@@ -387,10 +407,6 @@ XButton1 & F5:: {
 			git := "C:\Users\Aeraglyx\Desktop\git"
 			versions := [3.4, 3.5]
 			addons := ["fulcrum"]
-		case "BBP-P-N03":
-			git := "C:\Users\Aeraglyx\Desktop\git"
-			versions := [3.4]
-			addons := ["fulcrum"]
 		case "BBP-N3":
 			git := "C:\Users\user\Desktop\aeraglyx\git"
 			versions := [3.5, 3.6]
@@ -414,7 +430,6 @@ XButton1 & F5:: {
 	switch A_ComputerName {
 		case "FULCRUM": 	run newest_blender()
 		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
-		; case "BBP-P-N03": 	run "C:\Blender\stable\blender-3.3.1+lts.b292cfe5a936\blender.exe"
 		; case "BBP-N3": 		run "C:\Blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
 	}
 }
