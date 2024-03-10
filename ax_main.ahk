@@ -228,6 +228,8 @@ title_last := ""
 r:: Reload
 q:: WinClose "A"
 
+p:: WinClose "ahk_exe python.exe"
+
 
 ; MAGNIFIER
 
@@ -838,16 +840,16 @@ XButton1 & x:: Send "^{/}"
 
 ; PYTHON
 
-XButton1 & p:: {
-	A_Clipboard := ""
-	Send "^c"
-	ClipWait
-	Send "^{Enter}"
-	Send("{Raw}print(f`"{ = }`")")
-	Send("{Left 6}^v")
-	Send("{End}")
-	; Send("^{Left}^+{Right}")
-}
+; XButton1 & p:: {
+; 	A_Clipboard := ""
+; 	Send "^c"
+; 	ClipWait
+; 	Send "^{Enter}"
+; 	Send("{Raw}print(f`"{ = }`")")
+; 	Send("{Left 6}^v")
+; 	Send("{End}")
+; 	; Send("^{Left}^+{Right}")
+; }
 
 
 XButton1 & d:: {
