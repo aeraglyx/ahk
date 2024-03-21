@@ -79,7 +79,7 @@ p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 Volume_Down::
 Volume_Up:: {
 	volume := SoundGetVolume()
-	a := 2.0
+	a := 1.5
 	b := 0.06
 	if A_ThisHotkey = "Volume_Down" {
 		volume := (volume - a) / (1.0 + b)
