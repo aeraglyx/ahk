@@ -1,6 +1,7 @@
 ; run as admin, otherwise some of the functionality (eg. chrome hotkeys) won't work
 ; you'll need to have Python installed for some stuff
 
+#Requires AutoHotkey v2.0
 #SingleInstance Force
 InstallKeybdHook
 Persistent
