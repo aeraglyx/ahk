@@ -46,6 +46,18 @@ home_pc() {
 
 
 
+; THEME
+; colors inspired by catppuccin
+
+theme := Map(
+	"bg", "1f202f",
+	"fg", "ccd3f3",
+	"accent", "bfa2f2",
+)
+
+
+
+
 ; APP SWITCHER
 
 #HotIf l1() and main_pc()
@@ -77,6 +89,7 @@ p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
 
 
 
+
 Volume_Down::
 Volume_Up:: {
 	volume := SoundGetVolume()
@@ -96,10 +109,10 @@ Volume_Up:: {
 	}
 	MyGui := Gui(, "muhahahaha")
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
-	MyGui.BackColor := "161616"
+	MyGui.BackColor := theme["bg"]
 	WinSetTransparent 255
 	MyGui.SetFont("s24 w700", "Fira Code")
-	MyGui.Add("Text", "c888888", round(volume / 100, 2))
+	MyGui.Add("Text", "c" . theme["accent"], round(volume / 100, 2))
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
 	WinActivate active_id
@@ -133,12 +146,12 @@ title_last := ""
 	}
 	MyGui := Gui(, "muhahahaha")
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
-	MyGui.BackColor := "161616"
+	MyGui.BackColor := theme["bg"]
 	WinSetTransparent 255
 	MyGui.SetFont("s24 w700", "Fira Code")
-	MyGui.Add("Text", "c888888", word_array[2])
+	MyGui.Add("Text", "c" . theme["accent"], word_array[2])
 	MyGui.SetFont("s16 w700", "Fira Code")
-	MyGui.Add("Text", "c555555 y+0", word_array[1])
+	MyGui.Add("Text", "c" . theme["fg"] . " y+0", word_array[1])
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
 	WinActivate active_id
