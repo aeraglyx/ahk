@@ -47,12 +47,12 @@ home_pc() {
 
 
 ; THEME
-; colors inspired by catppuccin
+; https://github.com/aeraglyx/onyx
 
 theme := Map(
-	"bg", "1f202f",
-	"fg", "ccd3f3",
-	"accent", "bfa2f2",
+	"bg", "202020",
+	"fg", "cccccc",
+	"accent", "80d1ff",
 )
 
 
