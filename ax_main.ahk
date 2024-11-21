@@ -15,6 +15,7 @@ Run("support_scripts\acc_mouse.ahk")
 
 #Include "functions.ahk"
 #Include "support_scripts\kb_layout_stuff.ahk"
+#Include "support_scripts\addon_reloader.ahk"
 #Include "*i secret.ahk"
 ; #Include spotify_search.ahk
 
@@ -405,50 +406,6 @@ y:: {
 ; }
 
 #HotIf
-
-
-; BLENDER
-; Copy over addons and restart Blender
-^!+a::
-XButton1 & F5:: {
-
-	; MsgBox(A_ComputerName)
-	
-	switch A_ComputerName {
-		case "FULCRUM":
-			git := "X:\git"
-			versions := [3.4, 3.5]
-			addons := ["fulcrum"]
-		case "BEN":
-			git := "C:\Users\Aeraglyx\Desktop\git"
-			versions := [3.4, 3.5]
-			addons := ["fulcrum"]
-		case "BBP-N3":
-			git := "C:\Users\user\Desktop\aeraglyx\git"
-			versions := [3.5, 3.6, 4.0]
-			addons := ["fulcrum", "bbproducer"]
-	}
-	
-	; ProcessClose "blender.exe"  ; XXX kinda dangerous > ask user? And close all instances?
-	for version in versions {
-		for addon in addons {
-			src := git . "\" . addon
-			dst := A_AppData . "\Blender Foundation\Blender\" . round(version, 1) . "\scripts\addons\" . addon
-			if DirExist(dst) {
-				DirDelete dst, 1
-			}
-			DirCopy src, dst, 1
-		}
-	}
-
-	TrayTip("Addon updater", "Done.")
-
-	switch A_ComputerName {
-		case "FULCRUM": 	run newest_blender()
-		case "BEN": 		run "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
-		; case "BBP-N3": 		run "C:\Blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe"
-	}
-}
 
 
 
