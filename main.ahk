@@ -39,13 +39,18 @@ theme := Map(
 ^!+x:: ExitApp
 #!+r:: Reload
 
+; https://www.autohotkey.com/docs/v2/lib/Shutdown.htm
+#x:: DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
+#!x:: Shutdown(1)
+
 ; window management
 #m:: Send("{F11}")
+#g:: WinClose("A")
 
 ; app switching
 #f:: switch_to("ahk_class CabinetWClass", "explorer.exe")
 #t:: switch_to("ahk_exe WindowsTerminal.exe", "wt.exe")
-#r:: switch_to("ahk_exe librewolf.exe", "librewolf.exe")
+#r:: switch_to("ahk_exe librewolf.exe", "librewolf.exe") ; TODO: first time error
 #b:: switch_to("ahk_exe blender.exe", "blender.exe")
 
 
