@@ -17,9 +17,6 @@ Run("support_scripts\acc_mouse.ahk")
 #Include "support_scripts\kb_layout_stuff.ahk"
 #Include "support_scripts\addon_reloader.ahk"
 #Include "*i secret.ahk"
-; #Include spotify_search.ahk
-
-; SoundSetVolume 12.5
 
 
 l1() {
@@ -27,17 +24,6 @@ l1() {
 }
 l2() {
 	return GetKeyState("XButton2", "P")
-}
-
-
-main_pc() {
-	return A_ComputerName = "FULCRUM"
-}
-bbp_pc() {
-	return A_ComputerName = "BBP-N3"
-}
-home_pc() {
-	return A_ComputerName = "BEN"
 }
 
 
@@ -144,74 +130,6 @@ title_last := ""
 
 
 
-; TODO
-
-; #HotIf GetKeyState("D", "P") and A_TimeIdleKeyboard > 200
-; f:: Send("g")
-; #HotIf
-
-; f:: {
-; 	; time_elapsed := A_TickCount - LastKeyTime
-; 	if GetKeyState("D", "P") and A_TimeIdleKeyboard > 200 {
-; 		Send("g")
-; 	} else {
-; 		Send("f")
-; 	}
-; }
-
-
-
-
-
-; x_orig_whaat := 0
-; y_orig_whaat := 0
-; x_new_whaat := 0
-; y_new_whaat := 0
-
-; CoordMode "Mouse", "Screen"
-; SetTitleMatchMode 1
-
-; +XButton1:: {
-; 	MouseGetPos	&x_orig_whaat, &y_orig_whaat
-; }
-
-; +XButton1 Up:: {
-; 	MouseGetPos &x_new_whaat, &y_new_whaat
-; 	x_diff_whaat := x_new_whaat - x_orig_whaat
-; 	y_diff_whaat := y_new_whaat - y_orig_whaat
-; 	BlockInput "On"
-; 	MouseMove x_orig_whaat, y_orig_whaat
-; 	BlockInput "Off"
-; 	if (max(abs(x_diff_whaat), abs(y_diff_whaat)) > 64) {
-; 		if (abs(x_diff_whaat) > abs(y_diff_whaat)) {
-; 			; horizontal
-; 			if (x_diff_whaat < 0) {
-; 				; left
-; 				RunWait "X:\projects"
-; 				WinActivate "projects"
-; 				; MsgBox, left
-; 			} else {
-; 				; right
-; 				; chrome_new_tab()
-; 			}
-; 		} else {
-; 			;vertical
-; 			if (y_diff_whaat < 0) {
-; 				; up
-; 				RunWait "X:\UTB"
-; 				WinActivate "UTB"
-; 			} else {
-; 				; down
-; 				RunWait "X:\assets"
-; 				WinActivate "assets"
-; 			}
-; 		}
-; 	}
-; }
-
-
-
-
 #HotIf l1()
 
 r:: Reload
@@ -236,54 +154,9 @@ v:: {
 ; c:: toggle("support_scripts\color_picker.ahk")
 ; m:: toggle("support_scripts\measure.ahk")
 
-; s:: Run "support_scripts\spotify_search.ahk"
-
 ; 2:: Send "1.41421356237" ; sqrt(2)
 ; 3:: Send "1.73205080757" ; sqrt(3)
 ; 4:: Send "1.57079632679" ; tau / 4
-
-
-; Numpad7:: {  ; duplicate display
-; 	Send "#p"
-; 	Sleep 64
-; 	Send "{Home}{Down}"
-; 	Sleep 64
-; 	Send "{Enter}{Escape}"
-; }
-
-; Numpad9:: {  ; extend display
-; 	Send "#p"
-; 	Sleep 64
-; 	Send "{Home}{Down 2}"
-; 	Sleep 64
-; 	Send "{Enter}{Escape}"
-; }
-
-; hold L click without holding it
-; `:: {
-; 	MouseGetPos &x_orig, &y_orig
-; 	Click "Down"
-; 	mouse_pressed := True
-; }
-
-; if mouse_pressed {
-; 	$LButton:: {
-; 		Click "Up"
-; 		mouse_pressed := False
-; 	}
-; 	$*Esc::`
-; 	$*RButton:: {
-; 		MouseGetPos &x_new, &y_new
-; 		MouseMove x_orig, y_orig, 0
-; 		Click "Up"
-; 		MouseMove x_new, y_new, 0
-; 		mouse_pressed := False
-; 	}
-; }
-; #ifWinActive  ; why?
-
-
-
 
 
 
@@ -426,23 +299,6 @@ p:: {
 ; 3:: Send "0.86602540378" ; sqrt(3) / 2
 ; 4:: Send "0.78539816339" ; tau / 8
 
-; Left:: {
-; 	WinGet prev_pid, PID, A
-; 	WinActivate ahk_exe Spotify.exe
-; 	Send "+{Left 6}"
-; 	WinActivate ahk_pid %prev_pid%
-; }
-
-; Right:: {
-; 	WinGet prev_pid, PID, A
-; 	WinActivate ahk_exe Spotify.exe
-; 	Send "+{Right 6}"
-; 	WinActivate ahk_pid %prev_pid%
-; }
-
-
-
-
 
 
 
@@ -518,8 +374,6 @@ p:: {
 
 
 
-
-
 :*oc:boris::Mocha AE
 
 ; NUMBERS - Maybe only in Blender?
@@ -552,38 +406,6 @@ p:: {
 ::?vsc::Visual Studio Code
 ::?win::Windows 11
 
-
-
-
-
-
-; format
-; :r*?:ttt::
-; FormatTime, time_now,, yyyyMMdd_HHmmss
-; SendInput, %time_now%
-
-; return
-; encode time
-; :r*?:ttt::
-; 	time_now := A_NowUTC
-; 	time_now -= 19700101000000, Seconds
-; 	time_now := Floor(time_now / 60)
-; 	time_now := to62(time_now)
-; 	SendRaw, %time_now%
-; 	Return
-
-; decode time
-; XButton1 & x::
-; 	SendInput, ^{c}
-; 	ClipWait, 1
-; 	Sleep, 64
-; 	unix := from62(Clipboard) * 60
-; 	diff := A_Now - A_NowUTC
-; 	out += unix, Seconds
-; 	out := 19700101000000 + diff
-; 	FormatTime, out, %out%, yyyy MMMM dd, HH:mm
-; 	MsgBox,, Encoded at UTC, %out%
-; 	Return
 
 
 
@@ -669,43 +491,6 @@ p:: {
 
 
 
-; CHROME
-#HotIf WinActive("ahk_exe chrome.exe")
-
-F1:: Send "^+{Tab}"
-; Moving tabs uses Rearrange Tabs:
-; https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga
-F2:: Send "^w"
-F3:: Send "^{Tab}"
-F4:: Send "^t"
-; XButton2:: Send "^w"
-
-
-
-; XButton1 & Numpad1::
-; ; 28, 17
-; 	WinGet, win_state, MinMax, A
-; 	if (win_state = 1){
-		
-; 	}
-; 	MouseGetPos, x_orig, y_orig
-; 	Click, Down
-; 	mouse_pressed := True
-
-; 	MouseClick, Left, 28, 17, 1
-; 	Return
-
-
-
-; make Ctrl + Z work
-; BUG reloading triggers this (does it?)
-; TODO exception sites?
-; ^z:: Send, !{Left}
-; ^+z:: Send, !{Right}
-
-
-
-
 ; ; RESOLVE  ; TODO how to know which tab I'm in?
 ; #HotIf WinActive("ahk_exe Resolve.exe")
 ; ^d:: Send "^p"
@@ -758,64 +543,6 @@ y2 := 0
 
 ; #If in_range_abs(50, 1930, 800, 1350)
 ; !LButton:: Send, {Click}^+
-
-
-
-
-; VS CODE
-#HotIf WinActive("ahk_exe Code.exe")
-
-F1:: Send "^{PgUp}"
-; F2:: Send, ^w
-F3:: Send "^{PgDn}"
-F4:: Send "^n"
-XButton1 & c::
-XButton1 & x:: Send "^{/}"
-
-^Up:: Send "{Up 8}"
-^Down:: Send "{Down 8}"
-
-^+n:: {
-	Send "^+n"
-	Sleep 512
-	WinMaximize "A"
-	Send "^r"
-}
-
-
-; PYTHON
-
-; XButton1 & p:: {
-; 	A_Clipboard := ""
-; 	Send "^c"
-; 	ClipWait
-; 	Send "^{Enter}"
-; 	Send("{Raw}print(f`"{ = }`")")
-; 	Send("{Left 6}^v")
-; 	Send("{End}")
-; 	; Send("^{Left}^+{Right}")
-; }
-
-
-XButton1 & d:: {
-	; if RegExMatch(selected(), "\w"){
-	; 	Send("{End}{Space 2}")
-	; }
-	SetTitleMatchMode 2
-	title := WinGetTitle("A")
-	dict := map("ahk", "{;}", "ahk", "{;}", "jsx", "//", "dctl", "//", "py", "{#}")
-	for ext in dict {
-		if InStr(title, "." . ext){
-			Send(dict[ext])
-		}
-		break
-	}
-	Send("{Space}TODO{Space}")
-}
-
-
-#HotIf
-
 
 
 
