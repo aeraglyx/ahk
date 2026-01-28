@@ -112,7 +112,7 @@ Volume_Up:: {
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
 	MyGui.BackColor := theme["bg"]
 	WinSetTransparent 255
-	MyGui.SetFont("s24 w700", "Fira Code")
+	MyGui.SetFont("s24 w700", "Cascadia Code")
 	MyGui.Add("Text", "c" . theme["accent"], round(volume / 100, 2))
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
@@ -149,9 +149,9 @@ title_last := ""
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
 	MyGui.BackColor := theme["bg"]
 	WinSetTransparent 255
-	MyGui.SetFont("s24 w700", "Fira Code")
+	MyGui.SetFont("s24 w700", "Cascadia Code")
 	MyGui.Add("Text", "c" . theme["accent"], word_array[2])
-	MyGui.SetFont("s16 w700", "Fira Code")
+	MyGui.SetFont("s16 w700", "Cascadia Code")
 	MyGui.Add("Text", "c" . theme["fg"] . " y+0", word_array[1])
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
@@ -423,7 +423,7 @@ p:: {
 	; TODO
 	MyGui := Gui()
 	; MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound")
-	; MyGui.SetFont("s24 w700", "Fira Code")
+	; MyGui.SetFont("s24 w700", "Cascadia Code")
 	MyGui.Add("Edit", "r1 vname w236", "")
 	MyGui.Add("CheckBox", "v2d Checked", "2D")
 	MyGui.Add("CheckBox", "v3d Checked", "3D")
