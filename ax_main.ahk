@@ -19,8 +19,6 @@ Run("support_scripts\acc_mouse.ahk")
 #Include "*i secret.ahk"
 ; #Include spotify_search.ahk
 
-^!+x:: ExitApp
-
 ; SoundSetVolume 12.5
 
 
@@ -57,36 +55,18 @@ theme := Map(
 )
 
 
+; autohotkey stuff
+^!+x:: ExitApp
+#!+r:: Reload
 
+; window management
+#m:: Send("{F11}")
 
-; APP SWITCHER
-
-#HotIf l1() and main_pc()
-f:: switch_to("Files ahk_exe ApplicationFrameHost.exe", "C:\Users\Vladislav\AppData\Local\Files\FilesLauncher.exe")
-t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Vladislav\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-c:: switch_to("ahk_exe Code.exe", "C:\Users\Vladislav\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-d:: switch_to("ahk_exe blender.exe", newest_blender())
-b:: switch_to("ahk_exe blender.exe", "X:\software\Blender\stable\blender-3.2.2+stable.bcfdb14560e7\blender.exe")
-x:: switch_to("NukeX ahk_exe Nuke13.2.exe", "C:\Program Files\Nuke13.2v2\Nuke13.2.exe --nc --nukex")  ; TODO newest nuke
-p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
-
-#HotIf l1() and bbp_pc()  ; FIXME
-t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-b:: switch_to("ahk_exe blender.exe", "C:\Blender\stable\blender-3.4.0+stable.a95bf1ac01be\blender.exe")
-p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
-
-; #HotIf home_pc()
-; ^!+f:: switch_to("ahk_exe explorer.exe", "C:\Windows\explorer.exe")  ; FIXME
-; ^!+t:: switch_to("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-; ^!+s:: switch_to("ahk_exe Spotify.exe", "C:\Users\Aeraglyx\AppData\Local\Microsoft\WindowsApps\Spotify.exe")
-; ^!+c:: switch_to("ahk_exe Code.exe", "C:\Users\Aeraglyx\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-; ^!+b:: switch_to("ahk_exe blender.exe", "C:\Users\Aeraglyx\Desktop\blender\stable\blender-3.4.1+stable.55485cb379f7\blender.exe")
-; ^!+p:: switch_to("ahk_exe cmd.exe", "C:\Windows\System32\cmd.exe")
-
-#HotIf
+; app switching
+#f:: switch_to("ahk_class CabinetWClass", "explorer.exe")
+#t:: switch_to("ahk_exe WindowsTerminal.exe", "wt.exe")
+#r:: switch_to("ahk_exe librewolf.exe", "librewolf.exe")
+#b:: switch_to("ahk_exe blender.exe", "blender.exe")
 
 
 
