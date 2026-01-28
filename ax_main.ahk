@@ -52,8 +52,8 @@ home_pc() {
 
 theme := Map(
 	"bg", "202020",
-	"fg", "cccccc",
-	"accent", "80d1ff",
+	"fg", "c8c8c8",
+	"accent", "96c6dd",
 )
 
 
