@@ -40,14 +40,8 @@ home_pc() {
 	return A_ComputerName = "BEN"
 }
 
-; MsgBox home_pc()
 
-
-
-
-; THEME
 ; https://github.com/aeraglyx/onyx
-
 theme := Map(
 	"bg", "202020",
 	"fg", "c8c8c8",
@@ -374,7 +368,7 @@ y:: {
 		Send "{Tab 4}"
 	} else {
 		query("https://www.youtube.com/results?search_query=", txt)
-	}      
+	}
 }
 
 ; w:: {
