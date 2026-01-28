@@ -1,16 +1,16 @@
 # AutoHotkey Scripts
 
-My janky scripts for improved eFFiCieNcY. Made for v2, get AHK here - https://www.autohotkey.com/
+My janky scripts for improved eFFiCieNcY. Made for [AHK v2](https://www.autohotkey.com).
 
-The rest of this *readme* is kinda out of date since v2 refactor...
+The rest of this *readme* is a bit out of date since the v2 refactor...
 
 
-## Main Script `ax_main.ahk`
+## Main Script `main.ahk`
 
 This is the script that calls other sub-scripts and contains the most important hotkeys.
 
 Some of the functionality:
-- Quick app launcher (includes finding the newest Blender version)
+- App launcher to mimic parts of my [Linux dotfiles](https://github.com/aeraglyx/dotfiles)
 - Search on Google, Wolfram Alpha, YouTube, Spotify
 - Switches for Night light & Focus assist
 - Hotkeys for AE, LaTeX, Python
@@ -18,7 +18,6 @@ Some of the functionality:
 - Reloading Blender and copying folders for addon development
 - Multiplicative volume control
 - GUI for what song is playing and volume
-- Etc.
 
 
 ## Scroll Wheel Acceleration
