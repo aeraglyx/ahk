@@ -46,12 +46,15 @@ theme := Map(
 ; window management
 #m:: Send("{F11}")
 #g:: WinClose("A")
+#Tab:: Send("!{Tab}")
++#Tab:: Send("+!{Tab}")
 
 ; app switching
 #f:: switch_to("ahk_class CabinetWClass", "explorer.exe")
 #t:: switch_to("ahk_exe WindowsTerminal.exe", "wt.exe")
-#r:: switch_to("ahk_exe librewolf.exe", "librewolf.exe") ; TODO: first time error
-#b:: switch_to("ahk_exe blender.exe", "blender.exe")
+#r:: switch_to("ahk_exe librewolf.exe", "C:\Program Files\LibreWolf\librewolf.exe")
+#l:: switch_to("ahk_exe blender.exe", "blender.exe")
+#w:: switch_to("ahk_exe parsecd.exe", "C:\Program Files\Parsec\parsecd.exe")
 
 
 
