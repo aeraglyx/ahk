@@ -5,6 +5,16 @@ My janky scripts for improved eFFiCieNcY. Made for [AHK v2](https://www.autohotk
 The rest of this *readme* is a bit out of date since the v2 refactor...
 
 
+## Notes
+
+To disable `#g` ([source](https://www.reddit.com/r/WindowsHelp/comments/108ngxr/properly_uninstalling_xbox_gamebar_and_resolve/)):
+```
+Get-AppxPackage Microsoft.XboxGamingOverlay | Remove-AppxPackage
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR /f /t REG_DWORD /v "AppCaptureEnabled" /d 0
+reg add HKEY_CURRENT_USER\System\GameConfigStore /f /t REG_DWORD /v "GameDVR_Enabled" /d 0
+```
+
+
 ## Main Script `main.ahk`
 
 This is the script that calls other sub-scripts and contains the most important hotkeys.
