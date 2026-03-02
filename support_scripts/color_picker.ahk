@@ -1,7 +1,7 @@
 #SingleInstance Force
 #Persistent
 ;SendMode Input
-Menu, Tray, icon, %A_ScriptDir%\..\icons\col_bl_18px_v1.ico
+Menu, Tray, icon, %A_ScriptDir%\..\icons\icon_bl_18px.ico
 
 filmic_2_lin(x) {
 	line := x + 1
