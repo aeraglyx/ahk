@@ -91,46 +91,6 @@ Volume_Up:: {
 	SetTimer destroy_gui, -1000
 }
 
-title_last := ""
-~Media_Play_Pause::
-~Media_Prev::
-~Media_Next:: {
-	; if SubStr(ThisHotkey, 2) = "Media_Play_Pause" {
-	; 	Sleep 512
-	; 	Send "{Media_Play_Pause}"
-	; 	Sleep 512
-	; 	Send "{Media_Play_Pause}"
-	; }
-	Sleep 256
-	title := WinGetTitle("ahk_exe Spotify.exe")
-	if title != "Spotify Premium" {
-		global title_last := title
-	}
-	if title_last = "" {
-		return
-	}
-	word_array := StrSplit(title_last, " - ")
-	if WinExist("muhahahaha") {
-		WinClose("muhahahaha")
-	}
-	MyGui := Gui(, "muhahahaha")
-	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
-	MyGui.BackColor := theme["bg"]
-	WinSetTransparent 255
-	MyGui.SetFont("s24 w700", "Cascadia Code")
-	MyGui.Add("Text", "c" . theme["accent"], word_array[2])
-	MyGui.SetFont("s16 w700", "Cascadia Code")
-	MyGui.Add("Text", "c" . theme["fg"] . " y+0", word_array[1])
-	active_id := WinGetID("A")
-	MyGui.Show("Center")
-	WinActivate active_id
-	destroy_gui() {
-		MyGui.Destroy()
-	}
-	SetTimer destroy_gui, -2000
-}
-
-
 
 
 ^!WheelUp:: Send "^{Home}"
