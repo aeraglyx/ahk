@@ -80,7 +80,7 @@ Volume_Up:: {
 	MyGui.Opt("+Owner +AlwaysOnTop -Caption +LastFound +e0x00000020")
 	MyGui.BackColor := theme["bg"]
 	WinSetTransparent 255
-	MyGui.SetFont("s24 w700", "Cascadia Code")
+	MyGui.SetFont("s20 w700", "Cascadia Code")
 	MyGui.Add("Text", "c" . theme["accent"], round(volume / 100, 2))
 	active_id := WinGetID("A")
 	MyGui.Show("Center")
@@ -88,7 +88,7 @@ Volume_Up:: {
 	destroy_gui() {
 		MyGui.Destroy()
 	}
-	SetTimer destroy_gui, -1000
+	SetTimer destroy_gui, -250
 }
 
 
